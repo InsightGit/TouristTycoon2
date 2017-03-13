@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Project Ora" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Project Ora" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="src" />
+					<Add directory="src/ImagineSim" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-system" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-network" />
+					<Add library="sfml-window" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Project Ora" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="src" />
+					<Add directory="src/ImagineSim" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-system" />
+					<Add library="sfml-audio" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-network" />
+					<Add library="sfml-window" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++14" />
+			<Add option="-g" />
+			<Add option="-fpermissive" />
+		</Compiler>
+		<Linker>
+			<Add library="pthread" />
+			<Add library="jsoncpp" />
+		</Linker>
+		<Unit filename="../src/ClickableSprite.cpp" />
+		<Unit filename="../src/ClickableSprite.hpp" />
+		<Unit filename="../src/ImagineCore.cpp" />
+		<Unit filename="../src/ImagineCore.hpp" />
+		<Unit filename="../src/ImagineHUD.hpp" />
+		<Unit filename="../src/ImagineRPG/MessageBox.cpp" />
+		<Unit filename="../src/ImagineRPG/MessageBox.hpp" />
+		<Unit filename="../src/ImagineRPG/Tile.hpp" />
+		<Unit filename="../src/ImagineSaveGame.cpp" />
+		<Unit filename="../src/ImagineSaveGame.hpp" />
+		<Unit filename="../src/ImagineSim/Attraction.cpp" />
+		<Unit filename="../src/ImagineSim/Attraction.hpp" />
+		<Unit filename="../src/ImagineSim/BuildMenu.cpp" />
+		<Unit filename="../src/ImagineSim/BuildMenu.hpp" />
+		<Unit filename="../src/ImagineSim/HelpBar.cpp" />
+		<Unit filename="../src/ImagineSim/HelpBar.hpp" />
+		<Unit filename="../src/ImagineSim/Resources/MoneySign.h" />
+		<Unit filename="../src/ImagineSim/Resources/TouristSign.h" />
+		<Unit filename="../src/ImagineSim/Resources/cal.h" />
+		<Unit filename="../src/ImagineSim/Resources/saveicon.h" />
+		<Unit filename="../src/ImagineSim/SimHUD.cpp" />
+		<Unit filename="../src/ImagineSim/SimHUD.hpp" />
+		<Unit filename="../src/ImagineSim/SimPlayer.cpp" />
+		<Unit filename="../src/ImagineSim/SimPlayer.hpp" />
+		<Unit filename="../src/ImagineSim/SimSidebar.cpp" />
+		<Unit filename="../src/ImagineSim/SimSidebar.hpp" />
+		<Unit filename="../src/ImagineSim/Tile.cpp" />
+		<Unit filename="../src/ImagineSim/Tile.hpp" />
+		<Unit filename="../src/Main.cpp" />
+		<Unit filename="../src/MainMenu.cpp" />
+		<Unit filename="../src/MainMenu.hpp" />
+		<Unit filename="../src/Menu.cpp" />
+		<Unit filename="../src/Menu.hpp" />
+		<Unit filename="../src/Player.hpp" />
+		<Unit filename="../src/Scene.cpp" />
+		<Unit filename="../src/Scene.hpp" />
+		<Unit filename="../src/SceneController.cpp" />
+		<Unit filename="../src/SceneController.hpp" />
+		<Unit filename="../src/SceneMusicPlayer.cpp" />
+		<Unit filename="../src/SceneMusicPlayer.hpp" />
+		<Unit filename="../src/l3DRM.cpp" />
+		<Unit filename="../src/l3DRM.hpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

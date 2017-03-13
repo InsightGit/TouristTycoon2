@@ -1,0 +1,60 @@
+#ifndef BUILDMENU_HPP
+#define BUILDMENU_HPP
+
+#include "../ImagineCore.hpp"
+#include "SimPlayer.hpp"
+#include "../Menu.hpp"
+#include "MenuItem.hpp"
+#include "BuildPrompter.hpp"
+#include <iostream>
+#include "HelpBar.hpp"
+#include "ActionArea.hpp"
+
+namespace imagine {
+    namespace sim{
+        class buildMenu : public imagine::menu
+        {
+        public:
+        	bool drawMenu = false;
+            sf::RectangleShape leftRect = sf::RectangleShape(sf::Vector2f(100,300));
+            sf::RectangleShape rightRect = sf::RectangleShape(sf::Vector2f(300,300));
+
+            buildMenu(imagine::sim::player *mainPlayer,imagine::sim::helpBar *helpBarToUse,imagine::sim::actionArea *actionAreaToUse,sf::Font *fontToUse);
+            virtual ~buildMenu();
+
+            void spawn();
+	    	void draw(sf::RenderWindow *window);
+        protected:
+	    	sf::Font defaultFont;
+	    	sf::Text attractions;
+	    	sf::Text roadText;
+	    	sf::Text services;
+	    	std::string activeCategory;
+	    	std::string previousTextName = "attractions";
+	    	std::vector<imagine::sim::menuItem> attractionButtons;
+	    	std::vector<imagine::sim::menuItem> roadButtons;
+	    	std::vector<imagine::sim::menuItem> serviceButtons;
+	    	imagine::sim::player *player;
+	    	imagine::sim::buildPrompter *buildingPrompter;
+	    	imagine::sim::helpBar *helpBar;
+	    	imagine::sim::actionArea *actionArea;
+	    	imagine::types::arrayLocation *inPrompter;
+	    	sf::Image largeRoad;
+	    	bool pastDrawMenu = false;
+	    	bool drawPrompter = false;
+	    	bool prompterTimerNotYetSet = true;
+	    	bool prompterCreated = false;
+	    	bool placeTimerNotSet = true;
+	    	signed int attractionButtonSize = 0;
+
+	    	sf::Clock limitPrompterClicks;
+	    	sf::Clock limitClicks;
+	    	sf::Clock limitPlaceClicks;
+
+	    	void update(sf::RenderWindow *window);
+        };
+    }
+}
+
+
+#endif // BUILDMENU_HPP

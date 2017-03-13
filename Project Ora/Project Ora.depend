@@ -1,0 +1,320 @@
+# depslib dependency file v1.0
+1487119703 source:/home/newbobby/workspace/Project Ora/src/ImagineCore.cpp
+	"ImagineCore.hpp"
+	<stdexcept>
+	<sstream>
+	<stdio.h>
+	<string>
+	<iostream>
+
+1487119284 /home/newbobby/workspace/Project Ora/src/ImagineCore.hpp
+	<string>
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<limits.h>
+	<exception>
+	<stdexcept>
+	<exception>
+	<stdexcept>
+	<SFML/Graphics.hpp>
+
+1486175243 source:/home/newbobby/workspace/Project Ora/src/ImagineRPG/MessageBox.cpp
+	"MessageBox.hpp"
+
+1486175213 /home/newbobby/workspace/Project Ora/src/ImagineRPG/MessageBox.hpp
+	"../ImagineCore.hpp"
+	<list>
+	<SFML/Graphics.hpp>
+
+1486778184 source:/home/newbobby/workspace/Project Ora/src/ImagineSaveGame.cpp
+	"ImagineSaveGame.hpp"
+
+1486778280 /home/newbobby/workspace/Project Ora/src/ImagineSaveGame.hpp
+	<jsoncpp/json/value.h>
+	<jsoncpp/json/writer.h>
+	"ImagineCore.hpp"
+	<fstream>
+
+1487123387 source:/home/newbobby/workspace/Project Ora/src/ImagineSim/SimHUD.cpp
+	"SimHUD.hpp"
+	"Resources/MoneySign.h"
+	"Resources/TouristSign.h"
+	"Resources/cal.h"
+	<string>
+	<iostream>
+
+1487125184 /home/newbobby/workspace/Project Ora/src/ImagineSim/SimHUD.hpp
+	"SimPlayer.hpp"
+	<SFML/Graphics.hpp>
+
+1487039829 /home/newbobby/workspace/Project Ora/src/ImagineHUD.hpp
+	"ImagineCore.hpp"
+
+1487119931 /home/newbobby/workspace/Project Ora/src/ImagineSim/SimPlayer.hpp
+	<SFML/System.hpp>
+	<jsoncpp/json/value.h>
+	<stdexcept>
+
+1486868240 /home/newbobby/workspace/Project Ora/src/ImagineSim/Resources/MoneySign.h
+
+1486942047 /home/newbobby/workspace/Project Ora/src/ImagineSim/Resources/TouristSign.h
+
+1486946220 /home/newbobby/workspace/Project Ora/src/ImagineSim/Resources/cal.h
+
+1486531282 source:/home/newbobby/workspace/Project Ora/src/l3DRM.cpp
+	"ImagineCore.hpp"
+	<boost/python.hpp>
+	<python3.5/Python.h>
+
+1487205291 source:/home/newbobby/workspace/Project Ora/src/Main.cpp
+	<iostream>
+	"SceneController.hpp"
+	"ImagineCore.hpp"
+	"MainMenu.hpp"
+
+1487205316 /home/newbobby/workspace/Project Ora/src/SceneController.hpp
+	"MainMenu.hpp"
+	"Scene.hpp"
+
+1486012851 /home/newbobby/workspace/Project Ora/src/MainMenu.hpp
+	"Menu.hpp"
+	"Scene.hpp"
+	<list>
+
+1487204309 /home/newbobby/workspace/Project Ora/src/Menu.hpp
+	<SFML/Graphics.hpp>
+	"ImagineCore.hpp"
+
+1487217555 /home/newbobby/workspace/Project Ora/src/Scene.hpp
+	<SFML/Graphics.hpp>
+	<jsoncpp/json/reader.h>
+	"SceneMusicPlayer.hpp"
+	"ImagineSim/SimHUD.hpp"
+	"ImagineSim/SimSidebar.hpp"
+	"ImagineSim/SimPlayer.hpp"
+	"ImagineSim/HelpBar.hpp"
+
+1486788665 /home/newbobby/workspace/Project Ora/src/SceneMusicPlayer.hpp
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	"ImagineCore.hpp"
+	<thread>
+
+1487204159 source:/home/newbobby/workspace/Project Ora/src/MainMenu.cpp
+	"MainMenu.hpp"
+	"SceneController.hpp"
+	<stdexcept>
+	<iostream>
+
+1487204299 source:/home/newbobby/workspace/Project Ora/src/Menu.cpp
+	"Menu.hpp"
+	<random>
+
+1487220870 source:/home/newbobby/workspace/Project Ora/src/Scene.cpp
+	"Scene.hpp"
+	"MainMenu.hpp"
+	<iostream>
+
+1487205343 source:/home/newbobby/workspace/Project Ora/src/SceneController.cpp
+	"SceneController.hpp"
+	<iostream>
+
+1486788754 source:/home/newbobby/workspace/Project Ora/src/SceneMusicPlayer.cpp
+	"SceneMusicPlayer.hpp"
+
+1487117791 /home/newbobby/workspace/Project Ora/src/ImagineCore.cpp
+	"ImagineCore.hpp"
+	<stdexcept>
+	<sstream>
+	<stdio.h>
+	<string>
+	<iostream>
+
+1487122907 source:/home/newbobby/workspace/Project Ora/src/ImagineSim/SimPlayer.cpp
+	"SimPlayer.hpp"
+	<iostream>
+
+1487205404 source:/home/newbobby/workspace/Project Ora/src/ClickableSprite.cpp
+	"ClickableSprite.hpp"
+	<iostream>
+
+1487209816 /home/newbobby/workspace/Project Ora/src/ClickableSprite.hpp
+	<SFML/Graphics.hpp>
+
+1487210066 source:/home/newbobby/workspace/Project Ora/src/ImagineSim/SimSidebar.cpp
+	"SimSidebar.hpp"
+	"Resources/saveicon.h"
+	"Resources/buildIcon.h"
+	"../ImagineCore.hpp"
+	<iostream>
+
+1487210036 /home/newbobby/workspace/Project Ora/src/ImagineSim/SimSidebar.hpp
+	<SFML/Graphics.hpp>
+	"../ClickableSprite.hpp"
+
+1487137101 /home/newbobby/workspace/Project Ora/src/ImagineSim/Resources/saveicon.h
+
+1487209265 /home/newbobby/workspace/Project Ora/src/ImagineSim/Resources/buildIcon.h
+
+1487222323 /home/newbobby/workspace/Project Ora/src/ImagineSim/HelpBar.hpp
+	<string>
+	<SFML/Graphics.hpp>
+
+1487222273 source:/home/newbobby/workspace/Project Ora/src/ImagineSim/HelpBar.cpp
+	"HelpBar.hpp"
+
+1487224560 source:/home/bobby/Project-Ora/src/ClickableSprite.cpp
+	"ClickableSprite.hpp"
+	<iostream>
+
+1487224560 /home/bobby/Project-Ora/src/ClickableSprite.hpp
+	<SFML/Graphics.hpp>
+
+1487224560 source:/home/bobby/Project-Ora/src/ImagineCore.cpp
+	"ImagineCore.hpp"
+	<stdexcept>
+	<sstream>
+	<stdio.h>
+	<string>
+	<iostream>
+
+1487224560 /home/bobby/Project-Ora/src/ImagineCore.hpp
+	<string>
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<limits.h>
+	<exception>
+	<stdexcept>
+	<exception>
+	<stdexcept>
+	<SFML/Graphics.hpp>
+
+1487029328 source:/home/bobby/Project-Ora/src/ImagineRPG/MessageBox.cpp
+	"MessageBox.hpp"
+
+1487029328 /home/bobby/Project-Ora/src/ImagineRPG/MessageBox.hpp
+	"../ImagineCore.hpp"
+	<list>
+	<SFML/Graphics.hpp>
+
+1487029328 source:/home/bobby/Project-Ora/src/ImagineSaveGame.cpp
+	"ImagineSaveGame.hpp"
+
+1487029328 /home/bobby/Project-Ora/src/ImagineSaveGame.hpp
+	<jsoncpp/json/value.h>
+	<jsoncpp/json/writer.h>
+	"ImagineCore.hpp"
+	<fstream>
+
+1487224560 source:/home/bobby/Project-Ora/src/ImagineSim/HelpBar.cpp
+	"HelpBar.hpp"
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/HelpBar.hpp
+	<string>
+	<SFML/Graphics.hpp>
+
+1487224560 source:/home/bobby/Project-Ora/src/ImagineSim/SimHUD.cpp
+	"SimHUD.hpp"
+	"Resources/MoneySign.h"
+	"Resources/TouristSign.h"
+	"Resources/cal.h"
+	<string>
+	<iostream>
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/SimHUD.hpp
+	"SimPlayer.hpp"
+	<SFML/Graphics.hpp>
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/SimPlayer.hpp
+	<SFML/System.hpp>
+	<jsoncpp/json/value.h>
+	<stdexcept>
+
+1487029328 /home/bobby/Project-Ora/src/ImagineSim/Resources/MoneySign.h
+
+1487029328 /home/bobby/Project-Ora/src/ImagineSim/Resources/TouristSign.h
+
+1487029328 /home/bobby/Project-Ora/src/ImagineSim/Resources/cal.h
+
+1487224560 source:/home/bobby/Project-Ora/src/ImagineSim/SimPlayer.cpp
+	"SimPlayer.hpp"
+	<iostream>
+
+1487224560 source:/home/bobby/Project-Ora/src/ImagineSim/SimSidebar.cpp
+	"SimSidebar.hpp"
+	"Resources/saveicon.h"
+	"Resources/buildIcon.h"
+	"../ImagineCore.hpp"
+	<iostream>
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/SimSidebar.hpp
+	<SFML/Graphics.hpp>
+	"../ClickableSprite.hpp"
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/Resources/saveicon.h
+
+1487224560 /home/bobby/Project-Ora/src/ImagineSim/Resources/buildIcon.h
+
+1487029328 source:/home/bobby/Project-Ora/src/l3DRM.cpp
+	"ImagineCore.hpp"
+	<boost/python.hpp>
+	<python3.5/Python.h>
+
+1487224560 source:/home/bobby/Project-Ora/src/Main.cpp
+	<iostream>
+	"SceneController.hpp"
+	"ImagineCore.hpp"
+	"MainMenu.hpp"
+
+1487224560 /home/bobby/Project-Ora/src/SceneController.hpp
+	"MainMenu.hpp"
+	"Scene.hpp"
+
+1487029328 /home/bobby/Project-Ora/src/MainMenu.hpp
+	"Menu.hpp"
+	"Scene.hpp"
+	<list>
+
+1487224560 /home/bobby/Project-Ora/src/Menu.hpp
+	<SFML/Graphics.hpp>
+	"ImagineCore.hpp"
+
+1487224560 /home/bobby/Project-Ora/src/Scene.hpp
+	<SFML/Graphics.hpp>
+	<jsoncpp/json/reader.h>
+	"SceneMusicPlayer.hpp"
+	"ImagineSim/SimHUD.hpp"
+	"ImagineSim/SimSidebar.hpp"
+	"ImagineSim/SimPlayer.hpp"
+	"ImagineSim/HelpBar.hpp"
+
+1487029328 /home/bobby/Project-Ora/src/SceneMusicPlayer.hpp
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	"ImagineCore.hpp"
+	<thread>
+
+1487224560 source:/home/bobby/Project-Ora/src/MainMenu.cpp
+	"MainMenu.hpp"
+	"SceneController.hpp"
+	<stdexcept>
+	<iostream>
+
+1487224560 source:/home/bobby/Project-Ora/src/Menu.cpp
+	"Menu.hpp"
+	<random>
+
+1487224560 source:/home/bobby/Project-Ora/src/Scene.cpp
+	"Scene.hpp"
+	"MainMenu.hpp"
+	<iostream>
+
+1487224560 source:/home/bobby/Project-Ora/src/SceneController.cpp
+	"SceneController.hpp"
+	<iostream>
+
+1487029328 source:/home/bobby/Project-Ora/src/SceneMusicPlayer.cpp
+	"SceneMusicPlayer.hpp"
+
