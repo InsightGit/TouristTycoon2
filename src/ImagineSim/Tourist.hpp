@@ -78,10 +78,12 @@ namespace imagine{
 			void draw(sf::RenderWindow *window);
 		protected:
 			std::vector<int> popularityList;
-			std::vector<imagine::sim::attraction> *tempBlackList;
-			std::vector<imagine::sim::attraction> *visitedAttractions;
+			std::vector<imagine::sim::attraction> tempBlackList;
+			std::vector<imagine::sim::attraction> visitedAttractions;
 			int mostPopular;
-			int mostPopularPlace;
+			int mostPopularPlace = -1;
+			signed int tempBlackListSize = 0;
+			signed int visitedAttractionsSize = 0;
 
 			sf::Clock drivingTime;
 			sf::Clock touringTime;

@@ -17,17 +17,13 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
-<<<<<<< HEAD
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/AdvertMenu.hpp \
- ../src/ImagineSim/Advertisement.hpp ../src/ImagineSim/Resources/laptop.h \
- ../src/ImagineSim/Resources/advertIcon.h ../src/ImagineSim/SimPlayer.hpp \
+ ../src/ImagineSim/../ImagineCore.hpp \
+ ../src/ImagineSim/Resources/advertIcon.h \
+ ../src/ImagineSim/AdvertMenu.hpp ../src/ImagineSim/Advertisement.hpp \
+ ../src/ImagineSim/Resources/laptop.h ../src/ImagineSim/SimPlayer.hpp \
  ../src/ImagineSim/HelpBar.hpp ../src/ImagineSim/ActionArea.hpp \
  ../src/ImagineSim/GameTime.hpp ../src/ImagineSim/TouristSpawner.hpp \
  ../src/ImagineSim/GameTime.hpp
-=======
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/SimPlayer.hpp \
- ../src/ImagineSim/HelpBar.hpp ../src/ImagineSim/ActionArea.hpp
->>>>>>> parent of 370e290... Worked on advertisements
 
 ../src/SceneController.hpp:
 
@@ -97,17 +93,14 @@ src/SceneController.o: ../src/SceneController.cpp \
 
 ../src/ImagineSim/../ImagineCore.hpp:
 
-<<<<<<< HEAD
+../src/ImagineSim/Resources/advertIcon.h:
+
 ../src/ImagineSim/AdvertMenu.hpp:
 
 ../src/ImagineSim/Advertisement.hpp:
 
 ../src/ImagineSim/Resources/laptop.h:
 
-../src/ImagineSim/Resources/advertIcon.h:
-
-=======
->>>>>>> parent of 370e290... Worked on advertisements
 ../src/ImagineSim/SimPlayer.hpp:
 
 ../src/ImagineSim/HelpBar.hpp:

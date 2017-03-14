@@ -17,6 +17,9 @@ imagine::sim::sidebar::sidebar(sf::Font *fontToUse, imagine::sim::player *mainPl
 imagine::sim::sidebar::~sidebar()
 {
     //dtor
+	delete simSaveGame;
+	delete sceneBuildMenu;
+	delete sceneAdvertMenu;
 }
 
 void imagine::sim::sidebar::spawn(){
@@ -32,6 +35,11 @@ void imagine::sim::sidebar::spawn(){
     buildIconTexture.loadFromImage(buildIconImage);
     buildIconSprite.sprite.setTexture(buildIconTexture);
     buildIconSprite.sprite.setPosition(sf::Vector2f(50,100));
+
+    advertIconImage.create(advertIcon.width,advertIcon.height,advertIcon.pixel_data);
+    advertIconTexture.loadFromImage(advertIconImage);
+    advertIconSprite.sprite.setTexture(advertIconTexture);
+    advertIconSprite.sprite.setPosition(sf::Vector2f(50,250));
 }
 
 void imagine::sim::sidebar::whenClicked(imagine::sim::types::sidebarButton buttonPressed){
@@ -56,6 +64,11 @@ void imagine::sim::sidebar::whenClicked(imagine::sim::types::sidebarButton butto
 		sceneBuildMenu = new imagine::sim::buildMenu(player,helpBar,actionArea,&defaultFont);
 		sceneBuildMenu->spawn();
 		sceneBuildMenuInit = true;
+    }else if(buttonPressed==imagine::sim::types::advertButton && player->levelProgress.currentLevel >= 1){
+    	std::cout << "Advert button clicked\n";
+    	sceneAdvertMenu = new imagine::sim::advertMenu(player,&defaultFont);
+    	sceneAdvertMenu->spawn();
+    	sceneAdvertMenuInit = true;
     }
 }
 
@@ -64,19 +77,26 @@ void imagine::sim::sidebar::update(sf::RenderWindow *window){
         whenClicked(imagine::sim::types::saveButton);
     }else if(buildIconSprite.isClicked(window)){
         whenClicked(imagine::sim::types::buildButton);
+    }else if(advertIconSprite.isClicked(window)){
+    	whenClicked(imagine::sim::types::advertButton);
     }
-
 }
 
 bool imagine::sim::sidebar::display(sf::RenderWindow *window){
     window->draw(sideBarRect);
     window->draw(saveIconSprite.sprite);
     window->draw(buildIconSprite.sprite);
+    if(player->levelProgress.currentLevel >= 1){
+    	window->draw(advertIconSprite.sprite);
+    }
     if(sceneBuildMenuInit){
     	sceneBuildMenu->draw(window);
     }
     if(saveGameInit){
         simSaveGame->draw(window);
+    }
+    if(sceneAdvertMenuInit){
+    	sceneAdvertMenu->draw(window);
     }
     return true;
 }

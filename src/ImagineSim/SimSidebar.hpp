@@ -5,6 +5,8 @@
 #include "BuildMenu.hpp"
 #include "SimPlayer.hpp"
 #include "SimSaveGame.hpp"
+#include "Resources/advertIcon.h"
+#include "AdvertMenu.hpp"
 
 namespace imagine{
     namespace sim{
@@ -12,7 +14,8 @@ namespace imagine{
             enum sidebarButton{
                 none,
                 saveButton,
-                buildButton
+                buildButton,
+				advertButton
             };
         }
         class sidebar
@@ -27,6 +30,9 @@ namespace imagine{
             sf::Texture buildIconTexture;
             imagine::clickableSprite buildIconSprite;
     		//imagine::sim::types::levelProgress progress;
+            sf::Image advertIconImage;
+            sf::Texture advertIconTexture;
+            imagine::clickableSprite advertIconSprite;
             sf::Font defaultFont;
 
             sidebar(sf::Font *fontToUse, imagine::sim::player *mainPlayer, imagine::sim::helpBar *helpBarToUse,imagine::sim::actionArea *actionAreaToUse);
@@ -39,9 +45,11 @@ namespace imagine{
         protected:
             imagine::sim::player *player;
     		imagine::sim::buildMenu *sceneBuildMenu;
+    		imagine::sim::advertMenu *sceneAdvertMenu;
     		imagine::sim::actionArea *actionArea;
     		imagine::sim::simSaveGame *simSaveGame;
     		bool sceneBuildMenuInit = false;
+    		bool sceneAdvertMenuInit = false;
     		bool saveGameInit = false;
     		sf::Clock saveGameClickLimit;
     		bool saveClickLimitSet = false;

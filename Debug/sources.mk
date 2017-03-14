@@ -30,5 +30,6 @@ Project\ Ora/obj/Release/src \
 Project\ Ora/obj/Release/src/ImagineRPG \
 Project\ Ora/obj/Release/src/ImagineSim \
 src \
+src/ImagineRPG \
 src/ImagineSim \
 

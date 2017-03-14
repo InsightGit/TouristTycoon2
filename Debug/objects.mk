@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -ljsoncpp -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-window -lpthread
+LIBS := -lpthread -ljsoncpp -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-window
 

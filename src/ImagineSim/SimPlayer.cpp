@@ -73,7 +73,7 @@ imagine::sim::player::player(Json::Value loadGameData,sf::Font *fontToUse){
 
 void imagine::sim::player::update(){
 	if(!levelUp){
-		if(numberOfRoadsSpawned>=1 && levelProgress.currentLevel==0){
+		if(numberOfAttractionsSpawned>=1 && levelProgress.currentLevel==0){
 			levelProgress.currentLevel = 1;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint=5;

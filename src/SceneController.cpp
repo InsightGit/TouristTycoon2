@@ -3,7 +3,7 @@
 
 imagine::mainMenu::mainMenu(){}
 
-imagine::sceneController::sceneController() : displayWindow(sf::VideoMode(1368,768),"Project Ora"){
+imagine::sceneController::sceneController() : displayWindow(sf::VideoMode(1368,768),"TouristTycoon"){
 	//window=displayWindow;
 	currentmainMenu = new mainMenu(fontLocation);
 	currentmainMenu->spawn();

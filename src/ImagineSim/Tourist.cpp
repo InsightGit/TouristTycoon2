@@ -94,6 +94,11 @@ imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attraction
 	}else{
 		money=350;
 	}
+	std::uniform_int_distribution<int> uni2(5,30);
+
+	auto randomInt2 = uni2(rng);
+
+	energy=2*randomInt2;
 }
 
 std::vector<int> imagine::sim::tourist::findNextRoadPlace(const imagine::sim::road *road){
@@ -114,16 +119,23 @@ void imagine::sim::tourist::spawn(){
 }
 
 void imagine::sim::tourist::update(){
+	/*if(status==imagine::sim::types::driving){
+		std::cout << chosenAttraction << " driving\n";
+	}else if(status==imagine::sim::types::touring){
+		std::cout << chosenAttraction << " touring\n";
+	}*/
 	if(touringTimeSet && chosenAttraction && touringTime.getElapsedTime().asSeconds() >= 5 && status==imagine::sim::types::touring){
 		chosenAttraction=false;
 		currentAttraction.demit();
-		visitedAttractions->push_back(currentAttraction);
+		visitedAttractions.push_back(currentAttraction);
+		visitedAttractionsSize++;
 		status=imagine::sim::types::driving;
+		std::cout << "Visited\n";
 	}
 	if(sleepingTimeSet && chosenHotel && sleepingTime.getElapsedTime().asSeconds() >= 7 && status==imagine::sim::types::sleeping){
 		chosenAttraction=false;
 		currentAttraction.demit();
-		visitedAttractions->push_back(currentAttraction);
+		visitedAttractions.push_back(currentAttraction);
 		status=imagine::sim::types::driving;
 	}
 
@@ -135,7 +147,6 @@ void imagine::sim::tourist::update(){
 
 		//decide which is most popular attraction and go to that attraction
 		for(int i = 0;attractionLength > i;++i){
-			std::cout << std::to_string(i) << "\n";
 			if(money-allAttractions->at(i).getCost() > 0){
 				if(i==0){
 					mostPopular=allAttractions->at(0).getPopularity();
@@ -147,42 +158,49 @@ void imagine::sim::tourist::update(){
 			}
 			popularityList.push_back(allAttractions->at(i).getPopularity());
 		}
-		if(mostPopularPlace==NULL){
+		if(mostPopularPlace==-1){
 			leaving=true;
+			std::cout << "Leaving\n";
 		}else{
 			currentAttraction = allAttractions->at(mostPopularPlace);
 			chosenAttraction=true;
+			status=imagine::sim::types::driving;
+			std::cout << "MPP\n";
 		}
 		justSpawned=false;
 	}else if(chosenAttraction && status==imagine::sim::types::driving){
 		if(!drivingTimeSet){
 			drivingTime.restart();
 			drivingTimeSet = true;
+			std::cout << "here\n";
 		}else if(drivingTime.getElapsedTime().asSeconds() >= 5){
-			drivingTimeSet=false;
 			if(currentAttraction.admit(this)){
+				std::cout << "Admitted\n";
 				touringTime.restart();
 				touringTimeSet=true;
 				status=imagine::sim::types::touring;
 			}else{
+				std::cout << "NOPE\n";
 				chosenAttraction=false;
-				tempBlackList->push_back(currentAttraction);
+				tempBlackList.push_back(currentAttraction);
+				tempBlackListSize++;
 			}
+			drivingTimeSet=false;
 		}
 	}else if(!chosenAttraction && !leaving && !chosenHotel){
 		for(int i = 0; attractionLength > i; i++){
 			if(i==0){
 				bool passed = true;
-				if(!tempBlackList->empty()){
-					for(int i = 0; tempBlackList->size() > i; i++){
-						if(allAttractions->at(0).getId()==tempBlackList->at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==tempBlackList->at(i).tileSprite.getPosition()){
+				if(!tempBlackList.empty()){
+					for(int i = 0; tempBlackListSize > i; i++){
+						if(allAttractions->at(0).getId()==tempBlackList.at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==tempBlackList.at(i).tileSprite.getPosition()){
 							passed=false;
 						}
 					}
 				}
-				if(!visitedAttractions->empty()){
-					for(int i = 0; tempBlackList->size() > i; i++){
-						if(allAttractions->at(0).getId()==visitedAttractions->at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==visitedAttractions->at(i).tileSprite.getPosition()){
+				if(visitedAttractionsSize!=0){
+					for(int i = 0; visitedAttractionsSize > i; i++){
+						if(allAttractions->at(0).getId()==visitedAttractions.at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==visitedAttractions.at(i).tileSprite.getPosition()){
 							passed=false;
 						}
 					}
@@ -192,19 +210,19 @@ void imagine::sim::tourist::update(){
 					mostPopularPlace = i;
 				}
 
-			}else if(mostPopular >= allAttractions->at(i).getPopularity()){
+			}else if(mostPopular <= allAttractions->at(i).getPopularity()){
 				bool passed = true;
-				if(!tempBlackList->empty()){
-					for(int i = 0; tempBlackList->size() > i; i++){
-						if(allAttractions->at(0).getId()==tempBlackList->at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==tempBlackList->at(i).tileSprite.getPosition()){
+				if(!tempBlackList.empty()){
+					for(int i = 0; tempBlackListSize > i; i++){
+						if(allAttractions->at(0).getId()==tempBlackList.at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==tempBlackList.at(i).tileSprite.getPosition()){
 							passed=false;
 						}
 					}
-					tempBlackList->clear();
+					tempBlackList.clear();
 				}
-				if(!visitedAttractions->empty()){
-					for(int i = 0; tempBlackList->size() > i; i++){
-						if(allAttractions->at(0).getId()==visitedAttractions->at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==visitedAttractions->at(i).tileSprite.getPosition()){
+				if(visitedAttractionsSize!=0){
+					for(int i = 0; visitedAttractionsSize > i; i++){
+						if(allAttractions->at(0).getId()==visitedAttractions.at(i).getId() && allAttractions->at(0).tileSprite.getPosition()==visitedAttractions.at(i).tileSprite.getPosition()){
 							passed=false;
 						}
 					}
@@ -216,15 +234,13 @@ void imagine::sim::tourist::update(){
 
 				mostPopular = allAttractions->at(i).getPopularity();
 				mostPopularPlace = i;
-
-
 			}
-			if(mostPopularPlace==NULL){
+			if(mostPopularPlace==-1){
 				leaving=true;
 			}else{
 				currentAttraction = allAttractions->at(mostPopularPlace);
-				if(energy<=0){
-					//if()
+				if(energy<=0 || energy-currentAttraction.getActivityLevel() < 0){
+					//if();
 					if(hotelLength!=0){
 						if(money-allHotels->at(i).getCost() > 0){
 							if(hotelLength==1){
@@ -245,9 +261,11 @@ void imagine::sim::tourist::update(){
 					}
 				}
 			}
-			tempBlackList->clear();
+			tempBlackList.clear();
+			tempBlackListSize=0;
 		}
 	}else if(chosenHotel && !leaving && status==imagine::sim::types::driving){
+		std::cout << "Hotel\n";
 		if(currentHotel.checkin(this)){
 				sleepingTime.restart();
 				sleepingTimeSet=true;

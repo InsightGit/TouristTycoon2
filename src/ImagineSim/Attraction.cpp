@@ -4,6 +4,7 @@
 
 #include "Tourist.hpp"
 #include "SimPlayer.hpp"
+#include <iostream>
 
 imagine::sim::attraction::attraction(int idToUse, imagine::sim::player *mainPlayer,sf::Vector2f positionToUse)
 {
@@ -26,7 +27,8 @@ void imagine::sim::attraction::spawn(){
 		cost=50;
 		attractionLevel=0;
 		popularity = 10;
-		maxOccupancy = 25;
+		maxOccupancy = 50;
+		activityLevel = 7;
 		tileImage.create(washMonu.width,washMonu.height,washMonu.pixel_data);
 	}
 	tileTexture.loadFromImage(tileImage);
@@ -39,11 +41,21 @@ void imagine::sim::attraction::spawn(){
 }
 
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
-	if(maxOccupancy>currentTouristNum++ && tourist->money-cost > 0 && tourist->energy-activityLevel > 0){
-		currentTouristNum++;
-		tourist->money-=cost;
-		player->money+=cost;
-		tourist->energy-=activityLevel;
+	if(maxOccupancy>currentTouristNum+1){
+		if(tourist->money-cost > 0){
+			 if(tourist->energy-activityLevel > 0){
+					currentTouristNum++;
+					tourist->money-=cost;
+					player->money+=cost;
+					tourist->energy-=activityLevel;
+			 }else{
+				std::cout << "No activity\n";
+				return false;
+			 }
+		}else{
+			std::cout << "No money\n";
+			return false;
+		}
 		return true;
 	}else{
 		return false;

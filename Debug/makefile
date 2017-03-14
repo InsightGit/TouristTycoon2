@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/ImagineSim/subdir.mk
+-include src/ImagineRPG/subdir.mk
 -include src/subdir.mk
 -include Project\ Ora/obj/Release/src/ImagineSim/subdir.mk
 -include Project\ Ora/obj/Release/src/ImagineRPG/subdir.mk
@@ -45,19 +46,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Project\ Zoing
+all: TouristTycoon2
 
 # Tool invocations
-Project\ Zoing: $(OBJS) $(USER_OBJS)
+TouristTycoon2: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o "Project Zoing" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "TouristTycoon2" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) "Project Zoing"
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(EXECUTABLES)$(C_UPPER_DEPS)$(CXX_DEPS)$(OBJS)$(CPP_DEPS)$(C_DEPS) TouristTycoon2
 	-@echo ' '
 
 .PHONY: all clean dependents

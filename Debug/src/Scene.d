@@ -7,7 +7,6 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Road.hpp ../src/ImagineSim/Resources/roadIcon.h \
  ../src/ImagineSim/Resources/roadturn.h ../src/ImagineSim/hotel.hpp \
  ../src/ImagineSim/service.hpp ../src/ImagineSim/Resources/hotel.h \
-<<<<<<< HEAD
  ../src/ImagineSim/Tourist.hpp ../src/ImagineSim/touristCar.hpp \
  ../src/ImagineSim/Resources/Car.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/SimSidebar.hpp \
@@ -17,18 +16,9 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/PopUp.hpp ../src/ImagineSim/ActionArea.hpp \
  ../src/ImagineSim/HelpBar.hpp ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
+ ../src/ImagineSim/Resources/advertIcon.h \
  ../src/ImagineSim/AdvertMenu.hpp ../src/ImagineSim/Advertisement.hpp \
- ../src/ImagineSim/Resources/laptop.h \
- ../src/ImagineSim/Resources/advertIcon.h ../src/ImagineSim/SimPlayer.hpp \
-=======
- ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/../Menu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/MenuItem.hpp \
- ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/PopUp.hpp \
- ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
- ../src/ImagineSim/SimSaveGame.hpp \
- ../src/ImagineSim/../ImagineSaveGame.hpp ../src/ImagineSim/SimPlayer.hpp \
->>>>>>> parent of 370e290... Worked on advertisements
+ ../src/ImagineSim/Resources/laptop.h ../src/ImagineSim/SimPlayer.hpp \
  ../src/ImagineSim/HelpBar.hpp ../src/ImagineSim/ActionArea.hpp \
  ../src/ImagineSim/GameTime.hpp ../src/ImagineSim/TouristSpawner.hpp \
  ../src/ImagineSim/GameTime.hpp ../src/MainMenu.hpp ../src/Menu.hpp
@@ -95,17 +85,14 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 
 ../src/ImagineSim/../ImagineSaveGame.hpp:
 
-<<<<<<< HEAD
+../src/ImagineSim/Resources/advertIcon.h:
+
 ../src/ImagineSim/AdvertMenu.hpp:
 
 ../src/ImagineSim/Advertisement.hpp:
 
 ../src/ImagineSim/Resources/laptop.h:
 
-../src/ImagineSim/Resources/advertIcon.h:
-
-=======
->>>>>>> parent of 370e290... Worked on advertisements
 ../src/ImagineSim/SimPlayer.hpp:
 
 ../src/ImagineSim/HelpBar.hpp:

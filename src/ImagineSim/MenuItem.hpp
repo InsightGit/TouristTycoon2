@@ -18,6 +18,7 @@ namespace imagine {
 		public:
 			sf::Font defaultFont;
 			sf::Text itemName;
+			signed int cost;
 
 			bool drawString = false;
 
