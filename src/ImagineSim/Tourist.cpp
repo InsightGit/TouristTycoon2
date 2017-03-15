@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "SimPlayer.hpp"
+
 imagine::sim::types::aStarRoad::aStarRoad(imagine::sim::road *aRoadToUse, imagine::sim::road *currentRoadToUse, imagine::sim::road *futureRoadToUse){
 	aRoad=aRoadToUse;
 	currentRoad=currentRoadToUse;
@@ -74,13 +76,11 @@ imagine::sim::types::aStarRoad::aStarRoad(imagine::sim::road *aRoadToUse, imagin
 	fScore=gScore+hScore;
 }
 
-imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, const int attractionsSpawned, const int roadsSpawned, const int hotelsSpawned){
+imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, imagine::sim::player *mainPlayer){
 	allAttractions=attractionList;
 	allRoads=roadList;
 	allHotels=hotelList;
-	attractionLength=attractionsSpawned;
-	roadLength=roadsSpawned;
-	hotelLength=roadsSpawned;
+	player = mainPlayer;
 	std::random_device rd;
 	std::mt19937 rng(rd());
 	std::uniform_int_distribution<int> uni(0,100);
@@ -103,7 +103,7 @@ imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attraction
 
 std::vector<int> imagine::sim::tourist::findNextRoadPlace(const imagine::sim::road *road){
 	std::vector<int> result;
-	for(int i = 0; roadLength > i; i++){
+	for(int i = 0; player->numberOfRoadsSpawned > i; i++){
 		if(road->tileSprite.getGlobalBounds().intersects(allRoads->at(i).tileSprite.getGlobalBounds())){
 			result.push_back(i);
 		}
@@ -119,6 +119,7 @@ void imagine::sim::tourist::spawn(){
 }
 
 void imagine::sim::tourist::update(){
+	pastLeaving=leaving;
 	/*if(status==imagine::sim::types::driving){
 		std::cout << chosenAttraction << " driving\n";
 	}else if(status==imagine::sim::types::touring){
@@ -146,8 +147,8 @@ void imagine::sim::tourist::update(){
 		aRoad=allRoads->at(0);*/
 
 		//decide which is most popular attraction and go to that attraction
-		for(int i = 0;attractionLength > i;++i){
-			if(money-allAttractions->at(i).getCost() > 0){
+		for(int i = 0;player->numberOfAttractionsSpawned > i;++i){
+			if(money-allAttractions->at(i).getCostForTourists() > 0){
 				if(i==0){
 					mostPopular=allAttractions->at(0).getPopularity();
 					mostPopularPlace = i;
@@ -160,7 +161,7 @@ void imagine::sim::tourist::update(){
 		}
 		if(mostPopularPlace==-1){
 			leaving=true;
-			std::cout << "Leaving\n";
+			std::cout << "LeavingNOW Attractions:" << player->numberOfAttractionsSpawned <<"\n";
 		}else{
 			currentAttraction = allAttractions->at(mostPopularPlace);
 			chosenAttraction=true;
@@ -188,7 +189,7 @@ void imagine::sim::tourist::update(){
 			drivingTimeSet=false;
 		}
 	}else if(!chosenAttraction && !leaving && !chosenHotel){
-		for(int i = 0; attractionLength > i; i++){
+		for(int i = 0; player->numberOfAttractionsSpawned > i; i++){
 			if(i==0){
 				bool passed = true;
 				if(!tempBlackList.empty()){
@@ -205,7 +206,7 @@ void imagine::sim::tourist::update(){
 						}
 					}
 				}
-				if(passed && money-allAttractions->at(i).getCost() > 0){
+				if(passed && money-allAttractions->at(i).getCostForTourists() > 0){
 					mostPopular=allAttractions->at(0).getPopularity();
 					mostPopularPlace = i;
 				}
@@ -227,7 +228,7 @@ void imagine::sim::tourist::update(){
 						}
 					}
 				}
-				if(passed && money-allAttractions->at(i).getCost() > 0){
+				if(passed && money-allAttractions->at(i).getCostForTourists() > 0){
 					mostPopular=allAttractions->at(i).getPopularity();
 					mostPopularPlace = i;
 				}
@@ -241,14 +242,14 @@ void imagine::sim::tourist::update(){
 				currentAttraction = allAttractions->at(mostPopularPlace);
 				if(energy<=0 || energy-currentAttraction.getActivityLevel() < 0){
 					//if();
-					if(hotelLength!=0){
+					if(player->numberOfHotelsSpawned!=0){
 						if(money-allHotels->at(i).getCost() > 0){
-							if(hotelLength==1){
+							if(player->numberOfHotelsSpawned==1){
 								currentHotel=allHotels->at(0);
 							}else{
 								std::random_device rd;
 								std::mt19937 rng(rd());
-								std::uniform_int_distribution<int> uni(0,hotelLength-1);
+								std::uniform_int_distribution<int> uni(0,player->numberOfHotelsSpawned-1);
 								auto randomInt = uni(rng);
 								currentHotel=allHotels->at(randomInt);
 							}

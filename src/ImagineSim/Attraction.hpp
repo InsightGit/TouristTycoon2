@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Tile.hpp"
+#include "PopUp.hpp"
 
 
 namespace imagine{
@@ -14,12 +15,16 @@ namespace imagine{
 		{
 		    public:
 			std::string name;
+			sf::Image attractionImage;
+			sf::Texture attractionTexture;
+			sf::Sprite attractionSprite;
+
 			attraction(int idToUse, imagine::sim::player *mainPlayer,sf::Vector2f positionToUse);
 			attraction();
 			virtual ~attraction();
 
 			signed int getId() { return id; }
-			signed int getCost() { return cost; }
+			signed int getCostForTourists() { return costForTourists; }
 			signed int getAttractionLevel() { return attractionLevel; }
 			signed int getTouristsThisYear() { return touristsThisYear; }
 			signed int getPopularity() { return popularity; }
@@ -27,6 +32,7 @@ namespace imagine{
 			signed int getActivityLevel() { return activityLevel; }
 
 			void spawn();
+			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
 			bool admit(imagine::sim::tourist *tourist);
 			void demit();
 			void draw(sf::RenderWindow *window)override;
@@ -36,6 +42,7 @@ namespace imagine{
 
 			signed int id;
 			signed int currentTouristNum = 0;
+			signed int costForTourists;
 			signed int cost;
 			signed int attractionLevel;
 			signed int touristsThisYear;

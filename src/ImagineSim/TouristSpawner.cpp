@@ -76,7 +76,7 @@ void imagine::sim::TouristSpawner::spawnTourists(const signed int numberOfAttrac
 	if(pastHour!=NULL){
 		if(pastHour!=player->time->getSimTime().getHour()){
 			for(int i = 0; player->tourists > i;++i){
-				if(player->touristsSpawned[i].leaving){
+				if(player->touristsSpawned[i].leaving && !player->touristsSpawned[i].pastLeaving){
 					//delete player->touristsSpawned[i];
 					player->activeTourists--;
 					player->tourists--;
@@ -90,7 +90,7 @@ void imagine::sim::TouristSpawner::spawnTourists(const signed int numberOfAttrac
 			}
 			std::cout << spawnNumber << "\n";
 			for(int i = 0; spawnNumber > i;++i){
-				imagine::sim::tourist newTourist = imagine::sim::tourist(&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,player->numberOfAttractionsSpawned,player->numberOfRoadsSpawned,player->numberOfHotelsSpawned);
+				imagine::sim::tourist newTourist = imagine::sim::tourist(&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,player);
 				player->touristsSpawned.push_back(newTourist);
 				player->tourists++;
 				std::cout << "Tourist spawned\n";

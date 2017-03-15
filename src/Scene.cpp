@@ -31,6 +31,9 @@ bool imagine::scene::spawn(){
 			sceneActionArea->spawn();
 			sceneSidebar = new imagine::sim::sidebar(&defaultFont,playerInScene,sceneHelpBar,sceneActionArea);
 			sceneSidebar->spawn();
+			std::vector<std::string> musicTracks = {"1.ogg"};
+			musicPlayer = new imagine::sceneMusicPlayer(musicTracks,1);
+			musicPlayer->play();
 			return true;
 		}
 	}
@@ -53,10 +56,10 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	window->setView(sceneActionArea->actionAreaView);
     	sceneActionArea->draw(window); //TODO: When porting to windows in Visual Studio disable SDL checks
     	for(int i = 0;playerInScene->numberOfRoadsSpawned > i;i++){
-    		window->draw(playerInScene->roadsCreated[i].tileSprite);
+    		window->draw(playerInScene->roadsCreated[i].tileSprite);                 //NOT THIS WAY
     	}
     	for(int i = 0;playerInScene->numberOfAttractionsSpawned > i;i++){
-    		window->draw(playerInScene->attractionsCreated[i].tileSprite);
+    		playerInScene->attractionsCreated[i].draw(window);                         //THIS WAY
     	}
     	window->setView(window->getDefaultView());
         sceneHUD->display(window);

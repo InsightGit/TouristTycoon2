@@ -49,6 +49,8 @@ namespace imagine {
 				protected:
 					bool drawTimerSet=false;
 					bool mouseWasPressed = false;
+					bool limitClickTimerNotSet = true;
+					sf::Clock limitClicks;
 					imagine::sim::player *player;
 					imagine::sim::actionArea *actionArea;
 					sf::Vector2f mousePosition;

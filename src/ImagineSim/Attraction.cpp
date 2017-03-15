@@ -24,29 +24,47 @@ imagine::sim::attraction::~attraction()
 void imagine::sim::attraction::spawn(){
 	//tileImage.create(Car.width,Car.height,Car.pixel_data);
 	if(id == 1){
-		cost=50;
+		cost=1500;
+		costForTourists=50;
 		attractionLevel=0;
 		popularity = 10;
 		maxOccupancy = 50;
 		activityLevel = 7;
-		tileImage.create(washMonu.width,washMonu.height,washMonu.pixel_data);
+		attractionImage.create(washMonu.width,washMonu.height,washMonu.pixel_data);
+		std::cout << "id==0\n";
 	}
-	tileTexture.loadFromImage(tileImage);
+	attractionTexture.loadFromImage(attractionImage);
 
-	tileSprite.setTexture(tileTexture);
-	tileSprite.setPosition(position);
+	attractionSprite.setTexture(attractionTexture);
+	attractionSprite.setPosition(position);
 
 	alive=true;
 	//tileSprite.set
 }
 
+bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse){
+	spawn();
+	if(id==1){
+		if(player->money >= cost){
+			player->attractionsCreated.push_back(*this);
+			player->numberOfAttractionsSpawned++;
+			std::cout << "Attraction created\n";
+			player->money-=cost;
+		}else{
+			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);
+			return false;
+		}
+	}
+	return true;
+}
+
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 	if(maxOccupancy>currentTouristNum+1){
-		if(tourist->money-cost > 0){
+		if(tourist->money-costForTourists > 0){
 			 if(tourist->energy-activityLevel > 0){
 					currentTouristNum++;
-					tourist->money-=cost;
-					player->money+=cost;
+					tourist->money-=costForTourists;
+					player->money+=costForTourists;
 					tourist->energy-=activityLevel;
 			 }else{
 				std::cout << "No activity\n";
@@ -68,6 +86,9 @@ void imagine::sim::attraction::demit(){
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
 	if(alive){
-		window->draw(tileSprite);
+		attractionTexture.loadFromImage(attractionImage);
+
+		attractionSprite.setTexture(attractionTexture);
+		window->draw(attractionSprite);
 	}
 }

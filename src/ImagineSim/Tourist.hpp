@@ -39,6 +39,7 @@ namespace imagine{
 				aStarRoad(imagine::sim::road *aRoadToUse, imagine::sim::road *currentRoadToUse, sf::Vector2f dest);
 			};
 		}
+		class player;
 
 		class tourist{
 		public:
@@ -51,9 +52,10 @@ namespace imagine{
 			bool chosenHotel = false;
 			bool leaving = false;
 			bool added = false;
-			int attractionLength;
-			int roadLength;
-			int hotelLength;
+			bool pastLeaving = false;
+			//int attractionLength;
+			//int roadLength;
+			//int hotelLength;
 			signed int money;
 			signed int energy;
 			std::vector<imagine::sim::attraction> *allAttractions;
@@ -70,7 +72,7 @@ namespace imagine{
 			sf::Texture touristTexture;
 			sf::Sprite touristSprite;
 
-			tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, const int attractionsSpawned, const int roadsSpawned, const int hotelsSpawned);
+			tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, imagine::sim::player *mainPlayer);
 			//TODO: add tourist(saveData)
 
 
@@ -99,6 +101,7 @@ namespace imagine{
 			std::vector<imagine::sim::types::aStarRoad> aStarResults;
 			imagine::sim::road *currentRoad;
 			imagine::sim::road *aRoad;
+			imagine::sim::player *player;
 
 			std::vector<int> findNextRoadPlace(const imagine::sim::road *road);
 			std::vector<int> findNextAttractionPlace(const imagine::sim::attraction *attraction);

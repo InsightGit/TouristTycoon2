@@ -118,64 +118,76 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 		done=true;
 	}
 	if(drawTimer.getElapsedTime().asSeconds() >= 1 && drawTimerSet){
-		if(drawingRoad && !done){
-			if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-				mouseWasPressed=true;
-				mousePressed.restart();
-				std::cout << "Mouse Pressed\n";
-				if(!collides){
-					if(tileId==0){
-						if(drawingRoadLength==0){
-							sf::Vector2f mouseTemp = mousePosition;
-							imagine::sim::road newRoad(imagine::sim::types::straight,mouseTemp);
-							//std::cout << std::to_string(mousePosition.x) << "Y:"<< std::to_string(mousePosition.y) << "\n";
-							newRoad.spawn();
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+			mouseWasPressed=true;
+			mousePressed.restart();
+			//std::cout << "Mouse Pressed\n";
+		}
+		if(!collides && !done){
+			if(tileId==0){
+				if(drawingRoad && !done){
+					if(drawingRoadLength==0){
+						sf::Vector2f mouseTemp = mousePosition;
+						imagine::sim::road newRoad(imagine::sim::types::straight,mouseTemp);
+						//std::cout << std::to_string(mousePosition.x) << "Y:"<< std::to_string(mousePosition.y) << "\n";
+						newRoad.spawn();
+						drawingRoads.push_back(newRoad);
+						previousRoad=&drawingRoads[drawingRoadLength];
+						drawingRoadLength++;
+						std::clog << newRoad.tileSprite.getPosition().x << "Y:" << newRoad.tileSprite.getPosition().y << "\n";
+					}else{
+						sf::Vector2f mouseTemp = mousePosition;
+						imagine::sim::road newRoad(imagine::sim::types::straight,mouseTemp);
+						std::cout << std::to_string(mousePosition.x) << "Y:"<< std::to_string(mousePosition.y) << "\n";
+						newRoad.spawn();
+						if(!newRoad.tileSprite.getGlobalBounds().intersects(previousRoad->tileSprite.getGlobalBounds())){
 							drawingRoads.push_back(newRoad);
 							previousRoad=&drawingRoads[drawingRoadLength];
 							drawingRoadLength++;
-							std::clog << newRoad.tileSprite.getPosition().x << "Y:" << newRoad.tileSprite.getPosition().y << "\n";
-						}else{
-							sf::Vector2f mouseTemp = mousePosition;
-							imagine::sim::road newRoad(imagine::sim::types::straight,mouseTemp);
-							std::cout << std::to_string(mousePosition.x) << "Y:"<< std::to_string(mousePosition.y) << "\n";
-							newRoad.spawn();
-							if(!newRoad.tileSprite.getGlobalBounds().intersects(previousRoad->tileSprite.getGlobalBounds())){
-								drawingRoads.push_back(newRoad);
-								previousRoad=&drawingRoads[drawingRoadLength];
-								drawingRoadLength++;
-							}
-							std::clog << newRoad.tileSprite.getPosition().x << "Y:" << newRoad.tileSprite.getPosition().y << "\n";
 						}
-
-						/*}else{
-							imagine::sim::road *newRoad = new imagine::sim::road(imagine::sim::types::straight,mousePosition);
-							newRoad->spawn();
-							//if(previousRoad->tileSprite.getPosition().y == newRoad->tileSprite.getPosition().y && previousRoad->tileSprite.getPosition().x+64 == previousRoad->tileSprite.getPosition().x){
-								drawingRoads.push_back(*newRoad);
-								previousRoad=&drawingRoads[drawingRoadLength];
-								drawingRoadLength++;
-							//}else{
-								delete newRoad;
-							//}
-						}*/
-					}else if(tileId==1){
-
-
+						std::clog << newRoad.tileSprite.getPosition().x << "Y:" << newRoad.tileSprite.getPosition().y << "\n";
 					}
-				}
-			}else if(drawingRoadLength>=0 && mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.5){
-				if(drawingRoadLength*50 <= player->money){
-					for(int i = 0; drawingRoadLength > i;++i){
-						player->roadsCreated.push_back(drawingRoads[i]);
-						std::clog << player->roadsCreated[i].tileSprite.getPosition().x << "Y:" << player->roadsCreated[i].tileSprite.getPosition().y << "\n";
+				}else if(drawingRoadLength>=0 && mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.5){
+					if(drawingRoadLength*50 <= player->money){
+						for(int i = 0; drawingRoadLength > i;++i){
+							player->roadsCreated.push_back(drawingRoads[i]);
+							std::clog << player->roadsCreated[i].tileSprite.getPosition().x << "Y:" << player->roadsCreated[i].tileSprite.getPosition().y << "\n";
+						}
+						player->numberOfRoadsSpawned = drawingRoadLength+player->numberOfRoadsSpawned;
+						player->money=player->money-drawingRoadLength*50;
+					}else{
+						notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",&defaultFont);
+						cannotBuild=true;
 					}
-					player->numberOfRoadsSpawned = drawingRoadLength+player->numberOfRoadsSpawned;
-					player->money=player->money-drawingRoadLength*50;
-				}else{
-					notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",&defaultFont);
-					cannotBuild=true;
+					done=true;
 				}
-				done=true;
+
+
+				/*}else{
+					imagine::sim::road *newRoad = new imagine::sim::road(imagine::sim::types::straight,mousePosition);
+					newRoad->spawn();
+					//if(previousRoad->tileSprite.getPosition().y == newRoad->tileSprite.getPosition().y && previousRoad->tileSprite.getPosition().x+64 == previousRoad->tileSprite.getPosition().x){
+						drawingRoads.push_back(*newRoad);
+						previousRoad=&drawingRoads[drawingRoadLength];
+						drawingRoadLength++;
+					//}else{
+						delete newRoad;
+					//}
+				}*/
+			}else if(tileId==1){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					std::cout << "TILEID=1\n";
+					imagine::sim::attraction attraction = imagine::sim::attraction(1,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
 			}
 		}
 	}
@@ -190,19 +202,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 			playerRequestingBuild=true;
 		}
 	}*/
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Left) && !collides && mousePressed.getElapsedTime().asSeconds() >= 0.5){
-		imagine::sim::attraction attraction = imagine::sim::attraction(1,player,mousePosition);
-		if(player->money >= 1500){
-			attraction.spawn();
-			player->attractionsCreated.push_back(attraction);
-			player->numberOfAttractionsSpawned++;
-			player->money-=1500;
-		}else{
-			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",&defaultFont);
-			cannotBuild=true;
-		}
-		done=true;
-	}
+
 }
 
 sf::Vector2f imagine::sim::buildPrompter::getMousePos(){

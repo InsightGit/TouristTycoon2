@@ -8,9 +8,14 @@ void imagine::sceneMusicPlayer::musicPlayingThreadFunction(){
 			}
 			if(currentTrack.getStatus() == sf::SoundSource::Stopped){
 				position++;
-				if(!currentTrack.openFromFile(musicTrackLocations[position])){
-					throw imagine::exceptions::couldNotOpenMusicFile(musicTrackLocations[0]);
+				if(position > songs-1 && repeating){
+					position=0;
+				}else{
+					if(!currentTrack.openFromFile(musicTrackLocations[position])){
+						throw imagine::exceptions::couldNotOpenMusicFile(musicTrackLocations[0]);
+					}
 				}
+
 			}
 		}else{
 			if(currentTrack.getStatus() == sf::SoundSource::Playing){
@@ -22,13 +27,15 @@ void imagine::sceneMusicPlayer::musicPlayingThreadFunction(){
 	currentTrack.stop();
 }
 
-imagine::sceneMusicPlayer::sceneMusicPlayer(const std::vector<std::string> *musicTracks,const bool repeatSongs){
+imagine::sceneMusicPlayer::sceneMusicPlayer(const std::vector<std::string> musicTracks, const signed int songNumber, const bool repeatSongs){
 	repeating=repeatSongs;
-	musicTrackLocations = *musicTracks;
+	songs=songNumber;
+	musicTrackLocations = musicTracks;
 	if(!currentTrack.openFromFile(musicTrackLocations[0])){
 		throw imagine::exceptions::couldNotOpenMusicFile(musicTrackLocations[0]);
 	}
 	musicPlayingThread = new std::thread();
+
 }
 
 void imagine::sceneMusicPlayer::play(){
