@@ -176,8 +176,33 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}*/
 			}else if(tileId==1){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					std::cout << "TILEID=1\n";
 					imagine::sim::attraction attraction = imagine::sim::attraction(1,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==2){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::hotel hotel = imagine::sim::hotel(2,mousePosition,player);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(hotel.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==3){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::attraction attraction = imagine::sim::attraction(3,player,mousePosition);
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){

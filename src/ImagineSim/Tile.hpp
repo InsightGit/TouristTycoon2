@@ -1,11 +1,11 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 #include <SFML/Graphics.hpp>
+#include "MenuItem.hpp"
 
 namespace imagine{
     namespace sim{
-        class tile
-        {
+        class tile{
         public:
             sf::Vector2f position;
             sf::Image tileImage;

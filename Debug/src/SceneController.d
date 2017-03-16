@@ -5,7 +5,9 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/levelCompletePopUp.hpp \
  ../src/ImagineSim/../ClickableSprite.hpp \
  ../src/ImagineSim/Attraction.hpp ../src/ImagineSim/Tile.hpp \
- ../src/ImagineSim/PopUp.hpp ../src/ImagineSim/Road.hpp \
+ ../src/ImagineSim/MenuItem.hpp ../src/ImagineSim/PopUp.hpp \
+ ../src/ImagineSim/Resources/WashMonu.h \
+ ../src/ImagineSim/Resources/Tokyotower.h ../src/ImagineSim/Road.hpp \
  ../src/ImagineSim/Resources/roadIcon.h \
  ../src/ImagineSim/Resources/roadturn.h ../src/ImagineSim/hotel.hpp \
  ../src/ImagineSim/service.hpp ../src/ImagineSim/Resources/hotel.h \
@@ -13,9 +15,13 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/Car.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/SimSidebar.hpp \
  ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
- ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/MenuItem.hpp \
- ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/ActionArea.hpp \
- ../src/ImagineSim/HelpBar.hpp ../src/ImagineSim/SimSaveGame.hpp \
+ ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/BuildPrompter.hpp \
+ ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
+ ../src/ImagineSim/Resources/roadRemastered.h \
+ ../src/ImagineSim/Resources/WashMonuIcon.h \
+ ../src/ImagineSim/Resources/hotelIcon.h \
+ ../src/ImagineSim/Resources/TokyotowerIcon.h \
+ ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
  ../src/ImagineSim/Resources/advertIcon.h \
@@ -49,7 +55,13 @@ src/SceneController.o: ../src/SceneController.cpp \
 
 ../src/ImagineSim/Tile.hpp:
 
+../src/ImagineSim/MenuItem.hpp:
+
 ../src/ImagineSim/PopUp.hpp:
+
+../src/ImagineSim/Resources/WashMonu.h:
+
+../src/ImagineSim/Resources/Tokyotower.h:
 
 ../src/ImagineSim/Road.hpp:
 
@@ -79,13 +91,19 @@ src/SceneController.o: ../src/SceneController.cpp \
 
 ../src/ImagineSim/../Menu.hpp:
 
-../src/ImagineSim/MenuItem.hpp:
-
 ../src/ImagineSim/BuildPrompter.hpp:
 
 ../src/ImagineSim/ActionArea.hpp:
 
 ../src/ImagineSim/HelpBar.hpp:
+
+../src/ImagineSim/Resources/roadRemastered.h:
+
+../src/ImagineSim/Resources/WashMonuIcon.h:
+
+../src/ImagineSim/Resources/hotelIcon.h:
+
+../src/ImagineSim/Resources/TokyotowerIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

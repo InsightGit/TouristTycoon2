@@ -8,9 +8,13 @@
 #ifndef SRC_IMAGINESIM_HOTEL_HPP_
 #define SRC_IMAGINESIM_HOTEL_HPP_
 
+#include <iostream>
+
 #include "../ClickableSprite.hpp"
 
 #include "service.hpp"
+#include "PopUp.hpp"
+
 //#include "Tourist.hpp"
 //#include "SimPlayer.hpp"
 
@@ -25,15 +29,18 @@ namespace imagine {
 			sf::Vector2f tilePosition;
 			imagine::clickableSprite hotelSprite;
 
-			hotel(sf::Vector2f position, imagine::sim::player *player);
+			hotel(const signed int idToUse, const sf::Vector2f position, imagine::sim::player *mainPlayer);
 			hotel();
 			virtual ~hotel();
 
 			bool getVacancy(){ return vacancy; }
-			int getCost(){ return cost; }
+			signed int getCost(){ return cost; }
+			signed int getId() { return id; }
 
 			bool checkin(imagine::sim::tourist *tourist);
 			void checkout(imagine::sim::tourist *tourist);
+
+			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
 
 			void spawn()override;
 			void update(sf::RenderWindow *window);
@@ -44,7 +51,9 @@ namespace imagine {
 			bool alive = false;
 			int size = 0;
 			int maxSize = 20;
-			int cost;
+			signed int cost;
+			signed int buildingCost;
+			signed int id;
 		};
 
 	} /* namespace sim */

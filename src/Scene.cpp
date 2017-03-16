@@ -61,6 +61,9 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	for(int i = 0;playerInScene->numberOfAttractionsSpawned > i;i++){
     		playerInScene->attractionsCreated[i].draw(window);                         //THIS WAY
     	}
+    	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;i++){
+    		playerInScene->hotelsCreated[i].draw(window);
+    	}
     	window->setView(window->getDefaultView());
         sceneHUD->display(window);
         sceneSidebar->display(window);

@@ -10,6 +10,12 @@
 #include "HelpBar.hpp"
 #include "ActionArea.hpp"
 
+#include "Resources/roadIcon.h"
+#include "Resources/roadRemastered.h"
+#include "Resources/WashMonuIcon.h"
+#include "Resources/hotelIcon.h"
+#include "Resources/TokyotowerIcon.h"
+
 namespace imagine {
     namespace sim{
         class buildMenu : public imagine::menu
@@ -40,12 +46,14 @@ namespace imagine {
 	    	imagine::sim::actionArea *actionArea;
 	    	imagine::types::arrayLocation *inPrompter;
 	    	sf::Image largeRoad;
+	    	sf::Image imageForPrompter;
 	    	bool pastDrawMenu = false;
 	    	bool drawPrompter = false;
 	    	bool prompterTimerNotYetSet = true;
 	    	bool prompterCreated = false;
 	    	bool placeTimerNotSet = true;
 	    	signed int attractionButtonSize = 0;
+	    	signed int serviceButtonSize = 0;
 
 	    	sf::Clock limitPrompterClicks;
 	    	sf::Clock limitClicks;

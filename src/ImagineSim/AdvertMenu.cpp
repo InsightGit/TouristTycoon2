@@ -24,7 +24,7 @@ void imagine::sim::advertMenu::spawn(){
 	menuBox.setPosition(sf::Vector2f(484,184));
 
 	if(player->levelProgress.currentLevel >= 1){
-		imagine::sim::menuItem newMenuItem = imagine::sim::menuItem(&defaultFont);
+		imagine::sim::menuItem newMenuItem = imagine::sim::menuItem(&defaultFont,1);
 		newMenuItem.optionalImage = new sf::Image();
 		newMenuItem.optionalTexture = new sf::Texture();
 		newMenuItem.optionalImage->create(laptop.width,laptop.height,laptop.pixel_data);
@@ -88,8 +88,10 @@ void imagine::sim::advertMenu::draw(sf::RenderWindow *window){
 	if(drawMenu){
 		window->draw(menuBox);
 		for(int i = 0;menuItemsLength > i;i++){
-			window->draw(menuItems[i].sprite);
-			window->draw(menuItems[i].itemName);
+			if(menuItems[i].levelRequired <= player->levelProgress.currentLevel){
+				window->draw(menuItems[i].sprite);
+				window->draw(menuItems[i].itemName);
+			}
 		}
 	}else if(popUpSpawned){
 		popUp->draw(window);

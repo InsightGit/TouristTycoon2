@@ -1,10 +1,10 @@
 #include "Attraction.hpp"
 
-#include "Resources/WashMonu.h"
+#include <iostream>
 
 #include "Tourist.hpp"
 #include "SimPlayer.hpp"
-#include <iostream>
+
 
 imagine::sim::attraction::attraction(int idToUse, imagine::sim::player *mainPlayer,sf::Vector2f positionToUse)
 {
@@ -24,6 +24,7 @@ imagine::sim::attraction::~attraction()
 void imagine::sim::attraction::spawn(){
 	//tileImage.create(Car.width,Car.height,Car.pixel_data);
 	if(id == 1){
+		name="Washington Monument";
 		cost=1500;
 		costForTourists=50;
 		attractionLevel=0;
@@ -32,6 +33,14 @@ void imagine::sim::attraction::spawn(){
 		activityLevel = 7;
 		attractionImage.create(washMonu.width,washMonu.height,washMonu.pixel_data);
 		std::cout << "id==0\n";
+	}else if(id == 3){
+		name="Tokyo Tower";
+		cost=5000;
+		costForTourists=75;
+		popularity = 20;
+		maxOccupancy = 100;
+		activityLevel = 9;
+		attractionImage.create(tokyoTowerImageFile.width,tokyoTowerImageFile.height,tokyoTowerImageFile.pixel_data);
 	}
 	attractionTexture.loadFromImage(attractionImage);
 

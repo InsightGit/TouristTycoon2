@@ -1,10 +1,5 @@
 #include "BuildMenu.hpp"
 
-
-#include "Resources/roadIcon.h"
-#include "Resources/roadRemastered.h"
-#include "Resources/WashMonuIcon.h"
-
 imagine::sim::buildMenu::buildMenu(imagine::sim::player *mainPlayer,imagine::sim::helpBar *helpBarToUse,imagine::sim::actionArea *actionAreaToUse,sf::Font *fontToUse)
 {
     //ctor
@@ -48,50 +43,8 @@ void imagine::sim::buildMenu::spawn(){
 	//roadText.setString("Roads");
 	services.setString("Services");
 
-	/*switch(player->levelProgress.currentLevel){
-		case 0:
-			/*imagine::sim::menuItem roadSprite = imagine::sim::menuItem(&defaultFont);
-			roadSprite.optionalImage = new sf::Image;
-			roadSprite.optionalTexture = new sf::Texture;
-			roadSprite.optionalImage->create(roadIconSmall.width,roadIconSmall.height,roadIconSmall.pixel_data);
-			roadSprite.optionalTexture->loadFromImage(*roadSprite.optionalImage);
-			roadSprite.sprite.setTexture(*roadSprite.optionalTexture);
-			//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
-			roadSprite.sprite.setScale(0.25,0.25);
-			roadSprite.position = sf::Vector2f(594,184);
-			roadSprite.sprite.setPosition(roadSprite.position);
-			roadSprite.category = "Roads";
-			roadSprite.itemName.setString("Small Road");
-			roadSprite.itemName.setFillColor(sf::Color::Black);
-			roadSprite.itemName.setPosition(sf::Vector2f(roadSprite.position.x,roadSprite.position.y+28));
-			roadSprite.itemName.setFont(defaultFont);
-			roadSprite.itemName.setCharacterSize(10);
-			roadSprite.drawString = true;
-
-		case 1:
-			/*imagine::sim::menuItem roadSprite = imagine::sim::menuItem(&defaultFont);
-			roadSprite.optionalImage = new sf::Image;
-			roadSprite.optionalTexture = new sf::Texture;
-			roadSprite.optionalImage->create(roadIconSmall.width,roadIconSmall.height,roadIconSmall.pixel_data);
-			roadSprite.optionalTexture->loadFromImage(*roadSprite.optionalImage);
-			roadSprite.sprite.setTexture(*roadSprite.optionalTexture);
-			//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
-			roadSprite.sprite.setScale(0.25,0.25);
-			roadSprite.position = sf::Vector2f(594,184);
-			roadSprite.sprite.setPosition(roadSprite.position);
-			roadSprite.category = "Roads";
-			roadSprite.itemName.setString("Small Road");
-			roadSprite.itemName.setFillColor(sf::Color::Black);
-			roadSprite.itemName.setPosition(sf::Vector2f(roadSprite.position.x,roadSprite.position.y+28));
-			roadSprite.itemName.setFont(defaultFont);
-			roadSprite.itemName.setCharacterSize(10);
-			roadSprite.drawString = true;
-			roadButtons.push_back(roadSprite);
-
-			//imagine::sim::menuItem attraction
-	}*/
 	if(player->levelProgress.currentLevel>=0){
-		imagine::sim::menuItem washMonu = imagine::sim::menuItem(&defaultFont);
+		imagine::sim::menuItem washMonu = imagine::sim::menuItem(&defaultFont,0);
 		washMonu.optionalImage = new sf::Image;
 		washMonu.optionalTexture = new sf::Texture;
 		washMonu.optionalImage->create(washMonuIcon.width,washMonuIcon.height,washMonuIcon.pixel_data);
@@ -108,6 +61,46 @@ void imagine::sim::buildMenu::spawn(){
 		washMonu.itemName.setFont(defaultFont);
 		washMonu.itemName.setCharacterSize(7);
 		attractionButtons.push_back(washMonu);
+		attractionButtonSize++;
+
+		//level 1 stuff
+		imagine::sim::menuItem simpleHotel = imagine::sim::menuItem(&defaultFont,1);
+		simpleHotel.optionalImage = new sf::Image;
+		simpleHotel.optionalTexture = new sf::Texture;
+		simpleHotel.optionalImage->create(hotelIconFile.width,hotelIconFile.height,hotelIconFile.pixel_data);
+		simpleHotel.optionalTexture->loadFromImage(*simpleHotel.optionalImage);
+		simpleHotel.sprite.setTexture(*simpleHotel.optionalTexture);
+		//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
+		simpleHotel.sprite.setScale(0.85,0.85);
+		simpleHotel.position = sf::Vector2f(594,184);
+		simpleHotel.sprite.setPosition(simpleHotel.position);
+		simpleHotel.category = "Services";
+		simpleHotel.itemName.setString("Simple Hotel");
+		simpleHotel.itemName.setFillColor(sf::Color::Black);
+		simpleHotel.itemName.setPosition(sf::Vector2f(simpleHotel.position.x,simpleHotel.position.y+54.4));
+		simpleHotel.itemName.setFont(defaultFont);
+		simpleHotel.itemName.setCharacterSize(7);
+		serviceButtons.push_back(simpleHotel);
+		serviceButtonSize++;
+
+		//level 2 stuff
+		imagine::sim::menuItem tokyoTower = imagine::sim::menuItem(&defaultFont,2);
+		tokyoTower.optionalImage = new sf::Image;
+		tokyoTower.optionalTexture = new sf::Texture;
+		tokyoTower.optionalImage->create(tokyoTowerIconImageFile.width,tokyoTowerIconImageFile.height,tokyoTowerIconImageFile.pixel_data);
+		tokyoTower.optionalTexture->loadFromImage(*tokyoTower.optionalImage);
+		tokyoTower.sprite.setTexture(*tokyoTower.optionalTexture);
+		//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
+		tokyoTower.sprite.setScale(0.85,0.85);
+		tokyoTower.position = sf::Vector2f(washMonu.position.x+70,184);
+		tokyoTower.sprite.setPosition(tokyoTower.position);
+		tokyoTower.category = "Services";
+		tokyoTower.itemName.setString("Tokyo Tower");
+		tokyoTower.itemName.setFillColor(sf::Color::Black);
+		tokyoTower.itemName.setPosition(sf::Vector2f(tokyoTower.position.x,simpleHotel.position.y+54.4));
+		tokyoTower.itemName.setFont(defaultFont);
+		tokyoTower.itemName.setCharacterSize(7);
+		attractionButtons.push_back(tokyoTower);
 		attractionButtonSize++;
 	}
 	activeCategory="attractions";
@@ -150,13 +143,20 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 	}
 	//std::cout << activeCategory << "\n";
 	if(activeCategory=="services"){
-		for(int i = 0; attractionButtons.size() > i; i++){
-			if(attractionButtons[i].isClicked(window)){
+		for(int i = 0; serviceButtonSize > i; i++){
+			if(serviceButtons[i].isClicked(window)){
 				switch(i){
 					case 0:
-						//TODO: Add attractions
-						NULL;
+						imageForPrompter.create(hotelImageFile.width,hotelImageFile.height,hotelImageFile.pixel_data);
+						buildingPrompter = new imagine::sim::buildPrompter(player,imageForPrompter,5000,sf::Vector2i(1,2),actionArea,2,&defaultFont);
+						buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
+						prompterCreated = true;
+						drawMenu = false;
 
+						if(prompterTimerNotYetSet){
+							limitPrompterClicks.restart();
+						}
+						helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -184,19 +184,29 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 	}else if(activeCategory=="attractions"){
 		for(int i = 0; attractionButtonSize > i; i++){
 			if(attractionButtons[i].isClicked(window)){
-				switch(i){
-					case 0:
-						//TODO: Add services
-						buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[0].optionalImage,1500,sf::Vector2i(1,1),actionArea,1,&defaultFont);
-						buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
-						prompterCreated = true;
-						drawMenu = false;
-						//drawPrompter = true;
-						//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
-						if(prompterTimerNotYetSet){
-							limitPrompterClicks.restart();
-						}
-						helpBar->switchMessage("Press Escape to Cancel");
+				if(attractionButtons[i].itemName.getString() == "Washington Monument"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[0].optionalImage,1500,sf::Vector2i(1,1),actionArea,1,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+
+				}else if(attractionButtons[i].itemName.getString() == "Tokyo Tower"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[1].optionalImage,5000,sf::Vector2i(1,2),actionArea,3,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -246,9 +256,19 @@ void imagine::sim::buildMenu::draw(sf::RenderWindow *window){
 			}*/
 		}else if(activeCategory=="attractions"){
 			for(int i = 0; attractionButtons.size() > i; i++){
-				window->draw(attractionButtons[i].sprite);
-				window->draw(attractionButtons[i].itemName);
+				if(attractionButtons[i].levelRequired <= player->levelProgress.currentLevel){
+					window->draw(attractionButtons[i].sprite);
+					window->draw(attractionButtons[i].itemName);
+				}
 			}
+		}else if(activeCategory=="services"){
+			for(int i = 0; serviceButtons.size() > i; i++){
+				if(serviceButtons[i].levelRequired <= player->levelProgress.currentLevel){
+					window->draw(serviceButtons[i].sprite);
+					window->draw(serviceButtons[i].itemName);
+				}
+			}
+			std::cout << "serviceButtons drawn\n";
 		}
 	}else if(prompterCreated){
 		//if(buildingPrompter->done){

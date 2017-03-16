@@ -6,6 +6,9 @@
 #include "Tile.hpp"
 #include "PopUp.hpp"
 
+#include "Resources/WashMonu.h"
+#include "Resources/Tokyotower.h"
+
 
 namespace imagine{
 	namespace sim{

@@ -8,10 +8,10 @@
 #include "MenuItem.hpp"
 
 
-imagine::sim::menuItem::menuItem(sf::Font *fontToUse) {
+imagine::sim::menuItem::menuItem(sf::Font *fontToUse, const signed int minimumRequiredLevel) {
 	// TODO Auto-generated constructor stub
 	defaultFont=*fontToUse;
-
+	levelRequired=minimumRequiredLevel;
 }
 
 imagine::sim::menuItem::~menuItem() {

@@ -19,10 +19,11 @@ namespace imagine {
 			sf::Font defaultFont;
 			sf::Text itemName;
 			signed int cost;
+			signed int levelRequired;
 
 			bool drawString = false;
 
-			menuItem(sf::Font *fontToUse);
+			menuItem(sf::Font *fontToUse, const signed int minimumRequiredLevel);
 			virtual ~menuItem();
 
 			//void draw(sf::RenderWindow *window); //not required, just a shortHand

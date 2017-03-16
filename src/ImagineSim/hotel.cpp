@@ -9,10 +9,15 @@
 #include "Tourist.hpp"
 #include "SimPlayer.hpp"
 
-imagine::sim::hotel::hotel(sf::Vector2f position, imagine::sim::player *mainPlayer) {
+imagine::sim::hotel::hotel(const signed int idToUse, const sf::Vector2f position, imagine::sim::player *mainPlayer) {
 	// TODO Auto-generated constructor stub
+	id=idToUse;
+	if(id==3){
+		cost=150;
+		buildingCost=3000;
+	}
 	tilePosition=position;
-	cost=150;
+
 	player = mainPlayer;
 }
 
@@ -23,14 +28,32 @@ imagine::sim::hotel::~hotel() {
 }
 
 void imagine::sim::hotel::spawn(){
-	tileImage.create(hotelImageFile.width,hotelImageFile.height,hotelImageFile.pixel_data);
-	tileTexture.loadFromImage(tileImage);
+	if(id==2){
+		tileImage.create(hotelImageFile.width,hotelImageFile.height,hotelImageFile.pixel_data);
+		tileTexture.loadFromImage(tileImage);
 
-	hotelSprite.sprite.setTexture(tileTexture);
-	hotelSprite.sprite.setPosition(tilePosition);
+		hotelSprite.sprite.setTexture(tileTexture);
+		hotelSprite.sprite.setPosition(tilePosition);
+		alive=true;
+		spawned=true;
+	}
 
-	alive=true;
-	spawned=true;
+}
+
+bool imagine::sim::hotel::create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse){
+	spawn();
+	if(id==2){
+		if(player->money >= buildingCost){
+			player->hotelsCreated.push_back(*this);
+			player->numberOfHotelsSpawned++;
+			std::cout << "Hotel created\n";
+			player->money-=buildingCost;
+		}else{
+			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);
+			return false;
+		}
+	}
+	return true;
 }
 
 bool imagine::sim::hotel::checkin(imagine::sim::tourist *tourist){
@@ -56,6 +79,8 @@ void imagine::sim::hotel::checkout(imagine::sim::tourist *tourist){
 
 void imagine::sim::hotel::draw(sf::RenderWindow *window){
 	if(spawned && alive){
+		tileTexture.loadFromImage(tileImage);
+		hotelSprite.sprite.setTexture(tileTexture);
 		window->draw(hotelSprite.sprite);
 	}
 }
