@@ -48,6 +48,16 @@ void imagine::scene::update(sf::RenderWindow *window){
         for(int i = 0;playerInScene->tourists > i; ++i){
         	playerInScene->touristsSpawned[i].draw(window);
         }
+
+    	for(int i = 0;playerInScene->numberOfRoadsSpawned > i;i++){
+    		playerInScene->roadsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
+    	for(int i = 0;playerInScene->numberOfAttractionsSpawned > i;i++){
+    		playerInScene->attractionsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
+    	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;i++){
+    		playerInScene->hotelsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
     }
 }
 

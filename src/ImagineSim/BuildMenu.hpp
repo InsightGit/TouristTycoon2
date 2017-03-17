@@ -15,6 +15,7 @@
 #include "Resources/WashMonuIcon.h"
 #include "Resources/hotelIcon.h"
 #include "Resources/TokyotowerIcon.h"
+#include "Resources/ZiplineIcon.h"
 
 namespace imagine {
     namespace sim{

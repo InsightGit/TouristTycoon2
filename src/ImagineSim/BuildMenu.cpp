@@ -94,13 +94,32 @@ void imagine::sim::buildMenu::spawn(){
 		tokyoTower.sprite.setScale(0.85,0.85);
 		tokyoTower.position = sf::Vector2f(washMonu.position.x+70,184);
 		tokyoTower.sprite.setPosition(tokyoTower.position);
-		tokyoTower.category = "Services";
+		tokyoTower.category = "Attractions";
 		tokyoTower.itemName.setString("Tokyo Tower");
 		tokyoTower.itemName.setFillColor(sf::Color::Black);
-		tokyoTower.itemName.setPosition(sf::Vector2f(tokyoTower.position.x,simpleHotel.position.y+54.4));
+		tokyoTower.itemName.setPosition(sf::Vector2f(tokyoTower.position.x,tokyoTower.position.y+54.4));
 		tokyoTower.itemName.setFont(defaultFont);
 		tokyoTower.itemName.setCharacterSize(7);
 		attractionButtons.push_back(tokyoTower);
+		attractionButtonSize++;
+
+		imagine::sim::menuItem zipline = imagine::sim::menuItem(&defaultFont,2);
+		zipline.optionalImage = new sf::Image;
+		zipline.optionalTexture = new sf::Texture;
+		zipline.optionalImage->create(ziplineIconImageFile.width,ziplineIconImageFile.height,ziplineIconImageFile.pixel_data);
+		zipline.optionalTexture->loadFromImage(*zipline.optionalImage);
+		zipline.sprite.setTexture(*zipline.optionalTexture);
+		//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
+		zipline.sprite.setScale(0.85,0.85);
+		zipline.position = sf::Vector2f(tokyoTower.position.x+70,tokyoTower.position.y);
+		zipline.sprite.setPosition(zipline.position);
+		zipline.category = "Attractions";
+		zipline.itemName.setString("Zipline");
+		zipline.itemName.setFillColor(sf::Color::Black);
+		zipline.itemName.setPosition(sf::Vector2f(zipline.position.x,zipline.position.y+54.4));
+		zipline.itemName.setFont(defaultFont);
+		zipline.itemName.setCharacterSize(7);
+		attractionButtons.push_back(zipline);
 		attractionButtonSize++;
 	}
 	activeCategory="attractions";
@@ -185,7 +204,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 		for(int i = 0; attractionButtonSize > i; i++){
 			if(attractionButtons[i].isClicked(window)){
 				if(attractionButtons[i].itemName.getString() == "Washington Monument"){
-					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[0].optionalImage,1500,sf::Vector2i(1,1),actionArea,1,&defaultFont);
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,1500,sf::Vector2i(1,1),actionArea,1,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
 					prompterCreated = true;
 					drawMenu = false;
@@ -197,7 +216,18 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 
 				}else if(attractionButtons[i].itemName.getString() == "Tokyo Tower"){
-					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[1].optionalImage,5000,sf::Vector2i(1,2),actionArea,3,&defaultFont);
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,5000,sf::Vector2i(1,2),actionArea,3,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Zipline"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,7000,sf::Vector2i(2,1),actionArea,4,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
 					prompterCreated = true;
 					drawMenu = false;

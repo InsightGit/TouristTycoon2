@@ -8,6 +8,7 @@
 
 #include "Resources/WashMonu.h"
 #include "Resources/Tokyotower.h"
+#include "Resources/Zipline.h"
 
 
 namespace imagine{

@@ -243,7 +243,7 @@ void imagine::sim::tourist::update(){
 				if(energy<=0 || energy-currentAttraction.getActivityLevel() < 0){
 					//if();
 					if(player->numberOfHotelsSpawned!=0){
-						if(money-allHotels->at(i).getCost() > 0){
+						if(money-allHotels->at(0).getCost() > 0){
 							if(player->numberOfHotelsSpawned==1){
 								currentHotel=allHotels->at(0);
 							}else{

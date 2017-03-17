@@ -5,6 +5,8 @@
 imagine::sim::road::road(const imagine::sim::types::roadDirection roadDirectionToUse, sf::Vector2f tilePosition){
 	roadDirection=roadDirectionToUse;
 	position=tilePosition;
+	maintainceCost=50;
+	maintainceCostSet = true;
 }
 
 imagine::sim::road::~road(){

@@ -14,6 +14,8 @@ imagine::sim::hotel::hotel(const signed int idToUse, const sf::Vector2f position
 	id=idToUse;
 	if(id==3){
 		cost=150;
+		maintainceCost=750;
+		maintainceCostSet=true;
 		buildingCost=3000;
 	}
 	tilePosition=position;

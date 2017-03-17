@@ -15,9 +15,9 @@
 //#include <string>
 
 #include "levelCompletePopUp.hpp"
-#include "Attraction.hpp"
-#include "Road.hpp"
-#include "hotel.hpp"
+//#include "Attraction.hpp"
+//#include "Road.hpp"
+//#include "hotel.hpp"
 #include "Tourist.hpp"
 
 
@@ -83,11 +83,14 @@ namespace imagine{
 			void display(sf::RenderWindow *window);
 
 		    protected:
+				std::vector<bool> progressAdded;
+				signed int progressAddedSize = 0;
 				bool levelUp = false;
 				Json::Reader JSONReader;
 				Json::Value playerData;
 				bool loadDataExists = false;
 
+				void updatePlayerLevel();
 				void update();
 				static std::string getApplicationDataDir();
 				static imagine::sim::types::platform getPlatform();

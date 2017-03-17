@@ -71,16 +71,53 @@ imagine::sim::player::player(Json::Value loadGameData,sf::Font *fontToUse){
 	defaultFont=*fontToUse;
 }
 
+void imagine::sim::player::updatePlayerLevel(){
+	//update the player level based on in-game events
+	 if(levelProgress.currentLevel==1){
+		 if(levelProgress.currentProgress < levelProgress.finishPoint){
+			 for(int i = 0;levelProgress.finishPoint > i;i++){
+				 if(i==0 && progressAddedSize-1 >= 0){
+					 if(!progressAdded[i]){
+						 if(money >= 13000){
+							 progressAdded.push_back(true);
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }
+					 }
+				 }else if(i==0){
+					 if(money >= 15000){
+						 progressAdded.push_back(true);
+						 levelProgress.currentProgress++;
+						 progressAddedSize++;
+					 }else{
+						 progressAdded.push_back(false);
+					 }
+				 }
+			 }
+		 }
+	 }
+}
+
 void imagine::sim::player::update(){
+	updatePlayerLevel();
+	//check level-up conditions
 	if(!levelUp){
 		if(numberOfAttractionsSpawned>=1 && levelProgress.currentLevel==0){
 			levelProgress.currentLevel = 1;
 			levelProgress.currentProgress = 0;
-			levelProgress.finishPoint=5;
+			levelProgress.finishPoint=1;
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,1,1),"Level Up! 1",&defaultFont);
+			levelUp=true;
+		}else if(levelProgress.currentLevel==1 && levelProgress.currentProgress >= levelProgress.finishPoint){
+			levelProgress.currentLevel = 2;
+			levelProgress.currentProgress = 0;
+			levelProgress.finishPoint = 2;
+			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 2",&defaultFont);
 			levelUp=true;
 		}
 	}else{
+		progressAdded.clear();
+		progressAddedSize = 0;
 		if(!levelCompletePopUp->getDrawingStatus()){
 			levelUp=false;
 		}
