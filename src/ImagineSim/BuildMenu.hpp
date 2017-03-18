@@ -16,6 +16,7 @@
 #include "Resources/hotelIcon.h"
 #include "Resources/TokyotowerIcon.h"
 #include "Resources/ZiplineIcon.h"
+#include "Resources/HikingTrailIcon.h"
 
 namespace imagine {
     namespace sim{

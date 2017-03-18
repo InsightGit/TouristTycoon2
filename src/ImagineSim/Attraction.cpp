@@ -37,8 +37,8 @@ void imagine::sim::attraction::spawn(){
 		std::cout << "id==0\n";
 	}else if(id == 3){ //We skip 2 because it is a hotel
 		name="Tokyo Tower";
-		cost=5000;
-		maintainceCost=375;
+		cost=2500;
+		maintainceCost=350;
 		maintainceCostSet=true;
 		costForTourists=75;
 		popularity = 20;
@@ -48,13 +48,22 @@ void imagine::sim::attraction::spawn(){
 	}else if(id == 4){
 		name="Zipline";
 		cost=7000;
-		maintainceCost=3000;
+		maintainceCost=475;
 		maintainceCostSet=true;
 		costForTourists=625;
 		popularity = 40;
 		maxOccupancy = 80;
 		activityLevel = 25;
 		attractionImage.create(ziplineImageFile.width,ziplineImageFile.height,ziplineImageFile.pixel_data);
+	}else if(id == 5){
+		name="Hiking Trail";
+		cost=7500;
+		maintainceCost=400;
+		maintainceCostSet=true;
+		popularity = 40;
+		maxOccupancy = 100;
+		activityLevel = 35;
+		attractionImage.create(hikingTrailImageFile.width,hikingTrailImageFile.height,hikingTrailImageFile.pixel_data);
 	}
 	attractionTexture.loadFromImage(attractionImage);
 
@@ -67,16 +76,20 @@ void imagine::sim::attraction::spawn(){
 
 bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse){
 	spawn();
-	if(player->money >= cost){
-		player->attractionsCreated.push_back(*this);
-		player->numberOfAttractionsSpawned++;
-		std::cout << "Attraction created\n";
-		player->money-=cost;
-	}else{
-		notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);
-		return false;
+	if(!created){
+		if(player->money >= cost){
+			player->attractionsCreated.push_back(*this);
+			player->numberOfAttractionsSpawned++;
+			std::cout << "Attraction created\n";
+			player->money-=cost;
+		}else{
+			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);
+			return false;
+		}
+		created=true;
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){

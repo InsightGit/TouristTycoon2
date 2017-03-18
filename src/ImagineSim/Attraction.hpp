@@ -9,6 +9,7 @@
 #include "Resources/WashMonu.h"
 #include "Resources/Tokyotower.h"
 #include "Resources/Zipline.h"
+#include "Resources/HikingTrail.h"
 
 
 namespace imagine{
@@ -42,6 +43,7 @@ namespace imagine{
 			void draw(sf::RenderWindow *window)override;
 		    protected:
 			bool alive = false;
+			bool created = false;
 			imagine::sim::player *player;
 
 			signed int id;

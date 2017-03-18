@@ -121,6 +121,25 @@ void imagine::sim::buildMenu::spawn(){
 		zipline.itemName.setCharacterSize(7);
 		attractionButtons.push_back(zipline);
 		attractionButtonSize++;
+
+		imagine::sim::menuItem hikingTrail = imagine::sim::menuItem(&defaultFont,2);
+		hikingTrail.optionalImage = new sf::Image;
+		hikingTrail.optionalTexture = new sf::Texture;
+		hikingTrail.optionalImage->create(hikingTrailIconImageFile.width,hikingTrailIconImageFile.height,hikingTrailIconImageFile.pixel_data);
+		hikingTrail.optionalTexture->loadFromImage(*hikingTrail.optionalImage);
+		hikingTrail.sprite.setTexture(*hikingTrail.optionalTexture);
+		//roadSprite.sprite.setPosition(sf::Vector2f(494,84));
+		hikingTrail.sprite.setScale(0.85,0.85);
+		hikingTrail.position = sf::Vector2f(zipline.position.x+70,zipline.position.y);
+		hikingTrail.sprite.setPosition(hikingTrail.position);
+		hikingTrail.category = "Attractions";
+		hikingTrail.itemName.setString("Hiking Trail");
+		hikingTrail.itemName.setFillColor(sf::Color::Black);
+		hikingTrail.itemName.setPosition(sf::Vector2f(hikingTrail.position.x,hikingTrail.position.y+54.4));
+		hikingTrail.itemName.setFont(defaultFont);
+		hikingTrail.itemName.setCharacterSize(7);
+		attractionButtons.push_back(hikingTrail);
+		attractionButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -228,6 +247,17 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(attractionButtons[i].itemName.getString() == "Zipline"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,7000,sf::Vector2i(2,1),actionArea,4,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Hiking Trail"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,7500,sf::Vector2i(2,1),actionArea,5,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated);
 					prompterCreated = true;
 					drawMenu = false;

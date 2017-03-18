@@ -19,7 +19,7 @@
 //#include "Road.hpp"
 //#include "hotel.hpp"
 #include "Tourist.hpp"
-
+#include "Restaurant.hpp"
 
 namespace imagine{
 	namespace sim{
@@ -63,6 +63,7 @@ namespace imagine{
 			std::vector<imagine::sim::hotel> hotelsCreated;
 			std::vector<imagine::sim::tourist> touristsSpawned;
 			std::vector<imagine::sim::Advertisement> advertisementsCreated;
+			std::vector<imagine::sim::Restaurant> restaurantsCreated;
 			imagine::sim::types::levelProgress levelProgress;
 			imagine::sim::TouristSpawner *touristSpawner;
 			signed int activeTourists = 0;
@@ -71,6 +72,7 @@ namespace imagine{
 			signed int numberOfAttractionsSpawned = 0;
 			signed int numberOfAdvertisementsSpawned = 0;
 			signed int numberOfHotelsSpawned = 0;
+			signed int numberOfRestaurantsSpawned = 0;
 			sf::Font defaultFont;
 
 			imagine::sim::levelCompletePopUp *levelCompletePopUp;

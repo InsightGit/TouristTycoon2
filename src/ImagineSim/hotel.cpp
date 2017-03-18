@@ -12,11 +12,12 @@
 imagine::sim::hotel::hotel(const signed int idToUse, const sf::Vector2f position, imagine::sim::player *mainPlayer) {
 	// TODO Auto-generated constructor stub
 	id=idToUse;
-	if(id==3){
+	if(id==2){
 		cost=150;
 		maintainceCost=750;
 		maintainceCostSet=true;
 		buildingCost=3000;
+		std::cout << "Hotel created\n";
 	}
 	tilePosition=position;
 
@@ -48,7 +49,6 @@ bool imagine::sim::hotel::create(imagine::sim::popUp *notEnoughMoneyPopUp, const
 		if(player->money >= buildingCost){
 			player->hotelsCreated.push_back(*this);
 			player->numberOfHotelsSpawned++;
-			std::cout << "Hotel created\n";
 			player->money-=buildingCost;
 		}else{
 			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);

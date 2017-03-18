@@ -85,7 +85,41 @@ void imagine::sim::player::updatePlayerLevel(){
 						 }
 					 }
 				 }else if(i==0){
-					 if(money >= 15000){
+					 if(money >= 13000){
+						 progressAdded.push_back(true);
+						 levelProgress.currentProgress++;
+						 progressAddedSize++;
+					 }else{
+						 progressAdded.push_back(false);
+					 }
+				 }
+			 }
+		 }
+	 }else if(levelProgress.currentLevel==2){
+		 if(levelProgress.currentProgress < levelProgress.finishPoint){
+			 for(int i = 0;levelProgress.finishPoint > i;i++){
+				 if(i==0 && progressAddedSize-1 >= 1){
+					 if(!progressAdded[i]){
+						 if(money >= 20000 && i==0){
+							 progressAdded[i]= true;
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }else if(activeTourists >= 500 && i==1){
+							 progressAdded[i] = true;
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }
+					 }
+				 }else if(i==0){
+					 if(money >= 20000){
+						 progressAdded.push_back(true);
+						 levelProgress.currentProgress++;
+						 progressAddedSize++;
+					 }else{
+						 progressAdded.push_back(false);
+					 }
+				 }else if(i==1){
+					 if(activeTourists >= 500){
 						 progressAdded.push_back(true);
 						 levelProgress.currentProgress++;
 						 progressAddedSize++;
@@ -105,7 +139,7 @@ void imagine::sim::player::update(){
 		if(numberOfAttractionsSpawned>=1 && levelProgress.currentLevel==0){
 			levelProgress.currentLevel = 1;
 			levelProgress.currentProgress = 0;
-			levelProgress.finishPoint=1;
+			levelProgress.finishPoint = 1;
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,1,1),"Level Up! 1",&defaultFont);
 			levelUp=true;
 		}else if(levelProgress.currentLevel==1 && levelProgress.currentProgress >= levelProgress.finishPoint){

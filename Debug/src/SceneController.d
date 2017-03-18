@@ -13,6 +13,7 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/WashMonu.h \
  ../src/ImagineSim/Resources/Tokyotower.h \
  ../src/ImagineSim/Resources/Zipline.h \
+ ../src/ImagineSim/Resources/HikingTrail.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/SimSidebar.hpp \
  ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
  ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/BuildPrompter.hpp \
@@ -22,6 +23,7 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/hotelIcon.h \
  ../src/ImagineSim/Resources/TokyotowerIcon.h \
  ../src/ImagineSim/Resources/ZiplineIcon.h \
+ ../src/ImagineSim/Resources/HikingTrailIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -84,6 +86,8 @@ src/SceneController.o: ../src/SceneController.cpp \
 
 ../src/ImagineSim/Resources/Zipline.h:
 
+../src/ImagineSim/Resources/HikingTrail.h:
+
 ../src/ImagineSim/Resources/personNew.h:
 
 ../src/ImagineSim/SimSidebar.hpp:
@@ -109,6 +113,8 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/TokyotowerIcon.h:
 
 ../src/ImagineSim/Resources/ZiplineIcon.h:
+
+../src/ImagineSim/Resources/HikingTrailIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 
