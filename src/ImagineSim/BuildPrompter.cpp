@@ -45,7 +45,7 @@ bool imagine::sim::buildPrompter::canBuild(){
 	}
 }
 
-void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels){
+void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels,std::vector<imagine::sim::Restaurant> *restaurants){
 	if(!canBuild()){
 		notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",&defaultFont);
 		cannotBuild = true;
@@ -67,6 +67,16 @@ void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<im
 				collides=true;
 			}
 		}
+		for(int i = 0; i < hotels->size();i++){
+			if(hotels->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+				collides=true;
+			}
+		}
+		for(int i = 0; i < restaurants->size();i++){
+			if(restaurants->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+				collides=true;
+			}
+		}
 		if(collides){
 			buildArea.setOutlineColor(sf::Color::Red);
 		}else{
@@ -84,7 +94,7 @@ void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<im
 	cost.setPosition(sf::Vector2f(1068,650));
 }
 
-void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels){
+void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels, std::vector<imagine::sim::Restaurant> *restaurants){
 	if(!drawTimerSet){
 		drawTimer.restart();
 		drawTimerSet=true;
@@ -239,6 +249,45 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
 					limitClickTimerNotSet=true;
 				}
+			}else if(tileId==6){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(6,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==7){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(7,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==8){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(8,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
 			}
 		}
 	}
@@ -260,8 +309,8 @@ sf::Vector2f imagine::sim::buildPrompter::getMousePos(){
 	return mousePosition;
 }
 
-void imagine::sim::buildPrompter::draw(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels){
-	update(window,attractions,roads,hotels);
+void imagine::sim::buildPrompter::draw(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels,std::vector<imagine::sim::Restaurant> *restaurants){
+	update(window,attractions,roads,hotels,restaurants);
 	if(!done){
 		if(cannotBuild){
 			notEnoughMoneyPopUp->draw(window);

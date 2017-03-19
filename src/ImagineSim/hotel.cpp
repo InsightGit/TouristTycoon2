@@ -74,7 +74,7 @@ bool imagine::sim::hotel::checkin(imagine::sim::tourist *tourist){
 
 void imagine::sim::hotel::checkout(imagine::sim::tourist *tourist){
 	size--;
-	if(size<=maxSize){
+	if(size < maxSize){
 		vacancy=true;
 	}
 }

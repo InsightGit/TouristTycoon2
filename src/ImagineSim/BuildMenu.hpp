@@ -17,6 +17,9 @@
 #include "Resources/TokyotowerIcon.h"
 #include "Resources/ZiplineIcon.h"
 #include "Resources/HikingTrailIcon.h"
+#include "Resources/ItalianRestaurantIcon.h"
+#include "Resources/MexicanRestaurantIcon.h"
+#include "Resources/dinerIcon.h"
 
 namespace imagine {
     namespace sim{
@@ -37,11 +40,13 @@ namespace imagine {
 	    	sf::Text attractions;
 	    	sf::Text roadText;
 	    	sf::Text services;
+	    	sf::Text restaurants;
 	    	std::string activeCategory;
 	    	std::string previousTextName = "attractions";
 	    	std::vector<imagine::sim::menuItem> attractionButtons;
 	    	std::vector<imagine::sim::menuItem> roadButtons;
 	    	std::vector<imagine::sim::menuItem> serviceButtons;
+	    	std::vector<imagine::sim::menuItem> restaurantButtons;
 	    	imagine::sim::player *player;
 	    	imagine::sim::buildPrompter *buildingPrompter;
 	    	imagine::sim::helpBar *helpBar;
@@ -56,6 +61,7 @@ namespace imagine {
 	    	bool placeTimerNotSet = true;
 	    	signed int attractionButtonSize = 0;
 	    	signed int serviceButtonSize = 0;
+	    	signed int restaurantButtonSize = 0;
 
 	    	sf::Clock limitPrompterClicks;
 	    	sf::Clock limitClicks;

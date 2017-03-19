@@ -10,6 +10,10 @@
 #include <SFML/Graphics.hpp>
 
 #include "Tile.hpp"
+#include "Tourist.hpp"
+#include "PopUp.hpp"
+
+//#include "Resources/"
 
 namespace imagine {
 	namespace sim {
@@ -31,13 +35,14 @@ namespace imagine {
 		}
 		class Restaurant : public tile{
 		public:
-			Restaurant(const int id, const sf::Vector2f position, imagine::sim::player *mainPlayer);
-			virtual ~Restaurant();
+			Restaurant(const int id,imagine::sim::player *mainPlayer, const sf::Vector2f position);
+			virtual ~Restauran,sft();
 			void spawn();
 
 			imagine::sim::types::foodCuisine getCuisine() { return cuisine; }
 			imagine::sim::types::foodQuality getQuality() { return quality; }
 			int getCost() { return cost; }
+			bool getVacancy() { return vacancy; }
 
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
 			bool checkin(imagine::sim::tourist *tourist);
@@ -53,6 +58,7 @@ namespace imagine {
 			signed int cost;
 			signed int buildingCost;
 			bool alive = false;
+			bool vacancy = true;
 
 			//void update();
 		};

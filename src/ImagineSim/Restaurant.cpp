@@ -7,11 +7,10 @@
 
 #include "Restaurant.hpp"
 
-#include "Player.hpp"
+#include "SimPlayer.hpp"
 
-imagine::sim::Restaurant::Restaurant(const int id, const sf::Vector2f position, imagine::sim::player *mainPlayer) {
+imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlayer, const sf::Vector2f position) {
 	// TODO Auto-generated constructor stub
-	tileImage = new sf::Image();
 	if(id==6){
 		buildingCost = 5000;
 		cost = 80;
@@ -43,12 +42,9 @@ imagine::sim::Restaurant::Restaurant(const int id, const sf::Vector2f position, 
 
 imagine::sim::Restaurant::~Restaurant() {
 	// TODO Auto-generated destructor stub
-	delete tileImage;
-	delete tileTexture;
 }
 
 void imagine::sim::Restaurant::spawn(){
-	tileTexture = new sf::Texture();
 	tileTexture.loadFromImage(tileImage);
 	tileSprite.setTexture(tileTexture);
 	alive=true;
@@ -68,11 +64,24 @@ bool imagine::sim::Restaurant::create(imagine::sim::popUp *notEnoughMoneyPopUp,c
 }
 
 bool imagine::sim::Restaurant::checkin(imagine::sim::tourist *tourist){
-	return true;
+	if(tourist->money-cost > 0 && vacancy){
+		tourist->money-=cost;
+		player->money+=cost;
+		currentOccupancy++;
+		if(currentOccupancy>=maxOccupancy){
+			vacancy=false;
+		}
+		return true;
+	}else{
+		return false;
+	}
 }
 
 void imagine::sim::Restaurant::checkout(imagine::sim::tourist *tourist){
-	return;
+	currentOccupancy--;
+	if(currentOccupancy < maxOccupancy){
+		vacancy=true;
+	}
 }
 
 void imagine::sim::Restaurant::draw(sf::RenderWindow *window){

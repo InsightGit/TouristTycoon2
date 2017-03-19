@@ -14,6 +14,7 @@
 #include "Road.hpp"
 #include "hotel.hpp"
 #include "ActionArea.hpp"
+#include "Restaurant.hpp"
 //#include "Services.hpp"
 
 namespace imagine {
@@ -43,8 +44,8 @@ namespace imagine {
 					virtual ~buildPrompter();
 
 					bool canBuild();
-					void spawn(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels) ;
-					void draw(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels);
+					void spawn(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels, std::vector<imagine::sim::Restaurant> *restaurants);
+					void draw(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels, std::vector<imagine::sim::Restaurant> *restaurants);
 					sf::Vector2f getMousePos();
 				protected:
 					bool drawTimerSet=false;
@@ -58,7 +59,7 @@ namespace imagine {
 					sf::Clock drawTimer;
 					signed int tileId;
 
-					void update(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads, std::vector<imagine::sim::hotel> *hotels);
+					void update(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads, std::vector<imagine::sim::hotel> *hotels, std::vector<imagine::sim::Restaurant> *restaurants);
 				};
 
 		} /* namespace sim */
