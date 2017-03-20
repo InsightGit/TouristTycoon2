@@ -14,10 +14,13 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Resources/Zipline.h \
  ../src/ImagineSim/Resources/HikingTrail.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
- ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/../Menu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/BuildPrompter.hpp \
- ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
+ ../src/ImagineSim/Resources/ItalianRestaurant.h \
+ ../src/ImagineSim/Resources/MexicanRestaurant.h \
+ ../src/ImagineSim/Resources/diner.h ../src/ImagineSim/SimSidebar.hpp \
+ ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
+ ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/../ImagineCore.hpp \
+ ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/ActionArea.hpp \
+ ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/Resources/roadRemastered.h \
  ../src/ImagineSim/Resources/WashMonuIcon.h \
  ../src/ImagineSim/Resources/hotelIcon.h \
@@ -87,6 +90,12 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 ../src/ImagineSim/Resources/personNew.h:
 
 ../src/ImagineSim/Restaurant.hpp:
+
+../src/ImagineSim/Resources/ItalianRestaurant.h:
+
+../src/ImagineSim/Resources/MexicanRestaurant.h:
+
+../src/ImagineSim/Resources/diner.h:
 
 ../src/ImagineSim/SimSidebar.hpp:
 

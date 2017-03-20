@@ -58,6 +58,9 @@ void imagine::scene::update(sf::RenderWindow *window){
     	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;i++){
     		playerInScene->hotelsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
+    	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
+    		playerInScene->restaurantsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
     }
 }
 
@@ -73,6 +76,9 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	}
     	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;i++){
     		playerInScene->hotelsCreated[i].draw(window);
+    	}
+    	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
+    		playerInScene->restaurantsCreated[i].draw(window);
     	}
     	window->setView(window->getDefaultView());
         sceneHUD->display(window);

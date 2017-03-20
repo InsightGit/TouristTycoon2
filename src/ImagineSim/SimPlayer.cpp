@@ -46,7 +46,7 @@ static std::string imagine::sim::player::getApplicationDataDir(){
 imagine::sim::types::levelProgress::levelProgress(){
     finishPoint = 0;
     currentProgress = 0;
-    currentLevel = 0;
+    currentLevel = 3;
 }
 
 imagine::sim::types::levelProgress::levelProgress(const int finishValue, const int currentValue, const int currentLevelNum){

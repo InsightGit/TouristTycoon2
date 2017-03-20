@@ -23,8 +23,11 @@ namespace imagine{
 				driving,
 				walking,
 				touring,
-				sleeping
+				sleeping,
+				eating
 			};
+			enum foodCuisine : unsigned int;
+			enum foodQuality : unsigned int;
 			class aStarRoad{
 			public:
 				float gScore;
@@ -38,21 +41,29 @@ namespace imagine{
 				aStarRoad(imagine::sim::road *aRoadToUse, imagine::sim::road *currentRoadToUse, imagine::sim::road *futureRoadToUse);
 				aStarRoad(imagine::sim::road *aRoadToUse, imagine::sim::road *currentRoadToUse, sf::Vector2f dest);
 			};
+			class compareFoodQuality{
+			public:
+				static bool isLess(imagine::sim::types::foodQuality leftSide, imagine::sim::types::foodQuality rightSide);
+			};
 		}
 		class player;
+		class Restaurant;
 
 		class tourist{
 		public:
 			//std::string name;
-			int visitedAttractionsNumber = 0;
+			signed int visitedAttractionsNumber = 0;
+			signed int numberOfAttractionsSinceLastEat = 0;
 			sf::Vector2f position;
 			bool display = false;
 			bool chosenAttraction = false;
 			bool justSpawned = true;
 			bool chosenHotel = false;
+			bool chosenRestaurant = false;
 			bool leaving = false;
 			bool added = false;
 			bool pastLeaving = false;
+			bool hungry = false;
 			//int attractionLength;
 			//int roadLength;
 			//int hotelLength;
@@ -62,9 +73,12 @@ namespace imagine{
 			std::vector<imagine::sim::road> *allRoads;
 			std::vector<imagine::sim::hotel> *allHotels;
 			imagine::sim::hotel currentHotel;
- 			imagine::sim::attraction currentAttraction;
+ 			imagine::sim::attraction *currentAttraction;
+ 			imagine::sim::Restaurant *currentRestaurant;
 			imagine::sim::types::touristStatus status = imagine::sim::types::driving;
 			imagine::sim::touristCar *car;
+			imagine::sim::types::foodCuisine preferredCuisine;
+			imagine::sim::types::foodQuality minimumQuality;
 
 
 			//sf::Image drivingForm;
@@ -79,11 +93,13 @@ namespace imagine{
 			void spawn();
 			void draw(sf::RenderWindow *window);
 		protected:
+			bool previousCuisineMatched = false;
 			std::vector<int> popularityList;
-			std::vector<imagine::sim::attraction> tempBlackList;
-			std::vector<imagine::sim::attraction> visitedAttractions;
+			std::vector<imagine::sim::attraction*> tempBlackList;
+			std::vector<imagine::sim::attraction*> visitedAttractions;
 			int mostPopular;
 			int mostPopularPlace = -1;
+			int mostPopularRestaurant = -1;
 			signed int tempBlackListSize = 0;
 			signed int visitedAttractionsSize = 0;
 

@@ -48,23 +48,25 @@ void imagine::sim::attraction::spawn(){
 	}else if(id == 4){
 		name="Zipline";
 		cost=7000;
-		maintainceCost=475;
+		maintainceCost=400;
 		maintainceCostSet=true;
-		costForTourists=625;
+		costForTourists=150;
 		popularity = 40;
 		maxOccupancy = 80;
-		activityLevel = 25;
+		activityLevel = 15;
 		attractionImage.create(ziplineImageFile.width,ziplineImageFile.height,ziplineImageFile.pixel_data);
 	}else if(id == 5){
 		name="Hiking Trail";
 		cost=7500;
-		maintainceCost=400;
+		maintainceCost=375;
+		costForTourists=175;
 		maintainceCostSet=true;
 		popularity = 40;
 		maxOccupancy = 100;
-		activityLevel = 35;
+		activityLevel = 25;
 		attractionImage.create(hikingTrailImageFile.width,hikingTrailImageFile.height,hikingTrailImageFile.pixel_data);
 	}
+	std::cout << id << "\n";
 	attractionTexture.loadFromImage(attractionImage);
 
 	attractionSprite.setTexture(attractionTexture);
@@ -119,6 +121,7 @@ void imagine::sim::attraction::demit(){
 }
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
+	//std::cout << currentTouristNum << "\n";
 	if(alive){
 		attractionTexture.loadFromImage(attractionImage);
 

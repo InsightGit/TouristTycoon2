@@ -29,14 +29,14 @@ void imagine::sim::buildMenu::spawn(){
 	attractions.setCharacterSize(20);
     roadText.setCharacterSize(20);
     services.setCharacterSize(20);
-    restaurants.setCharacterSize(20);
+    restaurants.setCharacterSize(19);
 
     float textPosX = leftRect.getPosition().x;
 
 	attractions.setPosition(sf::Vector2f(textPosX,leftRect.getPosition().y+50));
 	//roadText.setPosition(sf::Vector2f(textPosX,leftRect.getPosition().y+100));
 	services.setPosition(sf::Vector2f(textPosX,leftRect.getPosition().y+100));
-	restaurants.setPosition(sf::Vector2f(textPosX,leftRect.getPosition().y+200));
+	restaurants.setPosition(sf::Vector2f(textPosX,leftRect.getPosition().y+150));
 
 	attractions.setFillColor(sf::Color::Blue);
 	//roadText.setFillColor(sf::Color::Color(163,163,163,230));
@@ -232,7 +232,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 			services.setFillColor(sf::Color::Color(163,163,163,230));
 			attractions.setFillColor(sf::Color::Color(163,163,163,230));
 			roadText.setFillColor(sf::Color::Color(163,163,163,230));
-			activeCategory="services";
+			activeCategory="restaurants";
 		}else if(leftRect.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window))) || rightRect.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(*window)))){
 			//inside
 			/*switch(previousTextName){
@@ -344,7 +344,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 	}else if(activeCategory=="restaurants"){
 		for(int i = 0; restaurantButtonSize > i; i++){
 			if(restaurantButtons[i].isClicked(window)){
-				if(restaurantButtons[i].itemName.getString() == "Italian"){
+				if(restaurantButtons[i].itemName.getString() == "Italian Restaurant"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,5000,sf::Vector2i(1,1),actionArea,6,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;
@@ -356,7 +356,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					}
 					helpBar->switchMessage("Press Escape to Cancel");
 
-				}else if(restaurantButtons[i].itemName.getString() == "Mexican"){
+				}else if(restaurantButtons[i].itemName.getString() == "Mexican Restaurant"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,5000,sf::Vector2i(1,1),actionArea,7,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;

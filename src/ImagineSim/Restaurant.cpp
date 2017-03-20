@@ -19,6 +19,7 @@ imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlay
 		cuisine=imagine::sim::types::Italian;
 		quality=imagine::sim::types::Ok;
 		maxOccupancy=45;
+		tileImage.create(italianRestaurantImageFile.width,italianRestaurantImageFile.height,italianRestaurantImageFile.pixel_data);
 	}else if(id==7){
 		buildingCost = 5000;
 		cost = 80;
@@ -27,6 +28,7 @@ imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlay
 		cuisine=imagine::sim::types::Mexican;
 		quality=imagine::sim::types::Ok;
 		maxOccupancy=45;
+		tileImage.create(mexicanRestaurantImageFile.width,mexicanRestaurantImageFile.height,mexicanRestaurantImageFile.pixel_data);
 	}else if(id==8){
 		buildingCost = 5000;
 		cost = 80;
@@ -35,6 +37,7 @@ imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlay
 		cuisine=imagine::sim::types::Diner;
 		quality=imagine::sim::types::Ok;
 		maxOccupancy=45;
+		tileImage.create(dinerImageFile.width,dinerImageFile.height,dinerImageFile.pixel_data);
 	}
 	player=mainPlayer;
 	tileSprite.setPosition(position);

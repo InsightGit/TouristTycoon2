@@ -13,18 +13,20 @@
 #include "Tourist.hpp"
 #include "PopUp.hpp"
 
-//#include "Resources/"
+#include "Resources/ItalianRestaurant.h"
+#include "Resources/MexicanRestaurant.h"
+#include "Resources/diner.h"
 
 namespace imagine {
 	namespace sim {
 		class player;
 		namespace types{
-			enum foodCuisine{
+			enum foodCuisine : unsigned int{
 				Italian,
 				Mexican,
 				Diner
 			};
-			enum foodQuality{
+			enum foodQuality : unsigned int{
 				Terrible,
 				Poor,
 				Ok,
@@ -36,7 +38,7 @@ namespace imagine {
 		class Restaurant : public tile{
 		public:
 			Restaurant(const int id,imagine::sim::player *mainPlayer, const sf::Vector2f position);
-			virtual ~Restauran,sft();
+			virtual ~Restaurant();
 			void spawn();
 
 			imagine::sim::types::foodCuisine getCuisine() { return cuisine; }
