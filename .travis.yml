@@ -2,4 +2,4 @@ os:
 - linux
 dist: trusty
 sudo: required
-script: sudo apt install g++-6 make libjsoncpp-dev libsfml-dev libboost-all-dev -y && cd  Debug&& make all
+script: sudo apt install g++-5 make libjsoncpp-dev libsfml-dev libboost-all-dev -y && cd  Debug&& make all
