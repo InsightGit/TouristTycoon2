@@ -16,6 +16,7 @@
 #include "ActionArea.hpp"
 #include "Restaurant.hpp"
 //#include "Services.hpp"
+#include "TownHall.hpp"
 
 namespace imagine {
 		namespace sim {
@@ -48,7 +49,7 @@ namespace imagine {
 					void draw(sf::RenderWindow *window, std::vector<imagine::sim::attraction> *attractions, std::vector<imagine::sim::road> *roads,std::vector<imagine::sim::hotel> *hotels, std::vector<imagine::sim::Restaurant> *restaurants);
 					sf::Vector2f getMousePos();
 				protected:
-					bool drawTimerSet=false;
+					bool drawTimerSet = false;
 					bool mouseWasPressed = false;
 					bool limitClickTimerNotSet = true;
 					sf::Clock limitClicks;

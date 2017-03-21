@@ -17,10 +17,12 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
- ../src/ImagineSim/Resources/diner.h ../src/ImagineSim/SimSidebar.hpp \
- ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
- ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/BuildPrompter.hpp \
- ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
+ ../src/ImagineSim/Resources/diner.h ../src/ImagineSim/TownHall.hpp \
+ ../src/ImagineSim/Resources/TownHall.h ../src/ImagineSim/CityService.hpp \
+ ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
+ ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/../Menu.hpp \
+ ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/ActionArea.hpp \
+ ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/Resources/roadRemastered.h \
  ../src/ImagineSim/Resources/WashMonuIcon.h \
  ../src/ImagineSim/Resources/hotelIcon.h \
@@ -30,6 +32,7 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/ItalianRestaurantIcon.h \
  ../src/ImagineSim/Resources/MexicanRestaurantIcon.h \
  ../src/ImagineSim/Resources/dinerIcon.h \
+ ../src/ImagineSim/Resources/TownHallIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -104,6 +107,12 @@ src/SceneController.o: ../src/SceneController.cpp \
 
 ../src/ImagineSim/Resources/diner.h:
 
+../src/ImagineSim/TownHall.hpp:
+
+../src/ImagineSim/Resources/TownHall.h:
+
+../src/ImagineSim/CityService.hpp:
+
 ../src/ImagineSim/SimSidebar.hpp:
 
 ../src/ImagineSim/BuildMenu.hpp:
@@ -135,6 +144,8 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/MexicanRestaurantIcon.h:
 
 ../src/ImagineSim/Resources/dinerIcon.h:
+
+../src/ImagineSim/Resources/TownHallIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

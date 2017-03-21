@@ -20,6 +20,7 @@
 #include "Resources/ItalianRestaurantIcon.h"
 #include "Resources/MexicanRestaurantIcon.h"
 #include "Resources/dinerIcon.h"
+#include "Resources/TownHallIcon.h"
 
 namespace imagine {
     namespace sim{

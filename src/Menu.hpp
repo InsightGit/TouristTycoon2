@@ -12,6 +12,7 @@ namespace imagine{
 	public:
 		int optionSize;
 		int activeCirclePosition = 0;
+
 		sf::RectangleShape activeCircle = sf::RectangleShape(sf::Vector2f(100,50));
 
 		//virtual menu() = 0;

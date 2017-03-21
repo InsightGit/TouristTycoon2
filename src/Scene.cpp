@@ -80,6 +80,9 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
     		playerInScene->restaurantsCreated[i].draw(window);
     	}
+    	if(playerInScene->townHallSpawned){
+    		playerInScene->townHall->draw(window);
+    	}
     	window->setView(window->getDefaultView());
         sceneHUD->display(window);
         sceneSidebar->display(window);

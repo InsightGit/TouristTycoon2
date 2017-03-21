@@ -54,6 +54,7 @@ namespace imagine{
 			//std::string name;
 			signed int visitedAttractionsNumber = 0;
 			signed int numberOfAttractionsSinceLastEat = 0;
+			signed int happiness = 20;
 			sf::Vector2f position;
 			bool display = false;
 			bool chosenAttraction = false;

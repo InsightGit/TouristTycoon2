@@ -20,6 +20,7 @@
 //#include "hotel.hpp"
 #include "Tourist.hpp"
 #include "Restaurant.hpp"
+#include "TownHall.hpp"
 
 namespace imagine{
 	namespace sim{
@@ -66,6 +67,8 @@ namespace imagine{
 			std::vector<imagine::sim::Restaurant> restaurantsCreated;
 			imagine::sim::types::levelProgress levelProgress;
 			imagine::sim::TouristSpawner *touristSpawner;
+			imagine::sim::TownHall *townHall;
+			bool townHallSpawned = false;
 			signed int activeTourists = 0;
 			signed int tourists = 0;
 			signed int numberOfRoadsSpawned = 0;

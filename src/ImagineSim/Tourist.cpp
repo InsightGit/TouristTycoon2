@@ -170,6 +170,10 @@ void imagine::sim::tourist::spawn(){
 
 void imagine::sim::tourist::update(){
 	pastLeaving=leaving;
+
+	if(happiness==0){
+		leaving=true;
+	}
 	/*if(status==imagine::sim::types::driving){
 		std::cout << chosenAttraction << " driving\n";
 	}else if(status==imagine::sim::types::touring){
@@ -177,6 +181,7 @@ void imagine::sim::tourist::update(){
 	}*/
 	if(touringTimeSet && chosenAttraction && touringTime.getElapsedTime().asSeconds() >= 5 && status==imagine::sim::types::touring){
 		chosenAttraction=false;
+		touringTimeSet=false;
 		currentAttraction->demit();
 		visitedAttractions.push_back(currentAttraction);
 		visitedAttractionsSize++;
@@ -184,11 +189,15 @@ void imagine::sim::tourist::update(){
 		if(numberOfAttractionsSinceLastEat>=2){
 			hungry=true;
 		}
+		happiness+=0.1*currentAttraction->getPopularity();
+		happiness-=2;
+		//if(niceParks)
 		mostPopularPlace=-1;
 		status=imagine::sim::types::driving;
 		std::cout << "Visited\n";
 	}else if(touringTimeSet && chosenRestaurant && touringTime.getElapsedTime().asSeconds() >= 4 && status==imagine::sim::types::eating){
 		chosenRestaurant=false;
+		touringTimeSet=false;
 		currentRestaurant->checkout(this);
 		numberOfAttractionsSinceLastEat = 0;
 		hungry=false;
@@ -244,7 +253,7 @@ void imagine::sim::tourist::update(){
 				touringTimeSet=true;
 				status=imagine::sim::types::touring;
 			}else{
-				//std::cout << "NOPE\n";
+				std::cout << "NOPE\n";
 				chosenAttraction=false;
 				tempBlackList.push_back(currentAttraction);
 				tempBlackListSize++;

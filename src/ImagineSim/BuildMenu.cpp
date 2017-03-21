@@ -202,6 +202,24 @@ void imagine::sim::buildMenu::spawn(){
 		diner.itemName.setCharacterSize(7);
 		restaurantButtons.push_back(diner);
 		restaurantButtonSize++;
+
+		imagine::sim::menuItem townHall = imagine::sim::menuItem(&defaultFont,3);
+		townHall.optionalImage = new sf::Image();
+		townHall.optionalTexture = new sf::Texture();
+		townHall.optionalImage->create(townHallIconImageFile.width,townHallIconImageFile.height,townHallIconImageFile.pixel_data);
+		townHall.optionalTexture->loadFromImage(*townHall.optionalImage);
+		townHall.sprite.setTexture(*townHall.optionalTexture);
+		townHall.sprite.setScale(0.85,0.85);
+		townHall.position = sf::Vector2f(simpleHotel.position.x+70,simpleHotel.position.y);
+		townHall.sprite.setPosition(townHall.position);
+		townHall.category = "Services";
+		townHall.itemName.setString("Town Hall");
+		townHall.itemName.setFillColor(sf::Color::Black);
+		townHall.itemName.setPosition(sf::Vector2f(townHall.position.x,townHall.position.y+54.4));
+		townHall.itemName.setFont(defaultFont);
+		townHall.itemName.setCharacterSize(7);
+		serviceButtons.push_back(townHall);
+		serviceButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -254,18 +272,33 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 	if(activeCategory=="services"){
 		for(int i = 0; serviceButtonSize > i; i++){
 			if(serviceButtons[i].isClicked(window)){
-				switch(i){
+				/*switch(i){
 					case 0:
-						imageForPrompter.create(hotelImageFile.width,hotelImageFile.height,hotelImageFile.pixel_data);
-						buildingPrompter = new imagine::sim::buildPrompter(player,imageForPrompter,5000,sf::Vector2i(1,2),actionArea,2,&defaultFont);
-						buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
-						prompterCreated = true;
-						drawMenu = false;
 
-						if(prompterTimerNotYetSet){
-							limitPrompterClicks.restart();
-						}
-						helpBar->switchMessage("Press Escape to Cancel");
+					case 1:
+						imag
+				}*/
+				if(serviceButtons[i].itemName.getString() == "Simple Hotel"){
+					imageForPrompter.create(hotelImageFile.width,hotelImageFile.height,hotelImageFile.pixel_data);
+					buildingPrompter = new imagine::sim::buildPrompter(player,imageForPrompter,5000,sf::Vector2i(1,2),actionArea,2,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(serviceButtons[i].itemName.getString() == "Town Hall" && !player->townHallSpawned){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*serviceButtons[i].optionalImage,4000,sf::Vector2i(2,4),actionArea,9,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -436,8 +469,13 @@ void imagine::sim::buildMenu::draw(sf::RenderWindow *window){
 		}else if(activeCategory=="services"){
 			for(int i = 0; serviceButtons.size() > i; i++){
 				if(serviceButtons[i].levelRequired <= player->levelProgress.currentLevel){
-					window->draw(serviceButtons[i].sprite);
-					window->draw(serviceButtons[i].itemName);
+					if(i==1 && !player->townHallSpawned){
+						window->draw(serviceButtons[i].sprite);
+						window->draw(serviceButtons[i].itemName);
+					}else{
+						window->draw(serviceButtons[i].sprite);
+						window->draw(serviceButtons[i].itemName);
+					}
 				}
 			}
 			std::cout << "serviceButtons drawn\n";

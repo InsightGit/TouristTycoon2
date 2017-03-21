@@ -7,10 +7,10 @@ namespace imagine{
    {
       public:
         sf::Sprite sprite;
-	sf::Texture *optionalTexture;
-	sf::Image *optionalImage;
-	std::string category = "N/A";
-	sf::Vector2f position;
+        sf::Texture *optionalTexture;
+        sf::Image *optionalImage;
+        std::string category = "N/A";
+        sf::Vector2f position;
 
         clickableSprite();
 

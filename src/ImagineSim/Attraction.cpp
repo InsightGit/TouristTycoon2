@@ -95,7 +95,7 @@ bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, 
 }
 
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
-	if(maxOccupancy>currentTouristNum+1){
+	//if(maxOccupancy>currentTouristNum+1){
 		if(tourist->money-costForTourists > 0){
 			 if(tourist->energy-activityLevel > 0){
 					currentTouristNum++;
@@ -111,9 +111,9 @@ bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 			return false;
 		}
 		return true;
-	}else{
-		return false;
-	}
+	//}else{
+		//return false;
+	//}
 }
 
 void imagine::sim::attraction::demit(){

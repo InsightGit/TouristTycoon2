@@ -48,7 +48,7 @@ namespace imagine{
 
 			signed int id;
 			signed int currentTouristNum = 0;
-			signed int costForTourists;
+			signed int costForTourists = 0;
 			signed int cost;
 			signed int attractionLevel;
 			signed int touristsThisYear;
