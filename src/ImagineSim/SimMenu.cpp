@@ -14,7 +14,7 @@ imagine::sim::SimMenu::SimMenu(const sf::Vector2f size,const sf::Vector2f positi
 	menuBox.setFillColor(fillColor);
 }
 
-imagine::sim::SimMenu::SimMenu(const sf::Vector2f size,const sf::Vector2f position, const sf::Color fillColor = sf::Color(183,201,255,255),std::string titleText, sf::Font *fontToUse){
+imagine::sim::SimMenu::SimMenu(const sf::Vector2f size,const sf::Vector2f position,std::string titleText, sf::Font *fontToUse, const sf::Color fillColor){
 	menuBox.setSize(size);
 	menuBox.setPosition(position);
 	menuBox.setFillColor(fillColor);
@@ -23,7 +23,7 @@ imagine::sim::SimMenu::SimMenu(const sf::Vector2f size,const sf::Vector2f positi
 	title.setFont(defaultFont);
 	title.setCharacterSize(20);
 	title.setFillColor(sf::Color::Black);
-	title.setPosition(sf::Vector2f(position.x+size/2,position.y/10));
+	title.setPosition(sf::Vector2f(position.x+size.x/2,position.y/10));
 }
 
 imagine::sim::SimMenu::~SimMenu() {

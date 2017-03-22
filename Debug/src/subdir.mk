@@ -13,6 +13,7 @@ CPP_SRCS += \
 ../src/Scene.cpp \
 ../src/SceneController.cpp \
 ../src/SceneMusicPlayer.cpp \
+../src/Switch.cpp \
 ../src/l3DRM.cpp 
 
 OBJS += \
@@ -25,6 +26,7 @@ OBJS += \
 ./src/Scene.o \
 ./src/SceneController.o \
 ./src/SceneMusicPlayer.o \
+./src/Switch.o \
 ./src/l3DRM.o 
 
 CPP_DEPS += \
@@ -37,6 +39,7 @@ CPP_DEPS += \
 ./src/Scene.d \
 ./src/SceneController.d \
 ./src/SceneMusicPlayer.d \
+./src/Switch.d \
 ./src/l3DRM.d 
 
 

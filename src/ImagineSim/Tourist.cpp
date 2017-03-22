@@ -191,6 +191,11 @@ void imagine::sim::tourist::update(){
 		}
 		happiness+=0.1*currentAttraction->getPopularity();
 		happiness-=2;
+		for(int i = 0;player->townHall->getCityPolicySize() > i;++i){
+			if(player->townHall->cityPolicies[i].active){
+				happiness+=player->townHall->cityPolicies[i].getHappinessGained();
+			}
+		}
 		//if(niceParks)
 		mostPopularPlace=-1;
 		status=imagine::sim::types::driving;

@@ -290,7 +290,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==9){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					player->townHall = new imagine::sim::TownHall(player,mousePosition);
+					player->townHall = new imagine::sim::TownHall(player,mousePosition,&defaultFont);
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(player->townHall->create(notEnoughMoneyPopUp,&defaultFont)){

@@ -61,6 +61,9 @@ void imagine::scene::update(sf::RenderWindow *window){
     	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
     		playerInScene->restaurantsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
+    	if(playerInScene->townHallSpawned){
+        	playerInScene->townHall->subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
     }
 }
 

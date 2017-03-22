@@ -18,9 +18,15 @@ src/Main.o: ../src/Main.cpp ../src/SceneController.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
  ../src/ImagineSim/Resources/diner.h ../src/ImagineSim/TownHall.hpp \
- ../src/ImagineSim/Resources/TownHall.h ../src/ImagineSim/CityService.hpp \
- ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/../Menu.hpp \
+ ../src/ImagineSim/../Switch.hpp ../src/ImagineSim/../ClickableSprite.hpp \
+ ../src/ImagineSim/../Resources/activebutton.h \
+ ../src/ImagineSim/../Resources/activebuttonnotactive.h \
+ ../src/ImagineSim/../Resources/nobutton.h \
+ ../src/ImagineSim/../Resources/nobuttonnotactive.h \
+ ../src/ImagineSim/CityService.hpp ../src/ImagineSim/SimMenu.hpp \
+ ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/CityPolicy.hpp \
+ ../src/ImagineSim/Resources/TownHall.h ../src/ImagineSim/SimSidebar.hpp \
+ ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
  ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/ActionArea.hpp \
  ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/Resources/roadRemastered.h \
@@ -109,17 +115,33 @@ src/Main.o: ../src/Main.cpp ../src/SceneController.hpp \
 
 ../src/ImagineSim/TownHall.hpp:
 
-../src/ImagineSim/Resources/TownHall.h:
+../src/ImagineSim/../Switch.hpp:
+
+../src/ImagineSim/../ClickableSprite.hpp:
+
+../src/ImagineSim/../Resources/activebutton.h:
+
+../src/ImagineSim/../Resources/activebuttonnotactive.h:
+
+../src/ImagineSim/../Resources/nobutton.h:
+
+../src/ImagineSim/../Resources/nobuttonnotactive.h:
 
 ../src/ImagineSim/CityService.hpp:
+
+../src/ImagineSim/SimMenu.hpp:
+
+../src/ImagineSim/../Menu.hpp:
+
+../src/ImagineSim/CityPolicy.hpp:
+
+../src/ImagineSim/Resources/TownHall.h:
 
 ../src/ImagineSim/SimSidebar.hpp:
 
 ../src/ImagineSim/BuildMenu.hpp:
 
 ../src/ImagineSim/../ImagineCore.hpp:
-
-../src/ImagineSim/../Menu.hpp:
 
 ../src/ImagineSim/BuildPrompter.hpp:
 

@@ -8,7 +8,7 @@
 #ifndef SRC_IMAGINESIM_SIMMENU_HPP_
 #define SRC_IMAGINESIM_SIMMENU_HPP_
 #include <SFML/Graphics.hpp>
-
+#include "../Menu.hpp"
 
 namespace imagine {
 	namespace sim {
@@ -19,7 +19,7 @@ namespace imagine {
 			sf::Font defaultFont;
 
 			SimMenu(const sf::Vector2f size,const sf::Vector2f position, const sf::Color fillColor = sf::Color(183,201,255,255));
-			SimMenu(const sf::Vector2f size,const sf::Vector2f position, const sf::Color fillColor = sf::Color(183,201,255,255),std::string titleText, sf::Font *fontToUse);
+			SimMenu(const sf::Vector2f size,const sf::Vector2f position,std::string titleText, sf::Font *fontToUse, const sf::Color fillColor = sf::Color(183,201,255,255));
 			virtual ~SimMenu();
 		};
 
