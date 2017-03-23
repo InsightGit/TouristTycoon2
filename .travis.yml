@@ -1,5 +1,3 @@
 os:
-- linux
-dist: trusty
-sudo: required
-script: sudo apt install g++-5 make libjsoncpp-dev libsfml-dev libboost-all-dev -y && cd  Debug&& make all
+- osx
+script: brew install g++-6 sfml jsoncpp boost && cd  Debug&& make all
