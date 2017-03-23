@@ -18,6 +18,8 @@ namespace imagine {
 		class Advertisement;
 		class TouristSpawner {
 		public:
+			signed int limitActiveTourists = 50;
+
 			TouristSpawner(imagine::sim::player *mainPlayer,std::vector<imagine::sim::Advertisement> *advertisements,std::vector<imagine::sim::attraction> *attractions);
 			virtual ~TouristSpawner();
 
@@ -28,6 +30,7 @@ namespace imagine {
 			signed int pastHour;
 			signed int spawnNumber = 0;
 			signed int pastTouristNumber = 0;
+			signed int activeTourists = 0;
 			imagine::sim::player *player;
 			std::vector<imagine::sim::Advertisement> *allAdvertisements;
 			std::vector<imagine::sim::attraction> *allAttractions;

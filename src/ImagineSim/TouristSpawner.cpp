@@ -26,12 +26,12 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 	if(numberOfAttractionsSpawned!=pastNumberOfAttractionsSpawned){ //possible SIGSEV?
 		basePopularity=0;
 		for(int i = 0; i < numberOfAttractionsSpawned; i++){
-			/*if(i==0){
+			if(i==0){
 				basePopularity=allAttractions->at(i).getPopularity();
 			}else if(basePopularity < allAttractions->at(i).getPopularity()){
 				basePopularity=allAttractions->at(i).getPopularity();
-			}*/
-			basePopularity+=allAttractions->at(i).getPopularity();
+			}
+			//basePopularity+=allAttractions->at(i).getPopularity();
 		}
 		pastNumberOfAttractionsSpawned=numberOfAttractionsSpawned;
 	}
@@ -45,7 +45,7 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 				}
 			}
 			pastHour=player->time->getSimTime().getHour();
-		}else if(pastHour!=player->time->getSimTime().getHour()){
+		}else if(pastHour+3!=player->time->getSimTime().getHour()){
 				spawnNumber = basePopularity;
 				for(int i = 0; i < numberOfAdvertisementsSpawned;++i){
 					if(allAdvertisements->at(i).id==0 && allAdvertisements->at(i).active){
@@ -62,7 +62,7 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 				}
 			}
 			//pastHour=player->time->getSimTime().getHour();
-		}else if(pastHour!=player->time->getSimTime().getHour()){
+		}else if(pastHour+3!=player->time->getSimTime().getHour()){
 			spawnNumber = basePopularity/2;
 			for(int i = 0; i < numberOfAdvertisementsSpawned;++i){
 				if(allAdvertisements->at(i).id==0){
@@ -71,11 +71,18 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 			}
 		}
 	}
+	activeTourists=0; //NOT thread safe 																															NTS
+	for(int i = 0; player->numberOfAttractionsSpawned > i;++i){
+		activeTourists+=player->attractionsCreated[i].getCurrentOccupancy();
+	}
+	for(int i = 0; player->numberOfRestaurantsSpawned > i;++i){
+		activeTourists+=player->restaurantsCreated[i].getCurrentOccupancy();
+	}
 }
 
 void imagine::sim::TouristSpawner::spawnTourists(const signed int numberOfAttractionsSpawned, const signed int numberOfAdvertisementsSpawned) {
 	update(numberOfAttractionsSpawned,numberOfAdvertisementsSpawned);
-	if(pastHour!=NULL){
+	if(pastHour!=NULL && activeTourists < limitActiveTourists){
 		if(pastHour!=player->time->getSimTime().getHour()){
 			for(int i = 0; player->tourists > i;++i){
 				if(player->touristsSpawned[i].leaving && !player->touristsSpawned[i].pastLeaving){

@@ -38,6 +38,15 @@ imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlay
 		quality=imagine::sim::types::Ok;
 		maxOccupancy=45;
 		tileImage.create(dinerImageFile.width,dinerImageFile.height,dinerImageFile.pixel_data);
+	}else if(id==11){ //we skip id 9 because it is a townHall and id 10 because it is an attraction
+		buildingCost = 6500;
+		cost = 150;
+		maintainceCost=300;
+		maintainceCostSet=true;
+		cuisine=imagine::sim::types::JapaneseTeppanyaki;
+		quality=imagine::sim::types::Good;
+		maxOccupancy=45;
+		tileImage.create(teppanyakiRestaurantImageFile.width,teppanyakiRestaurantImageFile.height,teppanyakiRestaurantImageFile.pixel_data);
 	}
 	player=mainPlayer;
 	tileSprite.setPosition(position);

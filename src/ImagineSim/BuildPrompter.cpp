@@ -301,6 +301,32 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
 					limitClickTimerNotSet=true;
 				}
+			}else if(tileId==10){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::attraction attraction = imagine::sim::attraction(10,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==11){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(11,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
 			}
 		}
 	}

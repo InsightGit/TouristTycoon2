@@ -46,7 +46,7 @@ static std::string imagine::sim::player::getApplicationDataDir(){
 imagine::sim::types::levelProgress::levelProgress(){
     finishPoint = 0;
     currentProgress = 0;
-    currentLevel = 3;
+    currentLevel = 4;
 }
 
 imagine::sim::types::levelProgress::levelProgress(const int finishValue, const int currentValue, const int currentLevelNum){
@@ -97,39 +97,47 @@ void imagine::sim::player::updatePlayerLevel(){
 		 }
 	 }else if(levelProgress.currentLevel==2){
 		 if(levelProgress.currentProgress < levelProgress.finishPoint){
-			 for(int i = 0;levelProgress.finishPoint > i;i++){
-				 if(i==0 && progressAddedSize-1 >= 1){
-					 if(!progressAdded[i]){
-						 if(money >= 20000 && i==0){
-							 progressAdded[i]= true;
-							 progressAddedSize++;
-							 levelProgress.currentProgress++;
-						 }else if(activeTourists >= 500 && i==1){
-							 progressAdded[i] = true;
-							 progressAddedSize++;
-							 levelProgress.currentProgress++;
+			 for(int i = 0; levelProgress.finishPoint > i;++i){
+					 if(progressAddedSize >= 2){
+						 if(!progressAdded[i]){
+							 if(money >= 20000 && i==0){
+								 progressAdded[i]= true;
+								 progressAddedSize++;
+								 levelProgress.currentProgress++;
+							 }else if(activeTourists >= 500 && i==1){
+								 progressAdded[i] = true;
+								 progressAddedSize++;
+								 levelProgress.currentProgress++;
+							 }
 						 }
-					 }
-				 }else if(i==0){
-					 if(money >= 20000){
-						 progressAdded.push_back(true);
-						 levelProgress.currentProgress++;
-						 progressAddedSize++;
-					 }else{
+					 }else if(std::find(progressAdded.begin(), progressAdded.end(),i)==progressAdded.end()){
 						 progressAdded.push_back(false);
-					 }
-				 }else if(i==1){
-					 if(activeTourists >= 500){
-						 progressAdded.push_back(true);
-						 levelProgress.currentProgress++;
 						 progressAddedSize++;
-					 }else{
-						 progressAdded.push_back(false);
 					 }
+			 }
+		 }else if(levelProgress.currentLevel==3){
+			 if(levelProgress.currentProgress < levelProgress.finishPoint){
+				 for(int i = 0; levelProgress.finishPoint > i;++i){
+						 if(progressAddedSize >= 2){
+							 if(!progressAdded[i]){
+								 if(money >= 40000 && i==0){
+									 progressAdded[i]= true;
+									 progressAddedSize++;
+									 levelProgress.currentProgress++;
+								 }else if(activeTourists >= 1500 && i==1){
+									 progressAdded[i] = true;
+									 progressAddedSize++;
+									 levelProgress.currentProgress++;
+								 }
+							 }
+						 }else if(std::find(progressAdded.begin(), progressAdded.end(),i)==progressAdded.end()){
+							 progressAdded.push_back(false);
+							 progressAddedSize++;
+						 }
 				 }
 			 }
 		 }
-	 }
+	}
 }
 
 void imagine::sim::player::update(){
@@ -148,6 +156,14 @@ void imagine::sim::player::update(){
 			levelProgress.finishPoint = 2;
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 2",&defaultFont);
 			levelUp=true;
+		}else if(levelProgress.currentLevel==2 && levelProgress.currentProgress >= levelProgress.finishPoint){
+			levelProgress.currentLevel = 2;
+			levelProgress.currentProgress = 0;
+			levelProgress.finishPoint = 3;
+			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 3",&defaultFont);
+			levelUp=true;
+			progressAdded.clear();
+			progressAddedSize = 0;
 		}
 	}else{
 		progressAdded.clear();

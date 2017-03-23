@@ -190,10 +190,12 @@ void imagine::sim::tourist::update(){
 			hungry=true;
 		}
 		happiness+=0.1*currentAttraction->getPopularity();
-		happiness-=2;
-		for(int i = 0;player->townHall->getCityPolicySize() > i;++i){
-			if(player->townHall->cityPolicies[i].active){
-				happiness+=player->townHall->cityPolicies[i].getHappinessGained();
+		happiness-=1.5*visitedAttractionsSize;
+		if(player->townHallSpawned){
+			for(int i = 0;player->townHall->getCityPolicySize() > i;++i){
+				if(player->townHall->cityPolicies[i].active){
+					happiness+=player->townHall->cityPolicies[i].getHappinessGained();
+				}
 			}
 		}
 		//if(niceParks)

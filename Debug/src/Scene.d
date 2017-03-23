@@ -13,10 +13,12 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Resources/Tokyotower.h \
  ../src/ImagineSim/Resources/Zipline.h \
  ../src/ImagineSim/Resources/HikingTrail.h \
+ ../src/ImagineSim/Resources/empireState.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
- ../src/ImagineSim/Resources/diner.h ../src/ImagineSim/TownHall.hpp \
+ ../src/ImagineSim/Resources/diner.h \
+ ../src/ImagineSim/Resources/teppanyaki.h ../src/ImagineSim/TownHall.hpp \
  ../src/ImagineSim/../Switch.hpp ../src/ImagineSim/../ClickableSprite.hpp \
  ../src/ImagineSim/../Resources/activebutton.h \
  ../src/ImagineSim/../Resources/activebuttonnotactive.h \
@@ -38,6 +40,8 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Resources/MexicanRestaurantIcon.h \
  ../src/ImagineSim/Resources/dinerIcon.h \
  ../src/ImagineSim/Resources/TownHallIcon.h \
+ ../src/ImagineSim/Resources/empireStateIcon.h \
+ ../src/ImagineSim/Resources/teppanyakiIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/Resources/advertIcon.h \
@@ -95,6 +99,8 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 
 ../src/ImagineSim/Resources/HikingTrail.h:
 
+../src/ImagineSim/Resources/empireState.h:
+
 ../src/ImagineSim/Resources/personNew.h:
 
 ../src/ImagineSim/Restaurant.hpp:
@@ -104,6 +110,8 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 ../src/ImagineSim/Resources/MexicanRestaurant.h:
 
 ../src/ImagineSim/Resources/diner.h:
+
+../src/ImagineSim/Resources/teppanyaki.h:
 
 ../src/ImagineSim/TownHall.hpp:
 
@@ -162,6 +170,10 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 ../src/ImagineSim/Resources/dinerIcon.h:
 
 ../src/ImagineSim/Resources/TownHallIcon.h:
+
+../src/ImagineSim/Resources/empireStateIcon.h:
+
+../src/ImagineSim/Resources/teppanyakiIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

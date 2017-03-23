@@ -16,6 +16,7 @@
 #include "Resources/ItalianRestaurant.h"
 #include "Resources/MexicanRestaurant.h"
 #include "Resources/diner.h"
+#include "Resources/teppanyaki.h"
 
 namespace imagine {
 	namespace sim {
@@ -24,7 +25,8 @@ namespace imagine {
 			enum foodCuisine : unsigned int{
 				Italian,
 				Mexican,
-				Diner
+				Diner,
+				JapaneseTeppanyaki
 			};
 			enum foodQuality : unsigned int{
 				Terrible,
@@ -43,6 +45,7 @@ namespace imagine {
 
 			imagine::sim::types::foodCuisine getCuisine() { return cuisine; }
 			imagine::sim::types::foodQuality getQuality() { return quality; }
+			signed int getCurrentOccupancy() { return currentOccupancy; }
 			int getCost() { return cost; }
 			bool getVacancy() { return vacancy; }
 

@@ -220,6 +220,42 @@ void imagine::sim::buildMenu::spawn(){
 		townHall.itemName.setCharacterSize(7);
 		serviceButtons.push_back(townHall);
 		serviceButtonSize++;
+
+		imagine::sim::menuItem empireStateBuilding = imagine::sim::menuItem(&defaultFont,4);
+		empireStateBuilding.optionalImage = new sf::Image();
+		empireStateBuilding.optionalTexture = new sf::Texture();
+		empireStateBuilding.optionalImage->create(empireStateBuildingIconImageFile.width,empireStateBuildingIconImageFile.height,empireStateBuildingIconImageFile.pixel_data);
+		empireStateBuilding.optionalTexture->loadFromImage(*empireStateBuilding.optionalImage);
+		empireStateBuilding.sprite.setTexture(*empireStateBuilding.optionalTexture);
+		empireStateBuilding.sprite.setScale(0.85,0.85);
+		empireStateBuilding.position = sf::Vector2f(washMonu.position.x,washMonu.position.y+100);
+		empireStateBuilding.sprite.setPosition(empireStateBuilding.position);
+		empireStateBuilding.category = "Attractions";
+		empireStateBuilding.itemName.setString("Empire State Building");
+		empireStateBuilding.itemName.setFillColor(sf::Color::Black);
+		empireStateBuilding.itemName.setPosition(sf::Vector2f(empireStateBuilding.position.x,empireStateBuilding.position.y+54.4));
+		empireStateBuilding.itemName.setFont(defaultFont);
+		empireStateBuilding.itemName.setCharacterSize(7);
+		attractionButtons.push_back(empireStateBuilding);
+		attractionButtonSize++;
+
+		imagine::sim::menuItem teppanyaki = imagine::sim::menuItem(&defaultFont,4);
+		teppanyaki.optionalImage = new sf::Image();
+		teppanyaki.optionalTexture = new sf::Texture();
+		teppanyaki.optionalImage->create(teppanyakiRestaurantImageFile.width,teppanyakiRestaurantImageFile.height,teppanyakiRestaurantImageFile.pixel_data);
+		teppanyaki.optionalTexture->loadFromImage(*teppanyaki.optionalImage);
+		teppanyaki.sprite.setTexture(*teppanyaki.optionalTexture);
+		teppanyaki.sprite.setScale(0.85,0.85);
+		teppanyaki.position = sf::Vector2f(diner.position.x+70,diner.position.y);
+		teppanyaki.sprite.setPosition(teppanyaki.position);
+		teppanyaki.category = "Restaurants";
+		teppanyaki.itemName.setString("Japanese Teppanyaki Restaurant");
+		teppanyaki.itemName.setFillColor(sf::Color::Black);
+		teppanyaki.itemName.setPosition(sf::Vector2f(teppanyaki.position.x-6,teppanyaki.position.y+54.4));
+		teppanyaki.itemName.setFont(defaultFont);
+		teppanyaki.itemName.setCharacterSize(6.75);
+		restaurantButtons.push_back(teppanyaki);
+		restaurantButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -371,6 +407,17 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 						limitPrompterClicks.restart();
 					}
 					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Empire State Building"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,8500,sf::Vector2i(2,1),actionArea,10,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -402,6 +449,17 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(restaurantButtons[i].itemName.getString() == "Diner"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,5000,sf::Vector2i(1,1),actionArea,8,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if("Japanese Teppanyaki Restaurant"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,6500,sf::Vector2i(1,1),actionArea,11,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;
 					drawMenu = false;

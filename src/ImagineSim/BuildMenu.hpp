@@ -21,6 +21,8 @@
 #include "Resources/MexicanRestaurantIcon.h"
 #include "Resources/dinerIcon.h"
 #include "Resources/TownHallIcon.h"
+#include "Resources/empireStateIcon.h"
+#include "Resources/teppanyakiIcon.h"
 
 namespace imagine {
     namespace sim{

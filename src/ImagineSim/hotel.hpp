@@ -36,6 +36,7 @@ namespace imagine {
 			bool getVacancy(){ return vacancy; }
 			signed int getCost(){ return cost; }
 			signed int getId() { return id; }
+			signed int getCurrentOccupancy() { return size; }
 
 			bool checkin(imagine::sim::tourist *tourist);
 			void checkout(imagine::sim::tourist *tourist);

@@ -26,8 +26,7 @@ void imagine::sim::attraction::spawn(){
 	if(id == 1){ //We skip id #0 because it is a road
 		name="Washington Monument";
 		cost=1500;
-		maintainceCost=250;
-		maintainceCostSet=true;
+		baseMaintainceCost=600;
 		costForTourists=50;
 		attractionLevel=0;
 		popularity = 10;
@@ -38,9 +37,8 @@ void imagine::sim::attraction::spawn(){
 	}else if(id == 3){ //We skip 2 because it is a hotel
 		name="Tokyo Tower";
 		cost=2500;
-		maintainceCost=350;
-		maintainceCostSet=true;
-		costForTourists=75;
+		baseMaintainceCost=950;
+		costForTourists=100;
 		popularity = 20;
 		maxOccupancy = 100;
 		activityLevel = 9;
@@ -48,8 +46,7 @@ void imagine::sim::attraction::spawn(){
 	}else if(id == 4){
 		name="Zipline";
 		cost=7000;
-		maintainceCost=400;
-		maintainceCostSet=true;
+		baseMaintainceCost=400;
 		costForTourists=150;
 		popularity = 40;
 		maxOccupancy = 80;
@@ -58,14 +55,25 @@ void imagine::sim::attraction::spawn(){
 	}else if(id == 5){
 		name="Hiking Trail";
 		cost=7500;
-		maintainceCost=375;
+		baseMaintainceCost=375;
 		costForTourists=175;
-		maintainceCostSet=true;
 		popularity = 40;
 		maxOccupancy = 100;
 		activityLevel = 25;
 		attractionImage.create(hikingTrailImageFile.width,hikingTrailImageFile.height,hikingTrailImageFile.pixel_data);
+	}else if(id == 10){ //we skip 6-9 because they are restaurants, or a townHall
+		name="Empire State Building";
+		cost=8500;
+		baseMaintainceCost=2000;
+		costForTourists=200;
+		popularity = 65;
+		maxOccupancy = 150;
+		activityLevel = 10;
+		attractionImage.create(empireStateImageFile.width,empireStateImageFile.height,empireStateImageFile.pixel_data);
 	}
+	maintainceCost=baseMaintainceCost;
+	maintainceCostSet=true;
+
 	std::cout << id << "\n";
 	attractionTexture.loadFromImage(attractionImage);
 
@@ -99,6 +107,7 @@ bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 		if(tourist->money-costForTourists > 0){
 			 if(tourist->energy-activityLevel > 0){
 					currentTouristNum++;
+					allTouristNum++;
 					tourist->money-=costForTourists;
 					player->money+=costForTourists;
 					tourist->energy-=activityLevel;
@@ -120,8 +129,16 @@ void imagine::sim::attraction::demit(){
 	currentTouristNum--;
 }
 
+void imagine::sim::attraction::update(){
+	if(int(allTouristNum/100)!=0 && pastTouristNum!=int(allTouristNum/100)){
+		maintainceCost=baseMaintainceCost*(int(allTouristNum/100));
+	}
+	pastTouristNum=int(allTouristNum/100);
+}
+
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
 	//std::cout << currentTouristNum << "\n";
+	update();
 	if(alive){
 		attractionTexture.loadFromImage(attractionImage);
 
