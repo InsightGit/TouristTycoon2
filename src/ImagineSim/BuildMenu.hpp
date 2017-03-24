@@ -23,6 +23,8 @@
 #include "Resources/TownHallIcon.h"
 #include "Resources/empireStateIcon.h"
 #include "Resources/teppanyakiIcon.h"
+#include "Resources/bigBenIcon.h"
+#include "Resources/amusementparkIcon.h"
 
 namespace imagine {
     namespace sim{

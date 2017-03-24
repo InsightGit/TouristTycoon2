@@ -52,7 +52,7 @@ namespace imagine{
 		class tourist{
 		public:
 			//std::string name;
-			signed int visitedAttractionsNumber = 0;
+			//signed int visitedAttractionsNumber = 0;
 			signed int numberOfAttractionsSinceLastEat = 0;
 			signed int happiness = 20;
 			sf::Vector2f position;
@@ -70,9 +70,9 @@ namespace imagine{
 			//int hotelLength;
 			signed int money;
 			signed int energy;
-			std::vector<imagine::sim::attraction> *allAttractions;
-			std::vector<imagine::sim::road> *allRoads;
-			std::vector<imagine::sim::hotel> *allHotels;
+			//std::vector<imagine::sim::attraction> *allAttractions;
+			//std::vector<imagine::sim::road> *allRoads;
+			//std::vector<imagine::sim::hotel> *allHotels;
 			imagine::sim::hotel currentHotel;
  			imagine::sim::attraction *currentAttraction;
  			imagine::sim::Restaurant *currentRestaurant;
@@ -87,7 +87,7 @@ namespace imagine{
 			sf::Texture touristTexture;
 			sf::Sprite touristSprite;
 
-			tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, imagine::sim::player *mainPlayer);
+			tourist(imagine::sim::player *mainPlayer);
 			//TODO: add tourist(saveData)
 
 

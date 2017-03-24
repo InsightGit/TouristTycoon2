@@ -14,6 +14,8 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
  ../src/ImagineSim/Resources/Zipline.h \
  ../src/ImagineSim/Resources/HikingTrail.h \
  ../src/ImagineSim/Resources/empireState.h \
+ ../src/ImagineSim/Resources/amusementpark.h \
+ ../src/ImagineSim/Resources/bigBen.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
@@ -42,6 +44,8 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
  ../src/ImagineSim/Resources/TownHallIcon.h \
  ../src/ImagineSim/Resources/empireStateIcon.h \
  ../src/ImagineSim/Resources/teppanyakiIcon.h \
+ ../src/ImagineSim/Resources/bigBenIcon.h \
+ ../src/ImagineSim/Resources/amusementparkIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -105,6 +109,10 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
 ../src/ImagineSim/Resources/HikingTrail.h:
 
 ../src/ImagineSim/Resources/empireState.h:
+
+../src/ImagineSim/Resources/amusementpark.h:
+
+../src/ImagineSim/Resources/bigBen.h:
 
 ../src/ImagineSim/Resources/personNew.h:
 
@@ -177,6 +185,10 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
 ../src/ImagineSim/Resources/empireStateIcon.h:
 
 ../src/ImagineSim/Resources/teppanyakiIcon.h:
+
+../src/ImagineSim/Resources/bigBenIcon.h:
+
+../src/ImagineSim/Resources/amusementparkIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

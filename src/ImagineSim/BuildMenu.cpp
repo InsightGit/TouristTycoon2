@@ -256,6 +256,42 @@ void imagine::sim::buildMenu::spawn(){
 		teppanyaki.itemName.setCharacterSize(6.75);
 		restaurantButtons.push_back(teppanyaki);
 		restaurantButtonSize++;
+
+		imagine::sim::menuItem bigBen = imagine::sim::menuItem(&defaultFont,4);
+		bigBen.optionalImage = new sf::Image();
+		bigBen.optionalTexture = new sf::Texture();
+		bigBen.optionalImage->create(bigBenIconImageFile.width,bigBenIconImageFile.height,bigBenIconImageFile.pixel_data);
+		bigBen.optionalTexture->loadFromImage(*bigBen.optionalImage);
+		bigBen.sprite.setTexture(*bigBen.optionalTexture);
+		bigBen.sprite.setScale(0.85,0.85);
+		bigBen.position = sf::Vector2f(empireStateBuilding.position.x+70,empireStateBuilding.position.y);
+		bigBen.sprite.setPosition(bigBen.position);
+		bigBen.category = "Attractions";
+		bigBen.itemName.setString("Big Ben");
+		bigBen.itemName.setFillColor(sf::Color::Black);
+		bigBen.itemName.setPosition(sf::Vector2f(bigBen.position.x,bigBen.position.y+54.4));
+		bigBen.itemName.setFont(defaultFont);
+		bigBen.itemName.setCharacterSize(7);
+		attractionButtons.push_back(bigBen);
+		attractionButtonSize++;
+
+		imagine::sim::menuItem amusementPark = imagine::sim::menuItem(&defaultFont,4);
+		amusementPark.optionalImage = new sf::Image();
+		amusementPark.optionalTexture = new sf::Texture();
+		amusementPark.optionalImage->create(amusementParkIconImageFile.width,amusementParkIconImageFile.height,amusementParkIconImageFile.pixel_data);
+		amusementPark.optionalTexture->loadFromImage(*amusementPark.optionalImage);
+		amusementPark.sprite.setTexture(*amusementPark.optionalTexture);
+		amusementPark.sprite.setScale(0.85,0.85);
+		amusementPark.position = sf::Vector2f(bigBen.position.x+70,bigBen.position.y);
+		amusementPark.sprite.setPosition(amusementPark.position);
+		amusementPark.category = "Attractions";
+		amusementPark.itemName.setString("Amusement Park");
+		amusementPark.itemName.setFillColor(sf::Color::Black);
+		amusementPark.itemName.setPosition(sf::Vector2f(amusementPark.position.x,amusementPark.position.y+54.4));
+		amusementPark.itemName.setFont(defaultFont);
+		amusementPark.itemName.setCharacterSize(7);
+		attractionButtons.push_back(amusementPark);
+		attractionButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -409,6 +445,28 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(attractionButtons[i].itemName.getString() == "Empire State Building"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,8500,sf::Vector2i(2,1),actionArea,10,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Big Ben"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,6000,sf::Vector2i(1,2),actionArea,12,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Amusement Park"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,9000,sf::Vector2i(2,1),actionArea,13,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;
 					drawMenu = false;

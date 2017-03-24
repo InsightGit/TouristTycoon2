@@ -70,6 +70,26 @@ void imagine::sim::attraction::spawn(){
 		maxOccupancy = 150;
 		activityLevel = 10;
 		attractionImage.create(empireStateImageFile.width,empireStateImageFile.height,empireStateImageFile.pixel_data);
+	}else if(id==12){ //we skip 11 because it is a restaurant
+		name = "Big Ben";
+		cost = 6000;
+		baseMaintainceCost=2500;
+		costForTourists=175;
+		popularity = 50;
+		maxOccupancy = 100;
+		activityLevel = 10;
+		attractionImage.create(bigBenImageFile.width,bigBenImageFile.height,bigBenImageFile.pixel_data);
+	}else if(id==13){
+		name = "Amusement Park";
+		cost = 9000;
+		baseMaintainceCost=4000;
+		costForTourists=300;
+		popularity = 80;
+		maxOccupancy = 300;
+		activityLevel = 20;
+		attractionImage.create(amusementParkImageFile.width,amusementParkImageFile.height,amusementParkImageFile.pixel_data);
+	}else{
+		name = "Unknown";
 	}
 	maintainceCost=baseMaintainceCost;
 	maintainceCostSet=true;
@@ -137,7 +157,7 @@ void imagine::sim::attraction::update(){
 }
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
-	//std::cout << currentTouristNum << "\n";
+	std::cout << currentTouristNum << "\n";
 	update();
 	if(alive){
 		attractionTexture.loadFromImage(attractionImage);

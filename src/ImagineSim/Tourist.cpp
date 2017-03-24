@@ -108,10 +108,10 @@ imagine::sim::types::aStarRoad::aStarRoad(imagine::sim::road *aRoadToUse, imagin
 	fScore=gScore+hScore;
 }
 
-imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attractionList, std::vector<imagine::sim::road> *roadList, std::vector<imagine::sim::hotel> *hotelList, imagine::sim::player *mainPlayer){
-	allAttractions=attractionList;
-	allRoads=roadList;
-	allHotels=hotelList;
+imagine::sim::tourist::tourist(imagine::sim::player *mainPlayer){
+	//allAttractions=attractionList;
+	//allRoads=roadList;
+	//allHotels=hotelList;
 	player = mainPlayer;
 	std::random_device rd;
 	std::mt19937 rng(rd());
@@ -154,7 +154,7 @@ imagine::sim::tourist::tourist(std::vector<imagine::sim::attraction> *attraction
 std::vector<int> imagine::sim::tourist::findNextRoadPlace(const imagine::sim::road *road){
 	std::vector<int> result;
 	for(int i = 0; player->numberOfRoadsSpawned > i; i++){
-		if(road->tileSprite.getGlobalBounds().intersects(allRoads->at(i).tileSprite.getGlobalBounds())){
+		if(road->tileSprite.getGlobalBounds().intersects(player->roadsCreated.at(i).tileSprite.getGlobalBounds())){
 			result.push_back(i);
 		}
 	}
@@ -173,6 +173,7 @@ void imagine::sim::tourist::update(){
 
 	if(happiness==0){
 		leaving=true;
+		std::cout << "7\n";
 	}
 	/*if(status==imagine::sim::types::driving){
 		std::cout << chosenAttraction << " driving\n";
@@ -185,6 +186,7 @@ void imagine::sim::tourist::update(){
 		currentAttraction->demit();
 		visitedAttractions.push_back(currentAttraction);
 		visitedAttractionsSize++;
+		std::cout << visitedAttractionsSize << "\n";
 		numberOfAttractionsSinceLastEat++;
 		if(numberOfAttractionsSinceLastEat>=2){
 			hungry=true;
@@ -213,36 +215,37 @@ void imagine::sim::tourist::update(){
 		std::cout << "Visited\n";
 	}
 	if(sleepingTimeSet && chosenHotel && sleepingTime.getElapsedTime().asSeconds() >= 7 && status==imagine::sim::types::sleeping){
-		chosenAttraction=false;
+		chosenHotel=false;
 		currentHotel.checkout(this);
 		//visitedAttractions.push_back(currentAttraction);
 		status=imagine::sim::types::driving;
 	}
 
 	if(!chosenAttraction && justSpawned){
-		/*car = new imagine::sim::touristCar(sf::Vector2f(allRoads->at(0).tileSprite.getPosition().x+64,allRoads->at(0).tileSprite.getPosition().y));
-		car->carSprite.setRotation(allRoads->at(0).tileSprite.getRotation());
-		currentRoad=allRoads->at(0);
-		aRoad=allRoads->at(0);*/
+		/*car = new imagine::sim::touristCar(sf::Vector2f(player->roadsCreated.at(0).tileSprite.getPosition().x+64,player->roadsCreated.at(0).tileSprite.getPosition().y));
+		car->carSprite.setRotation(player->roadsCreated.at(0).tileSprite.getRotation());
+		currentRoad=player->roadsCreated.at(0);
+		aRoad=player->roadsCreated.at(0);*/
 
 		//decide which is most popular attraction and go to that attraction
 		for(int i = 0;player->numberOfAttractionsSpawned > i;++i){
-			if(money-allAttractions->at(i).getCostForTourists() > 0){
+			if(money-player->attractionsCreated.at(i).getCostForTourists() > 0){
 				if(i==0){
-					mostPopular=allAttractions->at(0).getPopularity();
+					mostPopular=player->attractionsCreated.at(0).getPopularity();
 					mostPopularPlace = i;
-				}else if(mostPopular >= allAttractions->at(i).getPopularity()){
-					mostPopular = allAttractions->at(i).getPopularity();
+				}else if(mostPopular >= player->attractionsCreated.at(i).getPopularity()){
+					mostPopular = player->attractionsCreated.at(i).getPopularity();
 					mostPopularPlace = i;
 				}
 			}
-			popularityList.push_back(allAttractions->at(i).getPopularity());
+			popularityList.push_back(player->attractionsCreated.at(i).getPopularity());
 		}
 		if(mostPopularPlace==-1){
 			leaving=true;
 			std::cout << "LeavingNOW Attractions:" << player->numberOfAttractionsSpawned <<"\n";
 		}else{
-			currentAttraction = &allAttractions->at(mostPopularPlace);
+			currentAttraction = &player->attractionsCreated.at(mostPopularPlace);
+			//std::cout << currentAttraction->name << "\n";
 			chosenAttraction=true;
 			status=imagine::sim::types::driving;
 			std::cout << "MPP\n";
@@ -255,7 +258,7 @@ void imagine::sim::tourist::update(){
 			std::cout << "here\n";
 		}else if(drivingTime.getElapsedTime().asSeconds() >= 5){
 			if(currentAttraction->admit(this)){
-				std::cout << "Admitted\n";
+				//std::cout << "Admitted\n";
 				touringTime.restart();
 				touringTimeSet=true;
 				status=imagine::sim::types::touring;
@@ -267,34 +270,35 @@ void imagine::sim::tourist::update(){
 			}
 			drivingTimeSet=false;
 		}
-	}else if(!chosenAttraction && !leaving && !chosenHotel && !hungry){
+	}else if(!chosenAttraction && !leaving && !chosenHotel && !hungry && !justSpawned){
 		for(int i = 0; player->numberOfAttractionsSpawned > i; i++){
 			if(i==0){
 				bool passed = true;
-				if(!tempBlackList.empty()){
+				//if(!tempBlackList.empty()){
 					for(int i = 0; tempBlackListSize > i; i++){
-						if(allAttractions->at(0).getId()==tempBlackList.at(i)->getId() && allAttractions->at(0).tileSprite.getPosition()==tempBlackList.at(i)->tileSprite.getPosition()){
+						if(player->attractionsCreated.at(0).getId()==tempBlackList.at(i)->getId() && player->attractionsCreated.at(0).tileSprite.getPosition()==tempBlackList.at(i)->tileSprite.getPosition()){
 							passed=false;
 						}
 					}
-				}
-				if(visitedAttractionsSize!=0){
+				//}
+				//if(visitedAttractionsSize!=0){
 					for(int i = 0; visitedAttractionsSize > i; i++){
-						if(allAttractions->at(0).getId()==visitedAttractions.at(i)->getId() && allAttractions->at(0).tileSprite.getPosition()==visitedAttractions.at(i)->tileSprite.getPosition()){
+						if(player->attractionsCreated.at(0).getId()==visitedAttractions.at(i)->getId() && player->attractionsCreated.at(0).tileSprite.getPosition()==visitedAttractions.at(i)->tileSprite.getPosition()){
 							passed=false;
+							std::cout << visitedAttractions.at(i)->name << " Failed\n";
 						}
 					}
-				}
-				if(passed && money-allAttractions->at(i).getCostForTourists() > 0){
-					mostPopular=allAttractions->at(0).getPopularity();
+				//}
+				if(passed && money-player->attractionsCreated.at(i).getCostForTourists() > 0){
+					mostPopular=player->attractionsCreated.at(0).getPopularity();
 					mostPopularPlace = i;
 				}
 
-			}else if(mostPopular < allAttractions->at(i).getPopularity()){
+			}else if(mostPopular < player->attractionsCreated.at(i).getPopularity()){
 				bool passed = true;
 				if(!tempBlackList.empty()){
 					for(int i = 0; tempBlackListSize > i; i++){
-						if(allAttractions->at(i).getId()==tempBlackList.at(i)->getId() && allAttractions->at(i).tileSprite.getPosition()==tempBlackList.at(i)->tileSprite.getPosition()){
+						if(player->attractionsCreated.at(i).getId()==tempBlackList.at(i)->getId() && player->attractionsCreated.at(i).tileSprite.getPosition()==tempBlackList.at(i)->tileSprite.getPosition()){
 							passed=false;
 						}
 					}
@@ -302,40 +306,43 @@ void imagine::sim::tourist::update(){
 				}
 				if(visitedAttractionsSize!=0){
 					for(int i = 0; visitedAttractionsSize > i; i++){
-						if(allAttractions->at(i).getId()==visitedAttractions.at(i)->getId() && allAttractions->at(i).tileSprite.getPosition()==visitedAttractions.at(i)->tileSprite.getPosition()){
+						if(player->attractionsCreated.at(i).getId()==visitedAttractions.at(i)->getId() && player->attractionsCreated.at(i).tileSprite.getPosition()==visitedAttractions.at(i)->tileSprite.getPosition()){
 							passed=false;
 						}
 					}
 				}
-				if(passed && money-allAttractions->at(i).getCostForTourists() > 0){
-					mostPopular=allAttractions->at(i).getPopularity();
+				if(passed && money-player->attractionsCreated.at(i).getCostForTourists() > 0){
+					mostPopular=player->attractionsCreated.at(i).getPopularity();
 					mostPopularPlace = i;
 				}
 			}
 			if(mostPopularPlace==-1){
 				leaving=true;
+				std::cout << "1\n";
 			}else{
-				//std::cout << allAttractions->at(mostPopularPlace).name << "\n";
-				currentAttraction = &allAttractions->at(mostPopularPlace);
+				currentAttraction = &player->attractionsCreated.at(mostPopularPlace);
+				//std::cout << currentAttraction->name << "\n";
 				if(energy<=0 || energy-currentAttraction->getActivityLevel() < 0){
 					//if();
 					if(player->numberOfHotelsSpawned!=0){
-						if(money-allHotels->at(0).getCost() > 0){
+						if(money-player->hotelsCreated.at(0).getCost() > 0){
 							if(player->numberOfHotelsSpawned==1){
-								currentHotel=allHotels->at(0);
+								currentHotel=player->hotelsCreated.at(0);
 							}else{
 								std::random_device rd;
 								std::mt19937 rng(rd());
 								std::uniform_int_distribution<int> uni(0,player->numberOfHotelsSpawned-1);
 								auto randomInt = uni(rng);
-								currentHotel=allHotels->at(randomInt);
+								currentHotel=player->hotelsCreated.at(randomInt);
 							}
 							chosenHotel=true;
 						}else{
 							leaving=true;
+							std::cout << "2\n";
 						}
 					}else{
 						leaving=true;
+						std::cout << "3\n";
 					}
 				}
 			}
@@ -350,6 +357,7 @@ void imagine::sim::tourist::update(){
 				status=imagine::sim::types::sleeping;
 		}else{
 			leaving=true;
+			std::cout << "4\n";
 		}
 	}else if(hungry && !chosenRestaurant && !leaving){
 		//choose a restaurant
@@ -408,6 +416,7 @@ void imagine::sim::tourist::update(){
 					chosenRestaurant=true;
 				}else{
 					leaving=true;
+					std::cout << "5\n";
 				}
 			}
 		}
@@ -425,6 +434,7 @@ void imagine::sim::tourist::update(){
 			}else{
 				//std::cout << "NOPE\n";
 				leaving=true;
+				std::cout << "6\n";
 			}
 			drivingTimeSet=false;
 		}
@@ -439,7 +449,7 @@ void imagine::sim::tourist::update(){
 				//if(i==0){
 					//lowestFScore = ;
 				//}
-				aStarResults.push_back(imagine::sim::types::aStarRoad(aRoad,currentRoad,&allRoads->at(possibleRoads[i])));
+				aStarResults.push_back(imagine::sim::types::aStarRoad(aRoad,currentRoad,&player->roadsCreated.at(possibleRoads[i])));
 			}
 			sf::Vector2i lowestFScore;
 			for(int i = 0; aStarResults.size() > i; i++){
@@ -453,7 +463,7 @@ void imagine::sim::tourist::update(){
 					}
 				}
 			}
-			closeList.push_back(&allRoads->at(lowestFScore.x));
+			closeList.push_back(&player->roadsCreated.at(lowestFScore.x));
 		}*/
 	}
 }

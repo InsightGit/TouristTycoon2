@@ -15,6 +15,8 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/Zipline.h \
  ../src/ImagineSim/Resources/HikingTrail.h \
  ../src/ImagineSim/Resources/empireState.h \
+ ../src/ImagineSim/Resources/amusementpark.h \
+ ../src/ImagineSim/Resources/bigBen.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
@@ -43,6 +45,8 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/TownHallIcon.h \
  ../src/ImagineSim/Resources/empireStateIcon.h \
  ../src/ImagineSim/Resources/teppanyakiIcon.h \
+ ../src/ImagineSim/Resources/bigBenIcon.h \
+ ../src/ImagineSim/Resources/amusementparkIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -108,6 +112,10 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/HikingTrail.h:
 
 ../src/ImagineSim/Resources/empireState.h:
+
+../src/ImagineSim/Resources/amusementpark.h:
+
+../src/ImagineSim/Resources/bigBen.h:
 
 ../src/ImagineSim/Resources/personNew.h:
 
@@ -180,6 +188,10 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/empireStateIcon.h:
 
 ../src/ImagineSim/Resources/teppanyakiIcon.h:
+
+../src/ImagineSim/Resources/bigBenIcon.h:
+
+../src/ImagineSim/Resources/amusementparkIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

@@ -11,6 +11,8 @@
 #include "Resources/Zipline.h"
 #include "Resources/HikingTrail.h"
 #include "Resources/empireState.h"
+#include "Resources/amusementpark.h"
+#include "Resources/bigBen.h"
 
 
 namespace imagine{
