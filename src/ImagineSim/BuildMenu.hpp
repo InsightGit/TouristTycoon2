@@ -25,6 +25,7 @@
 #include "Resources/teppanyakiIcon.h"
 #include "Resources/bigBenIcon.h"
 #include "Resources/amusementparkIcon.h"
+#include "Resources/policeStationIcon.h"
 
 namespace imagine {
     namespace sim{

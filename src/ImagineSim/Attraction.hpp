@@ -13,6 +13,7 @@
 #include "Resources/empireState.h"
 #include "Resources/amusementpark.h"
 #include "Resources/bigBen.h"
+#include "Resources/casino.h"
 
 
 namespace imagine{
@@ -39,6 +40,7 @@ namespace imagine{
 			signed int getMaxOccupancy() { return maxOccupancy; }
 			signed int getCurrentOccupancy() { return currentTouristNum; }
 			signed int getActivityLevel() { return activityLevel; }
+			signed int getCrimeAttention() { return crimeAttention; }
 
 			void spawn();
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
@@ -52,6 +54,7 @@ namespace imagine{
 			imagine::sim::player *player;
 
 			signed int id;
+			signed int crimeAttention = 0;
 			signed int pastTouristNum = 0;
 			signed int allTouristNum = 0;
 			signed int baseMaintainceCost;

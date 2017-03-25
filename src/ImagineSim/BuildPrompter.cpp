@@ -353,6 +353,20 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
 					limitClickTimerNotSet=true;
 				}
+			}else if(tileId==14){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::policeStation policeStation = imagine::sim::policeStation(14,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(policeStation.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+						//notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",&defaultFont);
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
 			}
 		}
 	}

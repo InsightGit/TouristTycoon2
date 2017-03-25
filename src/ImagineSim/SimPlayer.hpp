@@ -21,6 +21,7 @@
 #include "Tourist.hpp"
 #include "Restaurant.hpp"
 #include "TownHall.hpp"
+#include "policeStation.hpp"
 
 namespace imagine{
 	namespace sim{
@@ -65,6 +66,7 @@ namespace imagine{
 			std::vector<imagine::sim::tourist> touristsSpawned;
 			std::vector<imagine::sim::Advertisement> advertisementsCreated;
 			std::vector<imagine::sim::Restaurant> restaurantsCreated;
+			std::vector<imagine::sim::policeStation> policeStationsCreated;
 			imagine::sim::types::levelProgress levelProgress;
 			imagine::sim::TouristSpawner *touristSpawner;
 			imagine::sim::TownHall *townHall;
@@ -76,6 +78,7 @@ namespace imagine{
 			signed int numberOfAdvertisementsSpawned = 0;
 			signed int numberOfHotelsSpawned = 0;
 			signed int numberOfRestaurantsSpawned = 0;
+			signed int numberOfPoliceStationsSpawned = 0;
 			sf::Font defaultFont;
 
 			imagine::sim::levelCompletePopUp *levelCompletePopUp;

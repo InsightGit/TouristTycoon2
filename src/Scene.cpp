@@ -49,17 +49,20 @@ void imagine::scene::update(sf::RenderWindow *window){
         	playerInScene->touristsSpawned[i].draw(window);
         }
 
-    	for(int i = 0;playerInScene->numberOfRoadsSpawned > i;i++){
+    	for(int i = 0;playerInScene->numberOfRoadsSpawned > i;++i){
     		playerInScene->roadsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
-    	for(int i = 0;playerInScene->numberOfAttractionsSpawned > i;i++){
+    	for(int i = 0;playerInScene->numberOfAttractionsSpawned > i;++i){
     		playerInScene->attractionsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
-    	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;i++){
+    	for(int i = 0;playerInScene->numberOfHotelsSpawned > i;++i){
     		playerInScene->hotelsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
-    	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
+    	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;++i){
     		playerInScene->restaurantsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
+    	for(int i = 0;playerInScene->numberOfPoliceStationsSpawned > i;++i){
+    		playerInScene->policeStationsCreated[i].subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
     	if(playerInScene->townHallSpawned){
         	playerInScene->townHall->subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
@@ -82,6 +85,9 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	}
     	for(int i = 0;playerInScene->numberOfRestaurantsSpawned > i;i++){
     		playerInScene->restaurantsCreated[i].draw(window);
+    	}
+    	for(int i = 0;playerInScene->numberOfPoliceStationsSpawned > i;++i){
+    		playerInScene->policeStationsCreated[i].draw(window);
     	}
     	if(playerInScene->townHallSpawned){
     		playerInScene->townHall->draw(window);

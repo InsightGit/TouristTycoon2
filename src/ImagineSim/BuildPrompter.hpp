@@ -17,6 +17,7 @@
 #include "Restaurant.hpp"
 //#include "Services.hpp"
 #include "TownHall.hpp"
+#include "policeStation.hpp"
 
 namespace imagine {
 		namespace sim {

@@ -11,21 +11,26 @@
 #include "service.hpp"
 
 #include "../ClickableSprite.hpp"
+#include "PopUp.hpp"
 
 namespace imagine {
-namespace sim {
-	class CityService: public service {
-	public:
-		imagine::clickableSprite cityServiceSprite;
+	namespace sim {
+		class CityService: public service {
+		public:
+			bool created = false;
 
-		virtual void spawn() = 0;
+			imagine::clickableSprite cityServiceSprite;
 
-		virtual void whenClicked() = 0;
+			virtual void spawn() = 0;
 
-		virtual void update(sf::RenderWindow *window) = 0;
+			virtual void whenClicked() = 0;
 
-		virtual void draw(sf::RenderWindow *window) = 0;
-	};
+			virtual void update(sf::RenderWindow *window) = 0;
+
+			virtual void draw(sf::RenderWindow *window) = 0;
+
+			virtual bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse) = 0;
+		};
 
 	} /* namespace sim */
 } /* namespace imagine */

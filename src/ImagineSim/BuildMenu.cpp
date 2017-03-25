@@ -292,6 +292,24 @@ void imagine::sim::buildMenu::spawn(){
 		amusementPark.itemName.setCharacterSize(7);
 		attractionButtons.push_back(amusementPark);
 		attractionButtonSize++;
+
+		imagine::sim::menuItem policeStation = imagine::sim::menuItem(&defaultFont,5);
+		policeStation.optionalImage = new sf::Image();
+		policeStation.optionalTexture = new sf::Texture();
+		policeStation.optionalImage->create(policeStationIconImageFile.width,policeStationIconImageFile.height,policeStationIconImageFile.pixel_data);
+		policeStation.optionalTexture->loadFromImage(*policeStation.optionalImage);
+		policeStation.sprite.setTexture(*policeStation.optionalTexture);
+		policeStation.sprite.setScale(0.85,0.85);
+		policeStation.position = sf::Vector2f(townHall.position.x+70,townHall.position.y);
+		policeStation.sprite.setPosition(policeStation.position);
+		policeStation.category = "Services";
+		policeStation.itemName.setString("Police Station");
+		policeStation.itemName.setFillColor(sf::Color::Black);
+		policeStation.itemName.setPosition(sf::Vector2f(policeStation.position.x,policeStation.position.y+54.4));
+		policeStation.itemName.setFont(defaultFont);
+		policeStation.itemName.setCharacterSize(7);
+		serviceButtons.push_back(policeStation);
+		serviceButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -371,6 +389,16 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 						limitPrompterClicks.restart();
 					}
 					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(serviceButtons[i].itemName.getString() == "Police Station"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*serviceButtons[i].optionalImage,6500,sf::Vector2i(2,1),actionArea,14,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
 				}
 			}
 		}
@@ -594,7 +622,7 @@ void imagine::sim::buildMenu::draw(sf::RenderWindow *window){
 					}
 				}
 			}
-			std::cout << "serviceButtons drawn\n";
+			//std::cout << "serviceButtons drawn\n";
 		}else if(activeCategory=="restaurants"){
 			for(int i = 0; restaurantButtons.size() > i; i++){
 				if(restaurantButtons[i].levelRequired <= player->levelProgress.currentLevel){

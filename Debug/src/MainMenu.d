@@ -16,6 +16,7 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
  ../src/ImagineSim/Resources/empireState.h \
  ../src/ImagineSim/Resources/amusementpark.h \
  ../src/ImagineSim/Resources/bigBen.h \
+ ../src/ImagineSim/Resources/casino.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
@@ -28,10 +29,12 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
  ../src/ImagineSim/../Resources/nobuttonnotactive.h \
  ../src/ImagineSim/CityService.hpp ../src/ImagineSim/SimMenu.hpp \
  ../src/ImagineSim/../Menu.hpp ../src/ImagineSim/CityPolicy.hpp \
- ../src/ImagineSim/Resources/TownHall.h ../src/ImagineSim/SimSidebar.hpp \
- ../src/ImagineSim/BuildMenu.hpp ../src/ImagineSim/../ImagineCore.hpp \
- ../src/ImagineSim/BuildPrompter.hpp ../src/ImagineSim/ActionArea.hpp \
- ../src/ImagineSim/HelpBar.hpp \
+ ../src/ImagineSim/Resources/TownHall.h \
+ ../src/ImagineSim/policeStation.hpp \
+ ../src/ImagineSim/Resources/policeStation.h \
+ ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
+ ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/BuildPrompter.hpp \
+ ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/Resources/roadRemastered.h \
  ../src/ImagineSim/Resources/WashMonuIcon.h \
  ../src/ImagineSim/Resources/hotelIcon.h \
@@ -46,6 +49,7 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
  ../src/ImagineSim/Resources/teppanyakiIcon.h \
  ../src/ImagineSim/Resources/bigBenIcon.h \
  ../src/ImagineSim/Resources/amusementparkIcon.h \
+ ../src/ImagineSim/Resources/policeStationIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -114,6 +118,8 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
 
 ../src/ImagineSim/Resources/bigBen.h:
 
+../src/ImagineSim/Resources/casino.h:
+
 ../src/ImagineSim/Resources/personNew.h:
 
 ../src/ImagineSim/Restaurant.hpp:
@@ -149,6 +155,10 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
 ../src/ImagineSim/CityPolicy.hpp:
 
 ../src/ImagineSim/Resources/TownHall.h:
+
+../src/ImagineSim/policeStation.hpp:
+
+../src/ImagineSim/Resources/policeStation.h:
 
 ../src/ImagineSim/SimSidebar.hpp:
 
@@ -189,6 +199,8 @@ src/MainMenu.o: ../src/MainMenu.cpp ../src/MainMenu.hpp ../src/Menu.hpp \
 ../src/ImagineSim/Resources/bigBenIcon.h:
 
 ../src/ImagineSim/Resources/amusementparkIcon.h:
+
+../src/ImagineSim/Resources/policeStationIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

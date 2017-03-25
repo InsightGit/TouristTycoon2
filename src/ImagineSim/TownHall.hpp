@@ -39,7 +39,7 @@ namespace imagine {
 				int getCityPolicySize(){ return cityPoliciesCount; }
 
 				void spawn()override;
-				bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
+				bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse)override;
 
 				void draw(sf::RenderWindow *window)override;
 			protected:

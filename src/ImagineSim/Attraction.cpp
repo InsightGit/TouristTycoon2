@@ -88,6 +88,15 @@ void imagine::sim::attraction::spawn(){
 		maxOccupancy = 300;
 		activityLevel = 20;
 		attractionImage.create(amusementParkImageFile.width,amusementParkImageFile.height,amusementParkImageFile.pixel_data);
+	}else if(id==15){ //we skip id #14 because it is a police station
+		name = "Casino";
+		cost = 10000;
+		baseMaintainceCost=5000;
+		costForTourists=500;
+		popularity = 90;
+		maxOccupancy = 350;
+		activityLevel = 9;
+		crimeAttention = 10;
 	}else{
 		name = "Unknown";
 	}
