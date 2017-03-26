@@ -97,6 +97,7 @@ void imagine::sim::attraction::spawn(){
 		maxOccupancy = 350;
 		activityLevel = 9;
 		crimeAttention = 10;
+		attractionImage.create(casinoImageFile.width,casinoImageFile.height,casinoImageFile.pixel_data);
 	}else{
 		name = "Unknown";
 	}

@@ -6,7 +6,7 @@ static const struct {
   unsigned int 	 bytes_per_pixel; /* 2:RGB16, 3:RGB, 4:RGBA */ 
   char         	*comment;
   unsigned char	 pixel_data[64 * 64 * 4 + 1];
-} noButtonImageFile = {
+} noImageFile = {
   64, 64, 4,
   "Created with GIMP",
   "\347\000\000\377\347\000\000\377\347\000\000\377\347\000\000\377\347\000\000\377\347\000\000\377"

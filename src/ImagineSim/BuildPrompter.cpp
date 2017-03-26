@@ -33,6 +33,7 @@ imagine::sim::buildPrompter::buildPrompter(imagine::sim::player *mainPlayer,sf::
 imagine::sim::buildPrompter::~buildPrompter() {
 	// TODO Auto-generated destructor stub
 	delete notEnoughMoneyPopUp;
+	delete confirmationPopUp;
 }
 
 bool imagine::sim::buildPrompter::canBuild(){
@@ -87,6 +88,10 @@ void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<im
 		if(tileId==0){
 			drawingRoad=true;
 		}
+		//if(tileId==15 && player->numberOfPoliceStationsSpawned <= 0){
+			//confirmationPopUp = new imagine::sim::confirmationPopUp("A police station is recommended for a casino. Do you still want to build a casino?",&defaultFont,12);
+			//attentionNeeded = true;
+		//}
 	}
 	cost.setFont(defaultFont);
 	cost.setFillColor(sf::Color::White);
@@ -367,7 +372,32 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
 					limitClickTimerNotSet=true;
 				}
-			}
+			}else if(tileId==15){
+				if(player->numberOfPoliceStationsSpawned <= 0 && !attentionNeeded && !bypassed){
+					confirmationPopUp = new imagine::sim::confirmationPopUp("A police station is recommended for a casino. Do you still want to build a casino?",&defaultFont,9);
+					attentionNeeded = true;
+				}else if(attentionNeeded){
+					if(confirmationPopUp->getResponse() == imagine::sim::types::yes){
+						attentionNeeded=false;
+						bypassed=true;
+					}else if(confirmationPopUp->getResponse() == imagine::sim::types::no){
+						done=true;
+						attentionNeeded=false;
+						bypassed=true;
+					}
+				}else if(!attentionNeeded){
+					imagine::sim::attraction attraction = imagine::sim::attraction(15,player,mousePosition);
+					//limitClicks.restart();
+					//limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}
+			}//else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+				//limitClickTimerNotSet=true;
+			//}
 		}
 	}
 	if(drawingRoadLength*50 > player->money){
@@ -393,6 +423,8 @@ void imagine::sim::buildPrompter::draw(sf::RenderWindow *window, std::vector<ima
 	if(!done){
 		if(cannotBuild){
 			notEnoughMoneyPopUp->draw(window);
+		}else if(attentionNeeded){
+			confirmationPopUp->draw(window);
 		}else{
 			if(drawingRoad && drawingRoadLength!=0){
 				for(int i = 0;drawingRoadLength > i;++i){

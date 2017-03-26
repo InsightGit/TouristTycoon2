@@ -25,6 +25,8 @@ namespace imagine {
 
 		bool getSwitchState() { return switchOn; }
 
+		sf::Vector2f getPosition() { return yes.sprite.getPosition(); }
+
 		void draw(sf::RenderWindow *window);
 	protected:
 		imagine::clickableSprite yes;

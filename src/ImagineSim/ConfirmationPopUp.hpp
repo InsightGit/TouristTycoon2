@@ -25,7 +25,7 @@ namespace imagine {
 
 		class confirmationPopUp {
 		public:
-			confirmationPopUp(const std::string messageToUse,sf::Font *fontToUse, sf::Vector2f position = sf::Vector2f(584,234)); //center of display
+			confirmationPopUp(const std::string messageToUse,sf::Font *fontToUse, const int charSize = 16, const sf::Vector2f position = sf::Vector2f(584,234)); //center of display
 			virtual ~confirmationPopUp();
 
 			imagine::sim::types::confirmationResponse getResponse(){ return response; }

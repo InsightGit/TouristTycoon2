@@ -79,6 +79,7 @@ namespace imagine{
 			signed int numberOfHotelsSpawned = 0;
 			signed int numberOfRestaurantsSpawned = 0;
 			signed int numberOfPoliceStationsSpawned = 0;
+			signed int touristExtraHappiness = 0;
 			sf::Font defaultFont;
 
 			imagine::sim::levelCompletePopUp *levelCompletePopUp;

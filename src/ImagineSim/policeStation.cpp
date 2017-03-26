@@ -18,9 +18,11 @@ imagine::sim::policeStation::policeStation(const int idToUse,imagine::sim::playe
 		cost = 6500;
 		maintainceCost=400;
 		maintainceCostSet=true;
+		crimeFightingAbility=20;
 		//std::cout << "cost set\n";
 		policeSprite.optionalImage->create(policeStationImageFile.width,policeStationImageFile.height,policeStationImageFile.pixel_data);
 	}
+
 	policeSprite.sprite.setPosition(position);
 }
 
@@ -34,13 +36,17 @@ void imagine::sim::policeStation::spawn(){
 	policeSprite.optionalTexture = new sf::Texture();
 	policeSprite.optionalTexture->loadFromImage(*policeSprite.optionalImage);
 	policeSprite.sprite.setTexture(*policeSprite.optionalTexture);
-	//spawned=true;
+	spawned=true;
 	//created=true;
 }
 
 bool imagine::sim::policeStation::create(imagine::sim::popUp *notEnoughMoneyPopUp,const sf::Font *fontToUse){
-	spawn();
+	//spawn();
 	if(!created){
+		policeSprite.optionalTexture = new sf::Texture();
+		policeSprite.optionalTexture->loadFromImage(*policeSprite.optionalImage);
+		policeSprite.sprite.setTexture(*policeSprite.optionalTexture);
+		spawned=true;
 		//std::cout << player->money << " vs " << cost << "\n";
 		if(player->money >= cost){
 			player->policeStationsCreated.push_back(*this);

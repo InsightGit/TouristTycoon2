@@ -18,6 +18,7 @@
 //#include "Services.hpp"
 #include "TownHall.hpp"
 #include "policeStation.hpp"
+#include "ConfirmationPopUp.hpp"
 
 namespace imagine {
 		namespace sim {
@@ -31,6 +32,7 @@ namespace imagine {
 					sf::Font defaultFont;
 					sf::RectangleShape buildArea;
 					imagine::sim::popUp *notEnoughMoneyPopUp;
+					imagine::sim::confirmationPopUp *confirmationPopUp;
 					std::vector<imagine::sim::road> drawingRoads;
 					imagine::sim::road *previousRoad;
 					sf::Text cost;
@@ -40,6 +42,8 @@ namespace imagine {
 					bool playerRequestingBuild = false;
 			    	bool drawingRoad = false;
 			    	bool done = false;
+			    	bool attentionNeeded = false;
+			    	bool bypassed = false;
 
 					buildPrompter(imagine::sim::player *mainPlayer,sf::Image tileImageToUse,const signed int tileCost,const sf::Vector2i tileSize,imagine::sim::actionArea *actionAreaToUse,const signed int tileIdToUse, sf::Font *fontToUse);
 					buildPrompter(imagine::sim::player *mainPlayer, sf::Texture tileTextureToUse,const signed int tileCost,const sf::Vector2i tileSize,imagine::sim::actionArea *actionAreaToUse,const signed int tileIdToUse,sf::Font *fontToUse);

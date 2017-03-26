@@ -34,7 +34,9 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Resources/policeStation.h \
  ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
  ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/BuildPrompter.hpp \
- ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/HelpBar.hpp \
+ ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/ConfirmationPopUp.hpp \
+ ../src/ImagineSim/../Resources/yes.h ../src/ImagineSim/../Resources/no.h \
+ ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/Resources/roadRemastered.h \
  ../src/ImagineSim/Resources/WashMonuIcon.h \
  ../src/ImagineSim/Resources/hotelIcon.h \
@@ -50,6 +52,7 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/Resources/bigBenIcon.h \
  ../src/ImagineSim/Resources/amusementparkIcon.h \
  ../src/ImagineSim/Resources/policeStationIcon.h \
+ ../src/ImagineSim/Resources/casinoIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/Resources/advertIcon.h \
@@ -167,6 +170,12 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 
 ../src/ImagineSim/ActionArea.hpp:
 
+../src/ImagineSim/ConfirmationPopUp.hpp:
+
+../src/ImagineSim/../Resources/yes.h:
+
+../src/ImagineSim/../Resources/no.h:
+
 ../src/ImagineSim/HelpBar.hpp:
 
 ../src/ImagineSim/Resources/roadRemastered.h:
@@ -198,6 +207,8 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 ../src/ImagineSim/Resources/amusementparkIcon.h:
 
 ../src/ImagineSim/Resources/policeStationIcon.h:
+
+../src/ImagineSim/Resources/casinoIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 

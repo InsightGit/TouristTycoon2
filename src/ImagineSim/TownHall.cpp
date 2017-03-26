@@ -55,18 +55,33 @@ void imagine::sim::TownHall::whenClicked(){
 		cityManagmentMenu = new imagine::sim::SimMenu(sf::Vector2f(300,300),sf::Vector2f(584,184),"City Policies",&defaultFont);
 		cityManagmentMenuSpawned=true;
 		imagine::Switch nicerTrees = imagine::Switch(sf::Vector2f(594,200));
-		imagine::sim::CityPolicy nicerTreesPolicy = imagine::sim::CityPolicy(0);
+		imagine::sim::CityPolicy nicerTreesPolicy = imagine::sim::CityPolicy(0,player);
 		sf::Text nicerTreesTitle;
 		nicerTreesTitle.setFont(defaultFont);
 		nicerTreesTitle.setCharacterSize(15);
 		nicerTreesTitle.setFillColor(sf::Color::Black);
-		nicerTreesTitle.setPosition(sf::Vector2f(594,300));
-		nicerTreesTitle.setString("Nicer Trees");
+		nicerTreesTitle.setPosition(sf::Vector2f(594,270));
+		nicerTreesTitle.setString("Nicer trees");
 		cityPoliciesSwitches.push_back(nicerTrees);
-		cityPolicyMinumumLevels.push_back(3);
+		//cityPolicyMinumumLevels.push_back(3);
 		pastClickStates.push_back(false);
 		cityPolicies.push_back(nicerTreesPolicy);
 		cityPolicyDescriptions.push_back(nicerTreesTitle);
+		cityPoliciesCount++;
+
+		imagine::Switch doublePoliceSpending = imagine::Switch(sf::Vector2f(nicerTrees.getPosition().x,nicerTrees.getPosition().y+70));
+		imagine::sim::CityPolicy doublePoliceSpendingPolicy = imagine::sim::CityPolicy(1,player,5,imagine::sim::types::buildPolice);
+		sf::Text policeSpendingTitle;
+		policeSpendingTitle.setFont(defaultFont);
+		policeSpendingTitle.setCharacterSize(15);
+		policeSpendingTitle.setFillColor(sf::Color::Black);
+		policeSpendingTitle.setPosition(sf::Vector2f(doublePoliceSpending.getPosition().x,doublePoliceSpending.getPosition().y+70));
+		policeSpendingTitle.setString("Double police spending");
+		cityPoliciesSwitches.push_back(doublePoliceSpending);
+		//cityPolicyMinumumLevels.push_back(3);
+		pastClickStates.push_back(false);
+		cityPolicies.push_back(doublePoliceSpendingPolicy);
+		cityPolicyDescriptions.push_back(policeSpendingTitle);
 		cityPoliciesCount++;
 	}
 	drawManagmentMenu=true;
@@ -100,6 +115,7 @@ void imagine::sim::TownHall::update(sf::RenderWindow *window){
 	}
 	for(int i = 0; cityPoliciesCount > i;++i){
 		pastClickStates[i] = cityPoliciesSwitches[i].getSwitchState();
+		cityPolicies[i].update();
 	}
 }
 
@@ -113,9 +129,15 @@ void imagine::sim::TownHall::draw(sf::RenderWindow *window){
 			window->draw(cityManagmentMenu->menuBox);
 			window->draw(cityManagmentMenu->title);
 			for(int i = 0;cityPoliciesCount > i;++i){
-				if(cityPolicyMinumumLevels[i] >= player->levelProgress.currentLevel){
+				if(cityPolicies[i].getMinimumlevel() >= player->levelProgress.currentLevel){
 					cityPoliciesSwitches[i].draw(window);
 					window->draw(cityPolicyDescriptions[i]);
+				}
+				if(cityPolicies[i].getConditions() == imagine::sim::types::buildPolice){
+					if(player->numberOfPoliceStationsSpawned >= 0){
+						cityPoliciesSwitches[i].draw(window);
+						window->draw(cityPolicyDescriptions[i]);
+					}
 				}
 			}
 		}

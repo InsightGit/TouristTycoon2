@@ -7,7 +7,7 @@
 
 #include "ConfirmationPopUp.hpp"
 
-imagine::sim::confirmationPopUp::confirmationPopUp(const std::string messageToUse,sf::Font *fontToUse, sf::Vector2f position) {
+imagine::sim::confirmationPopUp::confirmationPopUp(const std::string messageToUse,sf::Font *fontToUse, const int charSize, const sf::Vector2f position) {
 	// TODO Auto-generated constructor stub
 	defaultFont=*fontToUse;
 
@@ -16,10 +16,10 @@ imagine::sim::confirmationPopUp::confirmationPopUp(const std::string messageToUs
 	messageBox.setFillColor(sf::Color(233,100,54,230));
 
 	message.setFont(defaultFont);
-	message.setPosition(sf::Vector2f(position.x+50,position.y+10));
+	message.setPosition(sf::Vector2f(position.x+10,position.y+10));
 	message.setString(messageToUse);
-	message.setFillColor(sf::Color::Red);
-	message.setCharacterSize(16);
+	message.setFillColor(sf::Color::Blue);
+	message.setCharacterSize(charSize);
 
 	yesButton.optionalImage = new sf::Image();
 	yesButton.optionalImage->create(yesButtonImageFile.width,yesButtonImageFile.height,yesButtonImageFile.pixel_data);
@@ -29,11 +29,11 @@ imagine::sim::confirmationPopUp::confirmationPopUp(const std::string messageToUs
 	yesButton.sprite.setTexture(*yesButton.optionalTexture);
 
 	noButton.optionalImage = new sf::Image();
-	noButton.optionalImage->create(noButtonImageFile.width,noButtonImageFile.height,noButtonImageFile.pixel_data);
+	noButton.optionalImage->create(noImageFile.width,noImageFile.height,noImageFile.pixel_data);
 	noButton.optionalTexture = new sf::Texture();
-	noButton.optionalTexture->loadFromImage(*yesButton.optionalImage);
+	noButton.optionalTexture->loadFromImage(*noButton.optionalImage);
 	noButton.sprite.setPosition(sf::Vector2f(position.x+100,position.y+76));
-	noButton.sprite.setTexture(*yesButton.optionalTexture);
+	noButton.sprite.setTexture(*noButton.optionalTexture);
 	popUpDraw=true;
 }
 

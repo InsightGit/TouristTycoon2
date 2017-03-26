@@ -31,6 +31,8 @@ namespace imagine {
 			signed int spawnNumber = 0;
 			signed int pastTouristNumber = 0;
 			signed int activeTourists = 0;
+			signed int crime = 0;
+			signed int crimeFighting = 0;
 			imagine::sim::player *player;
 			std::vector<imagine::sim::Advertisement> *allAdvertisements;
 			std::vector<imagine::sim::attraction> *allAttractions;

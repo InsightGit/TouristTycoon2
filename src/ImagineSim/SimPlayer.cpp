@@ -136,6 +136,29 @@ void imagine::sim::player::updatePlayerLevel(){
 						 }
 				 }
 			 }
+		 }else if(levelProgress.currentLevel==4){
+			 for(int i = 0; levelProgress.finishPoint > i; ++i){
+				 if(progressAddedSize >= 3){
+					 if(!progressAdded[i]){
+						 if(money >= 300000 && i==0){
+							 progressAdded[i]= true;
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }else if(activeTourists >= 10000 && i==1){
+							 progressAdded[i] = true;
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }else if(touristExtraHappiness >= 35 && i==2){
+							 progressAdded[i] = true;
+							 progressAddedSize++;
+							 levelProgress.currentProgress++;
+						 }
+					 }
+				 }else if(std::find(progressAdded.begin(), progressAdded.end(),i)==progressAdded.end()){
+					 progressAdded.push_back(false);
+					 progressAddedSize++;
+				 }
+			 }
 		 }
 	}
 }
@@ -157,10 +180,26 @@ void imagine::sim::player::update(){
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 2",&defaultFont);
 			levelUp=true;
 		}else if(levelProgress.currentLevel==2 && levelProgress.currentProgress >= levelProgress.finishPoint){
-			levelProgress.currentLevel = 2;
+			levelProgress.currentLevel = 3;
+			levelProgress.currentProgress = 0;
+			levelProgress.finishPoint = 2;
+			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 3",&defaultFont);
+			levelUp=true;
+			progressAdded.clear();
+			progressAddedSize = 0;
+		}else if(levelProgress.currentLevel==3 && levelProgress.currentProgress >= levelProgress.finishPoint){
+			levelProgress.currentLevel = 4;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 3;
-			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 3",&defaultFont);
+			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 4",&defaultFont);
+			levelUp=true;
+			progressAdded.clear();
+			progressAddedSize = 0;
+		}else if(levelProgress.currentLevel==4 && levelProgress.currentProgress >= levelProgress.finishPoint){
+			levelProgress.currentLevel = 5;
+			levelProgress.currentProgress = 0;
+			levelProgress.finishPoint = 99;
+			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 5",&defaultFont);
 			levelUp=true;
 			progressAdded.clear();
 			progressAddedSize = 0;

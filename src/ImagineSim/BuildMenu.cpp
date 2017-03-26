@@ -310,6 +310,24 @@ void imagine::sim::buildMenu::spawn(){
 		policeStation.itemName.setCharacterSize(7);
 		serviceButtons.push_back(policeStation);
 		serviceButtonSize++;
+
+		imagine::sim::menuItem casino = imagine::sim::menuItem(&defaultFont,5);
+		casino.optionalImage = new sf::Image();
+		casino.optionalTexture = new sf::Texture();
+		casino.optionalImage->create(casinoIconImageFile.width,casinoIconImageFile.height,casinoIconImageFile.pixel_data);
+		casino.optionalTexture->loadFromImage(*casino.optionalImage);
+		casino.sprite.setTexture(*casino.optionalTexture);
+		casino.sprite.setScale(0.85,0.85);
+		casino.position = sf::Vector2f(amusementPark.position.x+70,amusementPark.position.y);
+		casino.sprite.setPosition(casino.position);
+		casino.category = "Attractions";
+		casino.itemName.setString("Casino");
+		casino.itemName.setFillColor(sf::Color::Black);
+		casino.itemName.setPosition(sf::Vector2f(casino.position.x,casino.position.y+54.4));
+		casino.itemName.setFont(defaultFont);
+		casino.itemName.setCharacterSize(7);
+		attractionButtons.push_back(casino);
+		attractionButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -495,6 +513,17 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(attractionButtons[i].itemName.getString() == "Amusement Park"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,9000,sf::Vector2i(2,1),actionArea,13,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Casino"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,10000,sf::Vector2i(2,2),actionArea,15,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;
 					drawMenu = false;

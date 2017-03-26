@@ -23,6 +23,7 @@ namespace imagine {
 			virtual ~policeStation();
 
 			int getCost() { return cost; }
+			int getCrimeFightingAbility() { return crimeFightingAbility; }
 
 			void spawn()override;
 			void whenClicked()override;
@@ -32,6 +33,7 @@ namespace imagine {
 		protected:
 			bool spawned = false;
 			int cost;
+			int crimeFightingAbility;
 			imagine::sim::player *player;
 			imagine::clickableSprite policeSprite;
 		};

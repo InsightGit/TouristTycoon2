@@ -25,13 +25,22 @@ imagine::sim::TouristSpawner::~TouristSpawner() {
 void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSpawned, const signed int numberOfAdvertisementsSpawned) {
 	if(numberOfAttractionsSpawned!=pastNumberOfAttractionsSpawned){ //possible SIGSEV?
 		basePopularity=0;
-		for(int i = 0; i < numberOfAttractionsSpawned; i++){
+		for(int i = 0; i < numberOfAttractionsSpawned; ++i){
 			if(i==0){
 				basePopularity=allAttractions->at(i).getPopularity();
 			}else if(basePopularity < allAttractions->at(i).getPopularity()){
 				basePopularity=allAttractions->at(i).getPopularity();
 			}
 			//basePopularity+=allAttractions->at(i).getPopularity();
+		}
+		for(int i = 0; i < numberOfAttractionsSpawned; ++i){
+			crime+=allAttractions->at(i).getCrimeAttention();
+		}
+		for(int i = 0; i < player->numberOfPoliceStationsSpawned > i;++i){
+			crimeFighting+=player->policeStationsCreated[i].getCrimeFightingAbility();
+		}
+		if(crimeFighting-crime < 0){
+			basePopularity-=(crimeFighting-crime);
 		}
 		pastNumberOfAttractionsSpawned=numberOfAttractionsSpawned;
 	}
