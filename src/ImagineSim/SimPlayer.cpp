@@ -57,7 +57,7 @@ imagine::sim::types::levelProgress::levelProgress(const int finishValue, const i
 
 imagine::sim::player::player(sf::Font *fontToUse){
     //For now
-    money=10000;
+    money=15000;
     defaultFont=*fontToUse;
 	playerDate = new imagine::sim::types::date();
 	time = new imagine::sim::GameTime(this);
@@ -211,6 +211,7 @@ void imagine::sim::player::update(){
 			levelUp=false;
 		}
 	}
+	publicTransport.update();
 }
 
 void imagine::sim::player::display(sf::RenderWindow *window){

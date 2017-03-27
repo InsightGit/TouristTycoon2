@@ -22,6 +22,7 @@
 #include "Restaurant.hpp"
 #include "TownHall.hpp"
 #include "policeStation.hpp"
+#include "PublicTransportManager.hpp"
 
 namespace imagine{
 	namespace sim{
@@ -70,6 +71,7 @@ namespace imagine{
 			imagine::sim::types::levelProgress levelProgress;
 			imagine::sim::TouristSpawner *touristSpawner;
 			imagine::sim::TownHall *townHall;
+			imagine::sim::PublicTransportManager publicTransport;
 			bool townHallSpawned = false;
 			signed int activeTourists = 0;
 			signed int tourists = 0;

@@ -20,6 +20,7 @@ imagine::sim::sidebar::~sidebar()
 	delete simSaveGame;
 	delete sceneBuildMenu;
 	delete sceneAdvertMenu;
+	delete sceneDeleteBuilding;
 }
 
 void imagine::sim::sidebar::spawn(){
@@ -40,6 +41,8 @@ void imagine::sim::sidebar::spawn(){
     advertIconTexture.loadFromImage(advertIconImage);
     advertIconSprite.sprite.setTexture(advertIconTexture);
     advertIconSprite.sprite.setPosition(sf::Vector2f(50,250));
+
+    sceneDeleteBuilding = new imagine::sim::DeleteBuilding(player);
 }
 
 void imagine::sim::sidebar::whenClicked(imagine::sim::types::sidebarButton buttonPressed){
@@ -69,6 +72,9 @@ void imagine::sim::sidebar::whenClicked(imagine::sim::types::sidebarButton butto
     	sceneAdvertMenu = new imagine::sim::advertMenu(player,&defaultFont);
     	sceneAdvertMenu->spawn();
     	sceneAdvertMenuInit = true;
+    }else if(buttonPressed==imagine::sim::types::destroyButton){
+    	std::cout << "Destroy button clicked\n";
+    	sceneDeleteBuilding->whenClicked();
     }
 }
 
@@ -79,6 +85,8 @@ void imagine::sim::sidebar::update(sf::RenderWindow *window){
         whenClicked(imagine::sim::types::buildButton);
     }else if(advertIconSprite.isClicked(window)){
     	whenClicked(imagine::sim::types::advertButton);
+    }else if(sceneDeleteBuilding->button.isClicked(window)){
+    	whenClicked(imagine::sim::types::destroyButton);
     }
 }
 
@@ -89,6 +97,7 @@ bool imagine::sim::sidebar::display(sf::RenderWindow *window){
     if(player->levelProgress.currentLevel >= 1){
     	window->draw(advertIconSprite.sprite);
     }
+    sceneDeleteBuilding->draw(window);
     if(sceneBuildMenuInit){
     	sceneBuildMenu->draw(window);
     }

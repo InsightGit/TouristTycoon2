@@ -98,6 +98,16 @@ void imagine::sim::attraction::spawn(){
 		activityLevel = 9;
 		crimeAttention = 10;
 		attractionImage.create(casinoImageFile.width,casinoImageFile.height,casinoImageFile.pixel_data);
+	}else if(id==17){ //we skip id #16 because it is a cruise terminal
+		name = "Central Park";
+		cost = 7500;
+		baseMaintainceCost=1500;
+		costForTourists=375;
+		popularity = 75;
+		maxOccupancy = 600;
+		activityLevel = 27;
+		//crimeAttention = 10;
+		attractionImage.create(centralParkImageFile.width,centralParkImageFile.height,centralParkImageFile.pixel_data);
 	}else{
 		name = "Unknown";
 	}

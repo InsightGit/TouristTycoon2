@@ -7,6 +7,7 @@
 #include "SimSaveGame.hpp"
 #include "Resources/advertIcon.h"
 #include "AdvertMenu.hpp"
+#include "DeleteBuilding.hpp"
 
 namespace imagine{
     namespace sim{
@@ -15,7 +16,8 @@ namespace imagine{
                 none,
                 saveButton,
                 buildButton,
-				advertButton
+				advertButton,
+				destroyButton
             };
         }
         class sidebar
@@ -46,6 +48,7 @@ namespace imagine{
             imagine::sim::player *player;
     		imagine::sim::buildMenu *sceneBuildMenu;
     		imagine::sim::advertMenu *sceneAdvertMenu;
+            imagine::sim::DeleteBuilding *sceneDeleteBuilding;
     		imagine::sim::actionArea *actionArea;
     		imagine::sim::simSaveGame *simSaveGame;
     		bool sceneBuildMenuInit = false;

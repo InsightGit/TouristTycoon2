@@ -129,12 +129,12 @@ void imagine::sim::TownHall::draw(sf::RenderWindow *window){
 			window->draw(cityManagmentMenu->menuBox);
 			window->draw(cityManagmentMenu->title);
 			for(int i = 0;cityPoliciesCount > i;++i){
-				if(cityPolicies[i].getMinimumlevel() >= player->levelProgress.currentLevel){
+				if(cityPolicies[i].getMinimumlevel() <= player->levelProgress.currentLevel && cityPolicies[i].getConditions() == imagine::sim::types::noConditions){
 					cityPoliciesSwitches[i].draw(window);
 					window->draw(cityPolicyDescriptions[i]);
-				}
-				if(cityPolicies[i].getConditions() == imagine::sim::types::buildPolice){
-					if(player->numberOfPoliceStationsSpawned >= 0){
+				}else if(cityPolicies[i].getMinimumlevel() <= player->levelProgress.currentLevel && cityPolicies[i].getConditions() == imagine::sim::types::buildPolice){
+					std::cout << player->numberOfPoliceStationsSpawned << "\n";
+					if(player->numberOfPoliceStationsSpawned > 0){
 						cityPoliciesSwitches[i].draw(window);
 						window->draw(cityPolicyDescriptions[i]);
 					}

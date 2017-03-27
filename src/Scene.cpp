@@ -67,6 +67,9 @@ void imagine::scene::update(sf::RenderWindow *window){
     	if(playerInScene->townHallSpawned){
         	playerInScene->townHall->subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
+    	if(playerInScene->publicTransport.cruiseTerminalSpawned){
+    		playerInScene->publicTransport.currentCruiseTerminal.subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
+    	}
     }
 }
 
@@ -91,6 +94,9 @@ void imagine::scene::draw(sf::RenderWindow *window){
     	}
     	if(playerInScene->townHallSpawned){
     		playerInScene->townHall->draw(window);
+    	}
+    	if(playerInScene->publicTransport.cruiseTerminalSpawned){
+    		playerInScene->publicTransport.currentCruiseTerminal.draw(window);
     	}
     	window->setView(window->getDefaultView());
         sceneHUD->display(window);

@@ -242,7 +242,7 @@ void imagine::sim::buildMenu::spawn(){
 		imagine::sim::menuItem teppanyaki = imagine::sim::menuItem(&defaultFont,4);
 		teppanyaki.optionalImage = new sf::Image();
 		teppanyaki.optionalTexture = new sf::Texture();
-		teppanyaki.optionalImage->create(teppanyakiRestaurantImageFile.width,teppanyakiRestaurantImageFile.height,teppanyakiRestaurantImageFile.pixel_data);
+		teppanyaki.optionalImage->create(teppanyakiRestaurantIconImageFile.width,teppanyakiRestaurantIconImageFile.height,teppanyakiRestaurantIconImageFile.pixel_data);
 		teppanyaki.optionalTexture->loadFromImage(*teppanyaki.optionalImage);
 		teppanyaki.sprite.setTexture(*teppanyaki.optionalTexture);
 		teppanyaki.sprite.setScale(0.85,0.85);
@@ -328,6 +328,42 @@ void imagine::sim::buildMenu::spawn(){
 		casino.itemName.setCharacterSize(7);
 		attractionButtons.push_back(casino);
 		attractionButtonSize++;
+
+		imagine::sim::menuItem cruiseTerminal = imagine::sim::menuItem(&defaultFont,5);
+		cruiseTerminal.optionalImage = new sf::Image();
+		cruiseTerminal.optionalTexture = new sf::Texture();
+		cruiseTerminal.optionalImage->create(portIconImageFile.width,portIconImageFile.height,portIconImageFile.pixel_data);
+		cruiseTerminal.optionalTexture->loadFromImage(*cruiseTerminal.optionalImage);
+		cruiseTerminal.sprite.setTexture(*cruiseTerminal.optionalTexture);
+		cruiseTerminal.sprite.setScale(0.85,0.85);
+		cruiseTerminal.position = sf::Vector2f(policeStation.position.x+70,policeStation.position.y);
+		cruiseTerminal.sprite.setPosition(cruiseTerminal.position);
+		cruiseTerminal.category = "Services";
+		cruiseTerminal.itemName.setString("Cruise Terminal");
+		cruiseTerminal.itemName.setFillColor(sf::Color::Black);
+		cruiseTerminal.itemName.setPosition(sf::Vector2f(cruiseTerminal.position.x,cruiseTerminal.position.y+54.4));
+		cruiseTerminal.itemName.setFont(defaultFont);
+		cruiseTerminal.itemName.setCharacterSize(7);
+		serviceButtons.push_back(cruiseTerminal);
+		serviceButtonSize++;
+
+		imagine::sim::menuItem centralPark = imagine::sim::menuItem(&defaultFont,5);
+		centralPark.optionalImage = new sf::Image();
+		centralPark.optionalTexture = new sf::Texture();
+		centralPark.optionalImage->create(centralParkIconImageFile.width,centralParkIconImageFile.height,centralParkIconImageFile.pixel_data);
+		centralPark.optionalTexture->loadFromImage(*centralPark.optionalImage);
+		centralPark.sprite.setTexture(*centralPark.optionalTexture);
+		centralPark.sprite.setScale(0.85,0.85);
+		centralPark.position = sf::Vector2f(empireStateBuilding.position.x,empireStateBuilding.position.y+100);
+		centralPark.sprite.setPosition(centralPark.position);
+		centralPark.category = "Attractions";
+		centralPark.itemName.setString("Central Park");
+		centralPark.itemName.setFillColor(sf::Color::Black);
+		centralPark.itemName.setPosition(sf::Vector2f(centralPark.position.x,centralPark.position.y+54.4));
+		centralPark.itemName.setFont(defaultFont);
+		centralPark.itemName.setCharacterSize(7);
+		attractionButtons.push_back(centralPark);
+		attractionButtonSize++;
 	}
 	activeCategory="attractions";
 	drawMenu=true;
@@ -409,6 +445,16 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(serviceButtons[i].itemName.getString() == "Police Station"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*serviceButtons[i].optionalImage,6500,sf::Vector2i(2,1),actionArea,14,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+				}else if(serviceButtons[i].itemName.getString() == "Cruise Terminal"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*serviceButtons[i].optionalImage,12000,sf::Vector2i(4,2),actionArea,16,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
 					prompterCreated = true;
 					drawMenu = false;
@@ -533,6 +579,17 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 						limitPrompterClicks.restart();
 					}
 					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Central Park"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,7500,sf::Vector2i(2,2),actionArea,17,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -645,7 +702,10 @@ void imagine::sim::buildMenu::draw(sf::RenderWindow *window){
 					if(i==1 && !player->townHallSpawned){
 						window->draw(serviceButtons[i].sprite);
 						window->draw(serviceButtons[i].itemName);
-					}else{
+					}else if(i==3 && !player->publicTransport.cruiseTerminalSpawned){
+						window->draw(serviceButtons[i].sprite);
+						window->draw(serviceButtons[i].itemName);
+					}else if(i!=3 && i!=1){
 						window->draw(serviceButtons[i].sprite);
 						window->draw(serviceButtons[i].itemName);
 					}

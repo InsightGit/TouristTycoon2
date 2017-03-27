@@ -395,7 +395,34 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 						cannotBuild=true;
 					}
 				}
-			}//else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+			}else if(tileId==16){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::CruiseTerminal cruiseTerminal = imagine::sim::CruiseTerminal(player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(cruiseTerminal.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==17){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::attraction attraction = imagine::sim::attraction(17,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}
+			//else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
 				//limitClickTimerNotSet=true;
 			//}
 		}

@@ -14,6 +14,7 @@
 #include "Resources/amusementpark.h"
 #include "Resources/bigBen.h"
 #include "Resources/casino.h"
+#include "Resources/centralpark.h"
 
 
 namespace imagine{

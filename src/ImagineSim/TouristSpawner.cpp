@@ -43,6 +43,9 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 			basePopularity-=(crimeFighting-crime);
 		}
 		pastNumberOfAttractionsSpawned=numberOfAttractionsSpawned;
+		if(player->publicTransport.cruiseTerminalSpawned){
+			basePopularity=basePopularity*player->publicTransport.currentCruiseTerminal.getPopularityBoost();
+		}
 	}
 
 	if(player->time->getSimTime().getHour() >= 5 && player->time->getSimTime().getHour() <= 17){
