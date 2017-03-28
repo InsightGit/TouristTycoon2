@@ -47,6 +47,7 @@ namespace imagine {
 			imagine::sim::types::foodQuality getQuality() { return quality; }
 			signed int getCurrentOccupancy() { return currentOccupancy; }
 			int getCost() { return cost; }
+			int getId() { return restaurantId; }
 			bool getVacancy() { return vacancy; }
 
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
@@ -62,6 +63,7 @@ namespace imagine {
 			signed int currentOccupancy = 0;
 			signed int cost;
 			signed int buildingCost;
+			signed int restaurantId;
 			bool alive = false;
 			bool vacancy = true;
 

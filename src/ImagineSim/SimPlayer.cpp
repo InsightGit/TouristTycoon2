@@ -267,12 +267,57 @@ Json::Value imagine::sim::player::getReadySaveData(){
 		playerData["player"]["buildings"]["roads"][i]["xPos"] = roadsCreated[i].tileSprite.getPosition().x;
 		playerData["player"]["buildings"]["roads"][i]["yPos"] = roadsCreated[i].tileSprite.getPosition().y;
 	}
-	//TODO: Implement attraction saving with similar looking code to roadSpawning
+	for(int i = 0; i < numberOfAttractionsSpawned;++i){
+		playerData["player"]["buildings"]["attractions"][i]["id"] = attractionsCreated[i].getId();
+		playerData["player"]["buildings"]["attractions"][i]["xPos"] = attractionsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["attractions"][i]["yPos"] = attractionsCreated[i].tileSprite.getPosition().y;
+	}
+	for(int i = 0; i < numberOfHotelsSpawned; ++i){
+		playerData["player"]["buildings"]["hotels"][i]["id"] = hotelsCreated[i].getId();
+		playerData["player"]["buildings"]["hotels"][i]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["hotels"][i]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
+	}
+	/*for(int i = 0; i < numberOfAdvertisementsSpawned; ++i){
+		playerData["player"]["buildings"]["hotels"][i]["id"] = hotelsCreated[i].getId();
+		playerData["player"]["buildings"]["hotels"][i]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["hotels"][i]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
+	}*/
+	for(int i = 0; i < numberOfRestaurantsSpawned; ++i){
+		playerData["player"]["buildings"]["restaurants"][i]["id"] = restaurantsCreated[i].getId();
+		playerData["player"]["buildings"]["restaurants"][i]["xPos"] = restaurantsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["restaurants"][i]["yPos"] = restaurantsCreated[i].tileSprite.getPosition().y;
+	}
+	for(int i = 0; i < numberOfPoliceStationsSpawned; ++i){
+		playerData["player"]["buildings"]["policeStations"][i]["id"] = policeStationsCreated[i].getId();
+		playerData["player"]["buildings"]["policeStations"][i]["xPos"] = policeStationsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["policeStations"][i]["yPos"] = policeStationsCreated[i].tileSprite.getPosition().y;
+	}
+	if(townHallSpawned){
+		playerData["player"]["buildings"]["townHall"]["xPos"] = townHall->cityServiceSprite.sprite.getPosition().x;
+		playerData["player"]["buildings"]["townHall"]["yPos"] = townHall->cityServiceSprite.sprite.getPosition().y;
+		for(int i = 0;townHall->cityPolicies.size() > i;++i){
+			playerData["player"]["buildings"]["townHall"]["policies"][i]["id"] = townHall->cityPolicies[i].getId();
+			playerData["player"]["buildings"]["townHall"]["policies"][i]["state"] = townHall->cityPolicies[i].active;
+			playerData["player"]["buildings"]["townHall"]["policies"][i]["minLevel"] = townHall->cityPolicies[i].getMinimumlevel();
+			if(townHall->cityPolicies[i].getConditions()==imagine::sim::types::noConditions){
+				playerData["player"]["buildings"]["townHall"]["policies"][i]["conditions"] = "None";
+			}else if(townHall->cityPolicies[i].getConditions()==imagine::sim::types::buildPolice){
+				playerData["player"]["buildings"]["townHall"]["policies"][i]["conditions"] = "buildPolice";
+			}
+		}
+	}
+	if(publicTransport.cruiseTerminalSpawned){
+		playerData["player"]["buildings"]["cruiseTerminal"]["xPos"] = publicTransport.currentCruiseTerminal.transportSprite.sprite.getPosition().x;
+		playerData["player"]["buildings"]["cruiseTerminal"]["yPos"] = publicTransport.currentCruiseTerminal.transportSprite.sprite.getPosition().y;
+	}
 	playerData["player"]["money"] = money;
 
 	playerData["player"]["date"]["day"] = playerDate->getDay();
 	playerData["player"]["date"]["month"] = playerDate->getMonth();
 	playerData["player"]["date"]["year"] = playerDate->getYear();
+
+	playerData["player"]["time"]["hour"] = time->getSimTime().getHour();
+	playerData["player"]["time"]["minute"] = time->getSimTime().getMinute();
 
 	playerData["player"]["activeTourists"] = activeTourists;
 

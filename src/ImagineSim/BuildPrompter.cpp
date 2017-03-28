@@ -59,22 +59,22 @@ void imagine::sim::buildPrompter::spawn(sf::RenderWindow *window, std::vector<im
 
 		bool collides = false;
 		for(int i = 0; i < attractions->size();i++){
-			if(attractions->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+			if(attractions->at(i).tileSprite.getGlobalBounds().intersects(buildArea.getGlobalBounds())){
 				collides=true;
 			}
 		}
 		for(int i = 0; i < roads->size();i++){
-			if(roads->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+			if(roads->at(i).tileSprite.getGlobalBounds().intersects(buildArea.getGlobalBounds())){
 				collides=true;
 			}
 		}
 		for(int i = 0; i < hotels->size();i++){
-			if(hotels->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+			if(hotels->at(i).tileSprite.getGlobalBounds().intersects(buildArea.getGlobalBounds())){
 				collides=true;
 			}
 		}
 		for(int i = 0; i < restaurants->size();i++){
-			if(restaurants->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+			if(restaurants->at(i).tileSprite.getGlobalBounds().intersects(buildArea.getGlobalBounds())){
 				collides=true;
 			}
 		}
@@ -411,6 +411,32 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 			}else if(tileId==17){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
 					imagine::sim::attraction attraction = imagine::sim::attraction(17,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==18){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::attraction attraction = imagine::sim::attraction(18,player,mousePosition);
+					limitClicks.restart();
+					limitClickTimerNotSet = false;
+					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
+						done=true;
+					}else{
+						cannotBuild=true;
+					}
+				}else if(!limitClickTimerNotSet && limitClicks.getElapsedTime().asSeconds() >= 0.5){
+					limitClickTimerNotSet=true;
+				}
+			}else if(tileId==19){
+				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
+					imagine::sim::attraction attraction = imagine::sim::attraction(19,player,mousePosition);
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){

@@ -48,6 +48,7 @@ imagine::sim::Restaurant::Restaurant(const int id,imagine::sim::player *mainPlay
 		maxOccupancy=45;
 		tileImage.create(teppanyakiRestaurantImageFile.width,teppanyakiRestaurantImageFile.height,teppanyakiRestaurantImageFile.pixel_data);
 	}
+	restaurantId=id;
 	player=mainPlayer;
 	tileSprite.setPosition(position);
 }

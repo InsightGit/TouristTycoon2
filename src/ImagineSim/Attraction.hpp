@@ -15,6 +15,8 @@
 #include "Resources/bigBen.h"
 #include "Resources/casino.h"
 #include "Resources/centralpark.h"
+#include "Resources/movieSet.h"
+#include "Resources/spaceNeedle.h"
 
 
 namespace imagine{

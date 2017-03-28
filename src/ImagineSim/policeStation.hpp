@@ -17,13 +17,12 @@ namespace imagine {
 		class player;
 		class policeStation: public CityService {
 		public:
-			int id;
-
 			policeStation(const int idToUse,imagine::sim::player *mainPlayer,const sf::Vector2f position);
 			virtual ~policeStation();
 
 			int getCost() { return cost; }
 			int getCrimeFightingAbility() { return crimeFightingAbility; }
+			int getId() { return id; }
 
 			void spawn()override;
 			void whenClicked()override;
@@ -34,6 +33,7 @@ namespace imagine {
 			bool spawned = false;
 			int cost;
 			int crimeFightingAbility;
+			int id;
 			imagine::sim::player *player;
 			imagine::clickableSprite policeSprite;
 		};

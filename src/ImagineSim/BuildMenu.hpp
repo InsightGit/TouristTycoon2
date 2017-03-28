@@ -29,6 +29,8 @@
 #include "Resources/casinoIcon.h"
 #include "Resources/portIcon.h"
 #include "Resources/centralparkIcon.h"
+#include "Resources/movieSetIcon.h"
+#include "Resources/spaceNeedleIcon.h"
 
 namespace imagine {
     namespace sim{

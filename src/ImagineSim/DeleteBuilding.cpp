@@ -92,18 +92,35 @@ void imagine::sim::DeleteBuilding::update(sf::RenderWindow *window){
 			switch(placement.x){
 				case 1:
 					/*auto it = std::find(player->attractionsCreated.begin(), player->attractionsCreated.end(), player->attractionsCreated[placement.y]);
-					player->attractionsCreated.erase(it);
-					active=false;*/
+					player->attractionsCreated.erase(it);*/
+					player->attractionsCreated.erase(player->attractionsCreated.begin()+placement.y);
+					player->numberOfAttractionsSpawned--;
+					active=false;
 					break;
 				case 2:
+					player->hotelsCreated.erase(player->hotelsCreated.begin()+placement.y);
+					player->numberOfHotelsSpawned--;
+					active=false;
 					break;
 				case 3:
+					player->policeStationsCreated.erase(player->policeStationsCreated.begin()+placement.y);
+					player->numberOfPoliceStationsSpawned--;
+					active=false;
 					break;
 				case 4:
+					player->restaurantsCreated.erase(player->restaurantsCreated.begin()+placement.y);
+					player->numberOfRestaurantsSpawned--;
+					active=false;
 					break;
 				case 5:
+					delete player->townHall;
+					player->townHallSpawned=false;
+					active=false;
 					break;
 				case 6:
+					player->publicTransport.currentCruiseTerminal = imagine::sim::CruiseTerminal();
+					player->publicTransport.cruiseTerminalSpawned=false;
+					active=false;
 					break;
 			}
 		}

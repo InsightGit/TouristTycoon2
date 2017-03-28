@@ -22,7 +22,6 @@ imagine::sim::policeStation::policeStation(const int idToUse,imagine::sim::playe
 		//std::cout << "cost set\n";
 		policeSprite.optionalImage->create(policeStationImageFile.width,policeStationImageFile.height,policeStationImageFile.pixel_data);
 	}
-
 	policeSprite.sprite.setPosition(position);
 }
 

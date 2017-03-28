@@ -106,8 +106,23 @@ void imagine::sim::attraction::spawn(){
 		popularity = 75;
 		maxOccupancy = 600;
 		activityLevel = 27;
-		//crimeAttention = 10;
 		attractionImage.create(centralParkImageFile.width,centralParkImageFile.height,centralParkImageFile.pixel_data);
+	}else if(id==18){
+		name = "Movie Set";
+		cost = 8000;
+		baseMaintainceCost=700;
+		popularity = 25;
+		maxOccupancy = 50;
+		activityLevel = 15;
+		attractionImage.create(movieSetImageFile.width,movieSetImageFile.height,movieSetImageFile.pixel_data);
+	}else if(id==19){
+		name = "Space Needle";
+		cost = 4000;
+		baseMaintainceCost=750;
+		popularity = 20;
+		maxOccupancy = 100;
+		activityLevel = 9;
+		attractionImage.create(spaceNeedleImageFile.width,spaceNeedleImageFile.height,spaceNeedleImageFile.pixel_data);
 	}else{
 		name = "Unknown";
 	}

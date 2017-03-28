@@ -88,6 +88,42 @@ void imagine::sim::buildMenu::spawn(){
 		serviceButtons.push_back(simpleHotel);
 		serviceButtonSize++;
 
+		imagine::sim::menuItem movieSet = imagine::sim::menuItem(&defaultFont,1);
+		movieSet.optionalImage = new sf::Image;
+		movieSet.optionalTexture = new sf::Texture;
+		movieSet.optionalImage->create(movieSetIconImageFile.width,movieSetIconImageFile.height,movieSetIconImageFile.pixel_data);
+		movieSet.optionalTexture->loadFromImage(*movieSet.optionalImage);
+		movieSet.sprite.setTexture(*movieSet.optionalTexture);
+		movieSet.sprite.setScale(0.85,0.85);
+		movieSet.position = sf::Vector2f(664,384);
+		movieSet.sprite.setPosition(movieSet.position);
+		movieSet.category = "Attractions";
+		movieSet.itemName.setString("Movie Set");
+		movieSet.itemName.setFillColor(sf::Color::Black);
+		movieSet.itemName.setPosition(sf::Vector2f(movieSet.position.x,movieSet.position.y+54.4));
+		movieSet.itemName.setFont(defaultFont);
+		movieSet.itemName.setCharacterSize(7);
+		attractionButtons.push_back(movieSet);
+		attractionButtonSize++;
+
+		imagine::sim::menuItem spaceNeedle = imagine::sim::menuItem(&defaultFont,1);
+		spaceNeedle.optionalImage = new sf::Image;
+		spaceNeedle.optionalTexture = new sf::Texture;
+		spaceNeedle.optionalImage->create(spaceNeedleIconImageFile.width,spaceNeedleIconImageFile.height,spaceNeedleIconImageFile.pixel_data);
+		spaceNeedle.optionalTexture->loadFromImage(*spaceNeedle.optionalImage);
+		spaceNeedle.sprite.setTexture(*spaceNeedle.optionalTexture);
+		spaceNeedle.sprite.setScale(0.85,0.85);
+		spaceNeedle.position = sf::Vector2f(movieSet.position.x+70,movieSet.position.y);
+		spaceNeedle.sprite.setPosition(spaceNeedle.position);
+		spaceNeedle.category = "Attractions";
+		spaceNeedle.itemName.setString("Space Needle");
+		spaceNeedle.itemName.setFillColor(sf::Color::Black);
+		spaceNeedle.itemName.setPosition(sf::Vector2f(spaceNeedle.position.x,spaceNeedle.position.y+54.4));
+		spaceNeedle.itemName.setFont(defaultFont);
+		spaceNeedle.itemName.setCharacterSize(7);
+		attractionButtons.push_back(spaceNeedle);
+		attractionButtonSize++;
+
 		//level 2 stuff
 		imagine::sim::menuItem tokyoTower = imagine::sim::menuItem(&defaultFont,2);
 		tokyoTower.optionalImage = new sf::Image;
@@ -502,6 +538,28 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					}
 					helpBar->switchMessage("Press Escape to Cancel");
 
+				}else if(attractionButtons[i].itemName.getString() == "Movie Set"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,8000,sf::Vector2i(2,2),actionArea,18,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
+				}else if(attractionButtons[i].itemName.getString() == "Space Needle"){
+					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,4000,sf::Vector2i(1,2),actionArea,19,&defaultFont);
+					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
+					prompterCreated = true;
+					drawMenu = false;
+					//drawPrompter = true;
+					//inPrompter = new imagine::types::arrayLocation("roadButtons",0);
+					if(prompterTimerNotYetSet){
+						limitPrompterClicks.restart();
+					}
+					helpBar->switchMessage("Press Escape to Cancel");
 				}else if(attractionButtons[i].itemName.getString() == "Tokyo Tower"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,5000,sf::Vector2i(1,2),actionArea,3,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);

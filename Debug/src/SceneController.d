@@ -19,6 +19,8 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/bigBen.h \
  ../src/ImagineSim/Resources/casino.h \
  ../src/ImagineSim/Resources/centralpark.h \
+ ../src/ImagineSim/Resources/movieSet.h \
+ ../src/ImagineSim/Resources/spaceNeedle.h \
  ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
@@ -60,6 +62,8 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/casinoIcon.h \
  ../src/ImagineSim/Resources/portIcon.h \
  ../src/ImagineSim/Resources/centralparkIcon.h \
+ ../src/ImagineSim/Resources/movieSetIcon.h \
+ ../src/ImagineSim/Resources/spaceNeedleIcon.h \
  ../src/ImagineSim/SimSaveGame.hpp \
  ../src/ImagineSim/../ImagineSaveGame.hpp \
  ../src/ImagineSim/../ImagineCore.hpp \
@@ -135,6 +139,10 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/casino.h:
 
 ../src/ImagineSim/Resources/centralpark.h:
+
+../src/ImagineSim/Resources/movieSet.h:
+
+../src/ImagineSim/Resources/spaceNeedle.h:
 
 ../src/ImagineSim/Resources/personNew.h:
 
@@ -237,6 +245,10 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/portIcon.h:
 
 ../src/ImagineSim/Resources/centralparkIcon.h:
+
+../src/ImagineSim/Resources/movieSetIcon.h:
+
+../src/ImagineSim/Resources/spaceNeedleIcon.h:
 
 ../src/ImagineSim/SimSaveGame.hpp:
 
