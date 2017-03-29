@@ -19,19 +19,30 @@ imagine::sim::TownHall::TownHall(imagine::sim::player *mainPlayer, const sf::Vec
 	maintainceCostSet=true;
 }
 
-imagine::sim::TownHall::~TownHall() {
-	// TODO Auto-generated destructor stub
-	delete cityServiceSprite.optionalImage;
-	delete cityServiceSprite.optionalTexture;
-	delete cityManagmentMenu;
-}
-
 void imagine::sim::TownHall::spawn(){
 	cityServiceSprite.optionalImage = new sf::Image();
 	cityServiceSprite.optionalTexture = new sf::Texture();
 	cityServiceSprite.optionalImage->create(townHallImageFile.width,townHallImageFile.height,townHallImageFile.pixel_data);
 	cityServiceSprite.optionalTexture->loadFromImage(*cityServiceSprite.optionalImage);
 	cityServiceSprite.sprite.setTexture(*cityServiceSprite.optionalTexture);
+}
+
+imagine::sim::TownHall::TownHall(imagine::sim::player *mainPlayer, const sf::Vector2f position, const sf::Font *fontToUse, const std::vector<imagine::sim::CityPolicy> *cityPoliciesToUse){
+	player=mainPlayer;
+	cityServiceSprite.sprite.setPosition(position);
+	defaultFont=*fontToUse;
+	maintainceCost=200;
+	maintainceCostSet=true;
+	cityPolicies=*cityPoliciesToUse;
+	spawn();
+	created=true;
+}
+
+imagine::sim::TownHall::~TownHall() {
+	// TODO Auto-generated destructor stub
+	delete cityServiceSprite.optionalImage;
+	delete cityServiceSprite.optionalTexture;
+	delete cityManagmentMenu;
 }
 
 bool imagine::sim::TownHall::create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse){

@@ -33,6 +33,7 @@ namespace imagine {
 				bool drawManagmentMenu = false;
 
 				TownHall(imagine::sim::player *mainPlayer, const sf::Vector2f position, const sf::Font *fontToUse);
+				TownHall(imagine::sim::player *mainPlayer, const sf::Vector2f position, const sf::Font *fontToUse, const std::vector<imagine::sim::CityPolicy> *cityPoliciesToUse);
 				virtual ~TownHall();
 
 				int getCost(){ return cost; }

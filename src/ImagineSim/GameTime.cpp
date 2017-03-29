@@ -36,12 +36,15 @@ void imagine::sim::types::SimTime::setMinute(const signed int minuteToUse){
 imagine::sim::GameTime::GameTime(imagine::sim::player *mainPlayer) {
 	// TODO Auto-generated constructor stub
 	player = mainPlayer;
-	simTime = new imagine::sim::types::SimTime(0,0);
+}
+
+imagine::sim::GameTime::GameTime(imagine::sim::player *mainPlayer, imagine::sim::types::SimTime time){
+	player = mainPlayer;
+	simTime = time;
 }
 
 imagine::sim::GameTime::~GameTime() {
 	// TODO Auto-generated destructor stub
-	delete simTime;
 }
 
 void imagine::sim::GameTime::update(){
@@ -62,8 +65,8 @@ void imagine::sim::GameTime::update(){
 		dayTime.restart();
 	}
 	if(dayTime.getElapsedTime().asSeconds() >= 3){
-		simTime->setHour(int(dayTime.getElapsedTime().asSeconds()/3));
+		simTime.setHour(int(dayTime.getElapsedTime().asSeconds()/3));
 	}else{
-		simTime->setMinute(int(dayTime.getElapsedTime().asSeconds()*20));
+		simTime.setMinute(int(dayTime.getElapsedTime().asSeconds()*20));
 	}
 }

@@ -10,6 +10,8 @@
 #include <SFML/System.hpp>
 #include <jsoncpp/json/value.h>
 #include <jsoncpp/json/reader.h>
+#include <rapidjson/document.h>
+
 
 //#include "Advertisement.hpp"
 //#include <string>
@@ -75,12 +77,12 @@ namespace imagine{
 			bool townHallSpawned = false;
 			signed int activeTourists = 0;
 			signed int tourists = 0;
-			signed int numberOfRoadsSpawned = 0;
-			signed int numberOfAttractionsSpawned = 0;
-			signed int numberOfAdvertisementsSpawned = 0;
-			signed int numberOfHotelsSpawned = 0;
-			signed int numberOfRestaurantsSpawned = 0;
-			signed int numberOfPoliceStationsSpawned = 0;
+			unsigned int numberOfRoadsSpawned = 0;
+			unsigned int numberOfAttractionsSpawned = 0;
+			unsigned int numberOfAdvertisementsSpawned = 0;
+			unsigned int numberOfHotelsSpawned = 0;
+			unsigned int numberOfRestaurantsSpawned = 0;
+			unsigned int numberOfPoliceStationsSpawned = 0;
 			signed int touristExtraHappiness = 0;
 			sf::Font defaultFont;
 

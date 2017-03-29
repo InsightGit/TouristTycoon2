@@ -37,13 +37,14 @@ namespace imagine {
 		class GameTime {
 		public:
 			GameTime(imagine::sim::player *mainPlayer);
+			GameTime(imagine::sim::player *mainPlayer, imagine::sim::types::SimTime time);
 			virtual ~GameTime();
 
-			imagine::sim::types::SimTime getSimTime() { return *simTime; }
+			imagine::sim::types::SimTime getSimTime() { return simTime; }
 			void update();
 		protected:
 			imagine::sim::player *player;
-			imagine::sim::types::SimTime *simTime;
+			imagine::sim::types::SimTime simTime = imagine::sim::types::SimTime(0,0);
 			sf::Clock dayTime;
 		};
 

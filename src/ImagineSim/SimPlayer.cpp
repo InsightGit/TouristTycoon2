@@ -225,84 +225,156 @@ bool imagine::sim::player::loadData(){
 	std::ifstream saveFile(imagine::sim::player::getApplicationDataDir()+"touristtycoon/saveFile.json");
 	std::stringstream buffer;
 	buffer << saveFile.rdbuf();
-	std::cout << JSONReader.parse(buffer.str(),playerData) << "\n";
-	numberOfRoadsSpawned = playerData["player"]["buildings"]["number"].asInt();
-	for(int i = 0; i < numberOfRoadsSpawned;++i){
+	//std::cout << JSONReader.parse(buffer.str(),playerData) << "\n";
+	char *jsonAsCString = new char[buffer.str().length()+1];
+	std::strcpy(jsonAsCString,buffer.str().c_str());
+	std::cout << jsonAsCString << "\n";
+	rapidjson::Document saveFileJSON;
+	saveFileJSON.Parse(jsonAsCString);
+	numberOfRoadsSpawned = saveFileJSON[0]["player"]["buildings"]["roads"]["number"].GetInt();
+	numberOfAttractionsSpawned = saveFileJSON[0]["player"]["buildings"]["attractions"]["number"].GetInt();
+	numberOfHotelsSpawned = saveFileJSON[0]["player"]["buildings"]["hotels"]["number"].GetInt();
+	numberOfRestaurantsSpawned = saveFileJSON[0]["player"]["buildings"]["restaurants"]["number"].GetInt();
+	numberOfPoliceStationsSpawned = saveFileJSON[0]["player"]["buildings"]["policeStations"]["number"].GetInt();
+	townHallSpawned = saveFileJSON[0]["player"]["buildings"]["townHallSpawned"].GetBool();
+	std::cout << townHallSpawned << "=TownHallSpawned\n";
+	publicTransport.cruiseTerminalSpawned = saveFileJSON[0]["player"]["buildings"]["cruiseTerminalSpawned"].GetBool();
+	int policyCount;
+	if(townHallSpawned){
+		policyCount = saveFileJSON[0]["player"]["buildings"]["townHall"]["policyNumber"].GetInt();
+	}
+	for(unsigned int i = 0; i < numberOfRoadsSpawned;++i){
 		imagine::sim::types::roadDirection direction;
 		sf::Vector2f position;
-		if(playerData["player"]["buildings"]["roads"][i]["direction"].asString() == "straight"){
+		if(saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["direction"].GetString() == "straight"){
 			direction=imagine::sim::types::straight;
 		}
-		position.x = playerData["player"]["buildings"]["roads"][i]["xPos"].asInt();
-		position.y = Json::Value(playerData["player"]["buildings"]["roads"][i]["yPos"]).asInt();
+		position.x = saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["xPos"].GetInt();
+		position.y = saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["yPos"].GetInt();
 
 		imagine::sim::road newRoad = imagine::sim::road(direction,position);
 		roadsCreated.push_back(newRoad);
 	}
-	//TODO: Implement attraction loading with similar looking code to roadSpawning
-	money = Json::Value(playerData["player"]["money"]).asInt();
 
-	int day = Json::Value(playerData["player"]["date"]["day"]).asInt();
-	int month = Json::Value(playerData["player"]["date"]["month"]).asInt();
-	int year = Json::Value(playerData["player"]["date"]["year"]).asInt();
+	for(unsigned int i = 0; i < numberOfAttractionsSpawned;++i){
+		int id = saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["yPos"].GetFloat());
+		attractionsCreated.push_back(imagine::sim::attraction(id,this,position));
+	}
+	for(unsigned int i = 0; i < numberOfHotelsSpawned;++i){
+		int id = saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["yPos"].GetFloat());
+		hotelsCreated.push_back(imagine::sim::hotel(id,position,this));
+	}
+	for(unsigned int i = 0; i < numberOfRestaurantsSpawned;++i){
+		int id = saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["yPos"].GetFloat());
+		restaurantsCreated.push_back(imagine::sim::Restaurant(id,this,position));
+	}
+	for(unsigned int i = 0; i < numberOfPoliceStationsSpawned;++i){
+		int id = saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["yPos"].GetFloat());
+		policeStationsCreated.push_back(imagine::sim::policeStation(id,this,position));
+	}
+	if(townHallSpawned){
+		std::vector<imagine::sim::CityPolicy> tempPolicies;
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["townHall"]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["townHall"]["yPos"].GetFloat());
+		for(int i = 0; policyCount > i;++i){
+			int id = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["id"].GetInt();
+			bool policyState = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["state"].GetBool();
+			int minLevel = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["minLevel"].GetInt();
+			imagine::sim::types::conditions condition = imagine::sim::types::noConditions;
+			if(saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["conditions"].GetString() == "buildPolice"){
+				condition=imagine::sim::types::buildPolice;
+			}
+			imagine::sim::CityPolicy tempPolicy = imagine::sim::CityPolicy(id,this,minLevel,condition);
+			tempPolicy.active = policyState;
+			tempPolicies.push_back(tempPolicy);
+		}
+		std::cout << "(" << position.x << "," << position.y << ")\n";
+		townHall = new imagine::sim::TownHall(this,position,&defaultFont,&tempPolicies);
+	}
+	if(publicTransport.cruiseTerminalSpawned){
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["cruiseTerminal"]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["cruiseTerminal"]["yPos"].GetFloat());
+		publicTransport.currentCruiseTerminal = imagine::sim::CruiseTerminal(this,position);
+	}
+
+	money = saveFileJSON[0]["player"]["money"].GetInt();
+
+	int day = saveFileJSON[0]["player"]["date"]["day"].GetInt();
+	int month = saveFileJSON[0]["player"]["date"]["month"].GetInt();
+	int year = saveFileJSON[0]["player"]["date"]["year"].GetInt();
 	playerDate = new imagine::sim::types::date(day,month,year);
 
-	activeTourists = Json::Value(playerData["player"]["activeTourists"]).asInt();
+	int hour = saveFileJSON[0]["player"]["time"]["hour"].GetInt();
+	int minute = saveFileJSON[0]["player"]["time"]["minute"].GetInt();
+	time = new imagine::sim::GameTime(this,imagine::sim::types::SimTime(hour,minute));
 
-	levelProgress.finishPoint = Json::Value(playerData["player"]["levelProgress"]["finishPoint"]).asInt();
-	levelProgress.currentProgress = Json::Value(playerData["player"]["levelProgress"]["currentProgress"]).asInt();
-	levelProgress.currentLevel = Json::Value(playerData["player"]["levelProgress"]["currentLevel"]).asInt();
+	activeTourists = saveFileJSON[0]["player"]["activeTourists"].GetInt();
+
+	levelProgress.finishPoint = saveFileJSON[0]["player"]["levelProgress"]["finishPoint"].GetInt();
+	levelProgress.currentProgress = saveFileJSON[0]["player"]["levelProgress"]["currentProgress"].GetInt();
+	levelProgress.currentLevel = saveFileJSON[0]["player"]["levelProgress"]["currentLevel"].GetInt();
 
 	return true;
 }
 
 Json::Value imagine::sim::player::getReadySaveData(){
-	playerData["player"]["buildings"]["number"] = numberOfRoadsSpawned;
+	playerData["player"]["buildings"]["roads"]["number"] = numberOfRoadsSpawned;
+	playerData["player"]["buildings"]["attractions"]["number"] = numberOfAttractionsSpawned;
+	playerData["player"]["buildings"]["hotels"]["number"] = numberOfHotelsSpawned;
+	playerData["player"]["buildings"]["restaurants"]["number"] = numberOfRestaurantsSpawned;
+	playerData["player"]["buildings"]["policeStations"]["number"] = numberOfPoliceStationsSpawned;
+	playerData["player"]["buildings"]["townHallSpawned"] = townHallSpawned;
+	playerData["player"]["buildings"]["cruiseTerminalSpawned"] = publicTransport.cruiseTerminalSpawned;
 	std::string directionString;
-	for(int i = 0; i < numberOfRoadsSpawned;i++){
+	for(unsigned int i = 0; i < numberOfRoadsSpawned;i++){
 		if(roadsCreated[i].getRoadDirection() == imagine::sim::types::straight){
 			directionString="straight";
 		}
-		playerData["player"]["buildings"]["roads"][i]["direction"] = directionString;
-		playerData["player"]["buildings"]["roads"][i]["xPos"] = roadsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["roads"][i]["yPos"] = roadsCreated[i].tileSprite.getPosition().y;
+		playerData["player"]["buildings"]["roads"][std::to_string(i)]["direction"] = directionString;
+		playerData["player"]["buildings"]["roads"][std::to_string(i)]["xPos"] = roadsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["roads"][std::to_string(i)]["yPos"] = roadsCreated[i].tileSprite.getPosition().y;
 	}
-	for(int i = 0; i < numberOfAttractionsSpawned;++i){
-		playerData["player"]["buildings"]["attractions"][i]["id"] = attractionsCreated[i].getId();
-		playerData["player"]["buildings"]["attractions"][i]["xPos"] = attractionsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["attractions"][i]["yPos"] = attractionsCreated[i].tileSprite.getPosition().y;
+	for(unsigned int i = 0; i < numberOfAttractionsSpawned;++i){
+		std::cout << "passed I=" << i << "\n";
+		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["id"] = attractionsCreated[i].getId(); //!
+		std::cout << "passed2\n";
+		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["xPos"] = attractionsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["yPos"] = attractionsCreated[i].tileSprite.getPosition().y;
 	}
-	for(int i = 0; i < numberOfHotelsSpawned; ++i){
-		playerData["player"]["buildings"]["hotels"][i]["id"] = hotelsCreated[i].getId();
-		playerData["player"]["buildings"]["hotels"][i]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["hotels"][i]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
+	for(unsigned int i = 0; i < numberOfHotelsSpawned; ++i){
+		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["id"] = hotelsCreated[i].getId();
+		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
 	}
 	/*for(int i = 0; i < numberOfAdvertisementsSpawned; ++i){
 		playerData["player"]["buildings"]["hotels"][i]["id"] = hotelsCreated[i].getId();
 		playerData["player"]["buildings"]["hotels"][i]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
 		playerData["player"]["buildings"]["hotels"][i]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
 	}*/
-	for(int i = 0; i < numberOfRestaurantsSpawned; ++i){
-		playerData["player"]["buildings"]["restaurants"][i]["id"] = restaurantsCreated[i].getId();
-		playerData["player"]["buildings"]["restaurants"][i]["xPos"] = restaurantsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["restaurants"][i]["yPos"] = restaurantsCreated[i].tileSprite.getPosition().y;
+	for(unsigned int i = 0; i < numberOfRestaurantsSpawned; ++i){
+		playerData["player"]["buildings"]["restaurants"][std::to_string(i)]["id"] = restaurantsCreated[i].getId();
+		playerData["player"]["buildings"]["restaurants"][std::to_string(i)]["xPos"] = restaurantsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["restaurants"][std::to_string(i)]["yPos"] = restaurantsCreated[i].tileSprite.getPosition().y;
 	}
-	for(int i = 0; i < numberOfPoliceStationsSpawned; ++i){
-		playerData["player"]["buildings"]["policeStations"][i]["id"] = policeStationsCreated[i].getId();
-		playerData["player"]["buildings"]["policeStations"][i]["xPos"] = policeStationsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["policeStations"][i]["yPos"] = policeStationsCreated[i].tileSprite.getPosition().y;
+	for(unsigned int i = 0; i < numberOfPoliceStationsSpawned; ++i){
+		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["id"] = policeStationsCreated[i].getId();
+		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["xPos"] = policeStationsCreated[i].tileSprite.getPosition().x;
+		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["yPos"] = policeStationsCreated[i].tileSprite.getPosition().y;
 	}
 	if(townHallSpawned){
 		playerData["player"]["buildings"]["townHall"]["xPos"] = townHall->cityServiceSprite.sprite.getPosition().x;
 		playerData["player"]["buildings"]["townHall"]["yPos"] = townHall->cityServiceSprite.sprite.getPosition().y;
-		for(int i = 0;townHall->cityPolicies.size() > i;++i){
-			playerData["player"]["buildings"]["townHall"]["policies"][i]["id"] = townHall->cityPolicies[i].getId();
-			playerData["player"]["buildings"]["townHall"]["policies"][i]["state"] = townHall->cityPolicies[i].active;
-			playerData["player"]["buildings"]["townHall"]["policies"][i]["minLevel"] = townHall->cityPolicies[i].getMinimumlevel();
+		playerData["player"]["buildings"]["townHall"]["policyNumber"] = townHall->getCityPolicySize();
+		for(unsigned int i = 0;townHall->cityPolicies.size() > i;++i){
+			playerData["player"]["buildings"]["townHall"]["policies"][std::to_string(i)]["id"] = townHall->cityPolicies[i].getId();
+			playerData["player"]["buildings"]["townHall"]["policies"][std::to_string(i)]["state"] = townHall->cityPolicies[i].active;
+			playerData["player"]["buildings"]["townHall"]["policies"][std::to_string(i)]["minLevel"] = townHall->cityPolicies[i].getMinimumlevel();
 			if(townHall->cityPolicies[i].getConditions()==imagine::sim::types::noConditions){
-				playerData["player"]["buildings"]["townHall"]["policies"][i]["conditions"] = "None";
+				playerData["player"]["buildings"]["townHall"]["policies"][std::to_string(i)]["conditions"] = "None";
 			}else if(townHall->cityPolicies[i].getConditions()==imagine::sim::types::buildPolice){
-				playerData["player"]["buildings"]["townHall"]["policies"][i]["conditions"] = "buildPolice";
+				playerData["player"]["buildings"]["townHall"]["policies"][std::to_string(i)]["conditions"] = "buildPolice";
 			}
 		}
 	}
