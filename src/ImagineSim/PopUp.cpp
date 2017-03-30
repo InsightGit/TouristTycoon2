@@ -19,10 +19,10 @@ imagine::sim::popUp::popUp(const std::string messageToDisplay, const sf::Font *f
 	messageBox.setFillColor(sf::Color(233,100,54,230));
 
 	message.setFont(defaultFont);
-	message.setPosition(sf::Vector2f(position.x+50,position.y+10));
+	message.setPosition(sf::Vector2f(position.x+10,position.y+10));
 	message.setString(messageDisplayed);
-	message.setFillColor(sf::Color::Red);
-	message.setCharacterSize(16);
+	message.setFillColor(sf::Color::Green);
+	message.setCharacterSize(12);
 
 	okButton.optionalImage = new sf::Image();
 	okButton.optionalImage->create(okButtonImage.width,okButtonImage.height,okButtonImage.pixel_data);

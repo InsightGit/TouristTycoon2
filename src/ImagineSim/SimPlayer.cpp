@@ -245,46 +245,68 @@ bool imagine::sim::player::loadData(){
 	}
 	for(unsigned int i = 0; i < numberOfRoadsSpawned;++i){
 		imagine::sim::types::roadDirection direction;
+		std::string originalString = std::to_string(i);
 		sf::Vector2f position;
-		if(saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["direction"].GetString() == "straight"){
+		if(saveFileJSON[0]["player"]["buildings"]["roads"][originalString.c_str()]["direction"].GetString() == "straight"){
 			direction=imagine::sim::types::straight;
 		}
-		position.x = saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["xPos"].GetInt();
-		position.y = saveFileJSON[0]["player"]["buildings"]["roads"][char(i)]["yPos"].GetInt();
+		position.x = saveFileJSON[0]["player"]["buildings"]["roads"][originalString.c_str()]["xPos"].GetInt();
+		position.y = saveFileJSON[0]["player"]["buildings"]["roads"][originalString.c_str()]["yPos"].GetInt();
 
 		imagine::sim::road newRoad = imagine::sim::road(direction,position);
 		roadsCreated.push_back(newRoad);
 	}
 
 	for(unsigned int i = 0; i < numberOfAttractionsSpawned;++i){
-		int id = saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["id"].GetInt();
-		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["attractions"][char(i)]["yPos"].GetFloat());
-		attractionsCreated.push_back(imagine::sim::attraction(id,this,position));
+		std::string originalString = std::to_string(i);
+		//char *placement = new char[originalString.length()+1];
+		//std::strcpy()
+		int id = saveFileJSON[0]["player"]["buildings"]["attractions"][originalString.c_str()]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["attractions"][originalString.c_str()]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["attractions"][originalString.c_str()]["yPos"].GetFloat());
+		imagine::sim::attraction *tempAttraction = new imagine::sim::attraction(id,this,position);
+		tempAttraction->spawn();
+		//tempAttraction->alive = true;
+		//tempAttraction->createdVarOverride = imagine::sim::types::Overridetrue;
+		attractionsCreated.push_back(*tempAttraction);
+		delete tempAttraction;
 	}
 	for(unsigned int i = 0; i < numberOfHotelsSpawned;++i){
-		int id = saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["id"].GetInt();
-		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["hotels"][char(i)]["yPos"].GetFloat());
-		hotelsCreated.push_back(imagine::sim::hotel(id,position,this));
+		std::string originalString = std::to_string(i);
+		int id = saveFileJSON[0]["player"]["buildings"]["hotels"][originalString.c_str()]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["hotels"][originalString.c_str()]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["hotels"][originalString.c_str()]["yPos"].GetFloat());
+		imagine::sim::hotel *tempHotel = new imagine::sim::hotel(id,position,this);
+		tempHotel->spawn();
+		hotelsCreated.push_back(*tempHotel);
+		delete tempHotel;
 	}
 	for(unsigned int i = 0; i < numberOfRestaurantsSpawned;++i){
-		int id = saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["id"].GetInt();
-		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["restaurants"][char(i)]["yPos"].GetFloat());
-		restaurantsCreated.push_back(imagine::sim::Restaurant(id,this,position));
+		std::string originalString = std::to_string(i);
+		int id = saveFileJSON[0]["player"]["buildings"]["restaurants"][originalString.c_str()]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["restaurants"][originalString.c_str()]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["restaurants"][originalString.c_str()]["yPos"].GetFloat());
+		imagine::sim::Restaurant *tempRestaurant = new imagine::sim::Restaurant(id,this,position);
+		tempRestaurant->spawn();
+		restaurantsCreated.push_back(*tempRestaurant);
+		delete tempRestaurant;
 	}
 	for(unsigned int i = 0; i < numberOfPoliceStationsSpawned;++i){
-		int id = saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["id"].GetInt();
-		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["policeStations"][char(i)]["yPos"].GetFloat());
-		policeStationsCreated.push_back(imagine::sim::policeStation(id,this,position));
+		std::string originalString = std::to_string(i);
+		int id = saveFileJSON[0]["player"]["buildings"]["policeStations"][originalString.c_str()]["id"].GetInt();
+		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["policeStations"][originalString.c_str()]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["policeStations"][originalString.c_str()]["yPos"].GetFloat());
+		imagine::sim::policeStation *tempPoliceStation = new imagine::sim::policeStation(id,this,position);
+		tempPoliceStation->spawn();
+		policeStationsCreated.push_back(*tempPoliceStation);
+		delete tempPoliceStation;
 	}
 	if(townHallSpawned){
 		std::vector<imagine::sim::CityPolicy> tempPolicies;
 		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["townHall"]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["townHall"]["yPos"].GetFloat());
-		for(int i = 0; policyCount > i;++i){
-			int id = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["id"].GetInt();
-			bool policyState = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["state"].GetBool();
-			int minLevel = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["minLevel"].GetInt();
+		for(unsigned int i = 0; policyCount > i;++i){
+			std::string originalString = std::to_string(i);
+			int id = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][originalString.c_str()]["id"].GetInt();
+			bool policyState = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][originalString.c_str()]["state"].GetBool();
+			int minLevel = saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][originalString.c_str()]["minLevel"].GetInt();
 			imagine::sim::types::conditions condition = imagine::sim::types::noConditions;
-			if(saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][char(i)]["conditions"].GetString() == "buildPolice"){
+			if(saveFileJSON[0]["player"]["buildings"]["townHall"]["policies"][originalString.c_str()]["conditions"].GetString() == "buildPolice"){
 				condition=imagine::sim::types::buildPolice;
 			}
 			imagine::sim::CityPolicy tempPolicy = imagine::sim::CityPolicy(id,this,minLevel,condition);
@@ -297,6 +319,7 @@ bool imagine::sim::player::loadData(){
 	if(publicTransport.cruiseTerminalSpawned){
 		sf::Vector2f position = sf::Vector2f(saveFileJSON[0]["player"]["buildings"]["cruiseTerminal"]["xPos"].GetFloat(),saveFileJSON[0]["player"]["buildings"]["cruiseTerminal"]["yPos"].GetFloat());
 		publicTransport.currentCruiseTerminal = imagine::sim::CruiseTerminal(this,position);
+		publicTransport.currentCruiseTerminal.spawn();
 	}
 
 	money = saveFileJSON[0]["player"]["money"].GetInt();
@@ -340,13 +363,13 @@ Json::Value imagine::sim::player::getReadySaveData(){
 		std::cout << "passed I=" << i << "\n";
 		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["id"] = attractionsCreated[i].getId(); //!
 		std::cout << "passed2\n";
-		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["xPos"] = attractionsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["yPos"] = attractionsCreated[i].tileSprite.getPosition().y;
+		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["xPos"] = attractionsCreated[i].attractionSprite.getPosition().x;
+		playerData["player"]["buildings"]["attractions"][std::to_string(i)]["yPos"] = attractionsCreated[i].attractionSprite.getPosition().y;
 	}
 	for(unsigned int i = 0; i < numberOfHotelsSpawned; ++i){
 		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["id"] = hotelsCreated[i].getId();
-		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["xPos"] = hotelsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["yPos"] = hotelsCreated[i].tileSprite.getPosition().y;
+		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["xPos"] = hotelsCreated[i].hotelSprite.sprite.getPosition().x;
+		playerData["player"]["buildings"]["hotels"][std::to_string(i)]["yPos"] = hotelsCreated[i].hotelSprite.sprite.getPosition().y;
 	}
 	/*for(int i = 0; i < numberOfAdvertisementsSpawned; ++i){
 		playerData["player"]["buildings"]["hotels"][i]["id"] = hotelsCreated[i].getId();
@@ -360,8 +383,8 @@ Json::Value imagine::sim::player::getReadySaveData(){
 	}
 	for(unsigned int i = 0; i < numberOfPoliceStationsSpawned; ++i){
 		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["id"] = policeStationsCreated[i].getId();
-		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["xPos"] = policeStationsCreated[i].tileSprite.getPosition().x;
-		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["yPos"] = policeStationsCreated[i].tileSprite.getPosition().y;
+		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["xPos"] = policeStationsCreated[i].policeSprite.sprite.getPosition().x;
+		playerData["player"]["buildings"]["policeStations"][std::to_string(i)]["yPos"] = policeStationsCreated[i].policeSprite.sprite.getPosition().y;
 	}
 	if(townHallSpawned){
 		playerData["player"]["buildings"]["townHall"]["xPos"] = townHall->cityServiceSprite.sprite.getPosition().x;

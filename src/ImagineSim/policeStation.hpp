@@ -17,6 +17,7 @@ namespace imagine {
 		class player;
 		class policeStation: public CityService {
 		public:
+			imagine::clickableSprite policeSprite;
 			policeStation(const int idToUse,imagine::sim::player *mainPlayer,const sf::Vector2f position);
 			virtual ~policeStation();
 
@@ -35,7 +36,7 @@ namespace imagine {
 			int crimeFightingAbility;
 			int id;
 			imagine::sim::player *player;
-			imagine::clickableSprite policeSprite;
+
 		};
 	} /* namespace sim */
 } /* namespace imagine */

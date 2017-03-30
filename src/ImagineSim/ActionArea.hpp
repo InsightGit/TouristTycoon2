@@ -33,6 +33,9 @@ namespace imagine {
 			void draw(sf::RenderWindow *window);
 			protected:
 			bool newGame = true;
+			sf::Clock limitKeyboardPresses;
+			bool limitKeyboardPressesSet = false;
+			void update();
 		};
 
 	} /* namespace sim */

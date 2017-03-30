@@ -10,6 +10,7 @@ CPP_SRCS += \
 ../src/Main.cpp \
 ../src/MainMenu.cpp \
 ../src/Menu.cpp \
+../src/OptionsMenu.cpp \
 ../src/Scene.cpp \
 ../src/SceneController.cpp \
 ../src/SceneMusicPlayer.cpp \
@@ -23,6 +24,7 @@ OBJS += \
 ./src/Main.o \
 ./src/MainMenu.o \
 ./src/Menu.o \
+./src/OptionsMenu.o \
 ./src/Scene.o \
 ./src/SceneController.o \
 ./src/SceneMusicPlayer.o \
@@ -36,6 +38,7 @@ CPP_DEPS += \
 ./src/Main.d \
 ./src/MainMenu.d \
 ./src/Menu.d \
+./src/OptionsMenu.d \
 ./src/Scene.d \
 ./src/SceneController.d \
 ./src/SceneMusicPlayer.d \

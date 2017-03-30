@@ -191,7 +191,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}*/
 			}else if(tileId==1){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(1,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(1,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -204,7 +204,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==2){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::hotel hotel = imagine::sim::hotel(2,mousePosition,player);
+					imagine::sim::hotel hotel = imagine::sim::hotel(2,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y),player);
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(hotel.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -217,7 +217,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==3){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(3,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(3,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -230,7 +230,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==4){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(4,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(4,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -243,7 +243,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==5){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(5,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(5,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -256,7 +256,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==6){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(6,player,mousePosition);
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(6,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -269,7 +269,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==7){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(7,player,mousePosition);
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(7,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -282,7 +282,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==8){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(8,player,mousePosition);
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(8,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -295,7 +295,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==9){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					player->townHall = new imagine::sim::TownHall(player,mousePosition,&defaultFont);
+					player->townHall = new imagine::sim::TownHall(player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y),&defaultFont);
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(player->townHall->create(notEnoughMoneyPopUp,&defaultFont)){
@@ -308,7 +308,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==10){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(10,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(10,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -321,7 +321,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==11){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(11,player,mousePosition);
+					imagine::sim::Restaurant restaurant = imagine::sim::Restaurant(11,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(restaurant.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -334,7 +334,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==12){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(12,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(12,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -347,7 +347,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==13){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(13,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(13,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -360,7 +360,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==14){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::policeStation policeStation = imagine::sim::policeStation(14,player,mousePosition);
+					imagine::sim::policeStation policeStation = imagine::sim::policeStation(14,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(policeStation.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -386,7 +386,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 						bypassed=true;
 					}
 				}else if(!attentionNeeded){
-					imagine::sim::attraction attraction = imagine::sim::attraction(15,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(15,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					//limitClicks.restart();
 					//limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -397,7 +397,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==16){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::CruiseTerminal cruiseTerminal = imagine::sim::CruiseTerminal(player,mousePosition);
+					imagine::sim::CruiseTerminal cruiseTerminal = imagine::sim::CruiseTerminal(player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(cruiseTerminal.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -410,7 +410,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==17){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(17,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(17,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -423,7 +423,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==18){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(18,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(18,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){
@@ -436,7 +436,7 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 				}
 			}else if(tileId==19){
 				if(mouseWasPressed && mousePressed.getElapsedTime().asSeconds() >= 0.1){
-					imagine::sim::attraction attraction = imagine::sim::attraction(19,player,mousePosition);
+					imagine::sim::attraction attraction = imagine::sim::attraction(19,player,sf::Vector2f(mousePosition.x+buildArea.getSize().x,mousePosition.y+buildArea.getSize().y));
 					limitClicks.restart();
 					limitClickTimerNotSet = false;
 					if(attraction.create(notEnoughMoneyPopUp,&defaultFont)){

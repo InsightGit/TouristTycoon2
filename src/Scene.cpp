@@ -31,9 +31,14 @@ bool imagine::scene::spawn(){
 			sceneActionArea->spawn();
 			sceneSidebar = new imagine::sim::sidebar(&defaultFont,playerInScene,sceneHelpBar,sceneActionArea);
 			sceneSidebar->spawn();
-			std::vector<std::string> musicTracks = {"1.ogg"};
+			/*std::vector<std::string> musicTracks = {"1.ogg"};
 			musicPlayer = new imagine::sceneMusicPlayer(musicTracks,1);
-			musicPlayer->play();
+			musicPlayer->play();*/
+			if(!music.openFromFile("1.ogg")){
+				throw imagine::exceptions::couldNotOpenMusicFile("1.ogg");
+			}
+			music.play();
+			music.setLoop(true);
 			return true;
 		}
 	}
@@ -70,6 +75,10 @@ void imagine::scene::update(sf::RenderWindow *window){
     	if(playerInScene->publicTransport.cruiseTerminalSpawned){
     		playerInScene->publicTransport.currentCruiseTerminal.subtractMaintainceCost(playerInScene,&playerInScene->time->getSimTime());
     	}
+    	/*if(music.getStatus() != sf::Music::Playing){
+    		music.
+    	}*/
+    	//if()
     }
 }
 

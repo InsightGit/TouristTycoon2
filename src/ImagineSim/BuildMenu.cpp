@@ -525,7 +525,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 		}
 	}else if(activeCategory=="attractions"){
 		for(int i = 0; attractionButtonSize > i; i++){
-			if(attractionButtons[i].isClicked(window)){
+			if(attractionButtons[i].isClicked(window) && drawMenu){
 				if(attractionButtons[i].itemName.getString() == "Washington Monument"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,1500,sf::Vector2i(1,1),actionArea,1,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);

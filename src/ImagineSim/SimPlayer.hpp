@@ -49,6 +49,11 @@ namespace imagine{
                 levelProgress();
                 levelProgress(const int finishValue, const int currentValue, const int currentLevelNum);
             };
+            enum boolOverride{
+				Overridetrue,
+				Overridefalse,
+				UseInternalValue
+			};
     		enum platform{
     			win32,
     			win64,

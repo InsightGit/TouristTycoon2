@@ -76,7 +76,31 @@ void imagine::sim::actionArea::spawn(){
 	}
 }
 
+void imagine::sim::actionArea::update(){
+	if(!limitKeyboardPressesSet){
+		limitKeyboardPresses.restart();
+		limitKeyboardPressesSet = true;
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+			actionAreaView.move(sf::Vector2f(0,-100));
+		}
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+			actionAreaView.move(sf::Vector2f(0,100));
+		}
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+			actionAreaView.move(sf::Vector2f(-100,0));
+		}
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+			actionAreaView.move(sf::Vector2f(100,0));
+		}
+	}else if(limitKeyboardPresses.getElapsedTime().asSeconds() >= 0.1){
+		limitKeyboardPressesSet = false;
+	}
+}
+
 void imagine::sim::actionArea::draw(sf::RenderWindow *window){
+	update();
+
 	window->draw(repeatingGrassSprite);
 
 }

@@ -18,6 +18,8 @@ namespace imagine {
 	namespace sim {
 		class advertMenu: public menu {
 		public:
+			std::vector<imagine::clickableSprite> activeSprites;
+			signed int activeSpritesLength = 0;
 			sf::RectangleShape menuBox = sf::RectangleShape(sf::Vector2f(400,300));
 
 			bool drawMenu = false;
@@ -32,6 +34,8 @@ namespace imagine {
 			sf::Font defaultFont;
 			std::vector<imagine::sim::menuItem> menuItems;
 			sf::Clock limitClicks;
+			sf::Clock limitBuys;
+			bool limitBuysSet = false;
 			bool limitClicksTimerSet = false;
 			bool popUpSpawned = false;
 			signed int menuItemsLength = 0;

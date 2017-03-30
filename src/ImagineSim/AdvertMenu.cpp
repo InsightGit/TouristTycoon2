@@ -32,8 +32,9 @@ void imagine::sim::advertMenu::spawn(){
 		newMenuItem.sprite.setTexture(*newMenuItem.optionalTexture);
 		newMenuItem.position = sf::Vector2f(494,184);
 		newMenuItem.sprite.setPosition(newMenuItem.position);
-		newMenuItem.defaultFont = defaultFont;
-		newMenuItem.itemName.setString("Online Advertising");
+		newMenuItem.itemName.setFont(defaultFont);
+		newMenuItem.itemName.setFillColor(sf::Color::Black);
+		newMenuItem.itemName.setString("Online Advertising $1500");
 		newMenuItem.itemName.setCharacterSize(9);
 		newMenuItem.itemName.setPosition(sf::Vector2f(newMenuItem.position.x,newMenuItem.position.y+64));
 		newMenuItem.cost=1500;
@@ -53,7 +54,7 @@ void imagine::sim::advertMenu::update(sf::RenderWindow *window){
 		}else{
 			for(int i = 0; menuItemsLength > i; i++){
 				if(menuItems[i].isClicked(window)){
-					if(player->money-menuItems[i].cost > 0){
+					if(player->money-menuItems[i].cost > 0 && !limitBuysSet){
 						switch(i){
 							case 0:
 								imagine::sim::Advertisement newAdvert = imagine::sim::Advertisement(*player->playerDate,0);
@@ -64,18 +65,59 @@ void imagine::sim::advertMenu::update(sf::RenderWindow *window){
 									}
 								}
 								if(!match){
+									player->money-=menuItems[i].cost;
 									player->advertisementsCreated.push_back(newAdvert);
 									player->numberOfAdvertisementsSpawned++;
-								}else if(match){
-									popUp = new imagine::sim::popUp("You can't make 2 of the same advertisements active at the same time",&defaultFont);
+									std::cout << "Ad is active\n";
+									drawMenu=false;
+								}else if(match && !limitBuysSet){
+									popUp = new imagine::sim::popUp("You can't make 2 of the same active advertisements",&defaultFont);
 									popUpSpawned = true;
 									drawMenu=false;
 								}
+							limitBuysSet=true;
+							limitBuys.restart();
 						}
-					}else{
+					}else if(limitBuysSet && limitBuys.getElapsedTime().asSeconds() > 0.1 && player->money-menuItems[i].cost > 0){
+						limitBuysSet=false;
+					}else if(player->money-menuItems[i].cost < 0){
 						popUp = new imagine::sim::popUp("You don't have enough money",&defaultFont);
 						popUpSpawned = true;
 						drawMenu=false;
+					}
+					for(int i = 0; player->numberOfAdvertisementsSpawned > i;++i){
+						if(!player->advertisementsCreated[i].active){
+							player->advertisementsCreated.erase(player->advertisementsCreated.begin()+i);
+							player->numberOfAdvertisementsSpawned--;
+							for(int i = 0;activeSpritesLength > i;++i){
+								int placement = std::stoi(activeSprites[i].category);
+								if(!player->advertisementsCreated[placement].active){
+									activeSprites.erase(activeSprites.begin()+i);
+									activeSpritesLength--;
+								}
+							}
+						}
+						if(player->advertisementsCreated[i].active){
+							if(player->advertisementsCreated[i].id == 0){
+								bool passed = true;
+								for(int i = 0;activeSpritesLength > i;++i){
+									if(std::stoi(activeSprites[i].category)==player->advertisementsCreated[i].id){
+										passed = false;
+									}
+								}
+								if(passed){
+									imagine::clickableSprite tempSprite;
+									tempSprite.category = std::to_string(i);
+									tempSprite.optionalImage = menuItems[0].optionalImage;
+									tempSprite.optionalTexture = new sf::Texture();
+									tempSprite.optionalTexture->loadFromImage(*tempSprite.optionalImage);
+									tempSprite.sprite.setTexture(*tempSprite.optionalTexture);
+									tempSprite.sprite.setPosition(sf::Vector2f(1240,100));
+									activeSprites.push_back(tempSprite);
+									activeSpritesLength++;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -95,5 +137,8 @@ void imagine::sim::advertMenu::draw(sf::RenderWindow *window){
 		}
 	}else if(popUpSpawned){
 		popUp->draw(window);
+	}
+	for(int i = 0; activeSpritesLength > i;++i){
+		window->draw(activeSprites[i].sprite);
 	}
 }

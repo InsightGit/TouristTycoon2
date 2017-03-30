@@ -1,6 +1,7 @@
 #ifndef _scene_h
 #define _scene_h
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <jsoncpp/json/reader.h>
 
 #include "SceneMusicPlayer.hpp"
@@ -38,6 +39,7 @@ namespace imagine{
 		void draw(sf::RenderWindow *window);
 	protected:
 		Json::Value sceneData;
+		sf::Music music;
 	};
 }
 #endif

@@ -12,6 +12,7 @@ imagine::sim::attraction::attraction(int idToUse, imagine::sim::player *mainPlay
 	id=idToUse;
 	player=mainPlayer;
 	position=positionToUse;
+	//createdVarOverride=imagine::sim::types::UseInternalValue;
 }
 
 imagine::sim::attraction::attraction(){}
@@ -189,12 +190,17 @@ void imagine::sim::attraction::update(){
 		maintainceCost=baseMaintainceCost*(int(allTouristNum/100));
 	}
 	pastTouristNum=int(allTouristNum/100);
+	/*switch(createdVarOverride){
+		case imagine::sim::types::Overridetrue:
+
+	}*/
 }
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
 	std::cout << currentTouristNum << "\n";
 	update();
 	if(alive){
+		std::cout << "ALIVE\n";
 		attractionTexture.loadFromImage(attractionImage);
 
 		attractionSprite.setTexture(attractionTexture);

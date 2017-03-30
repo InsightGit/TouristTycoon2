@@ -14,21 +14,24 @@ imagine::sim::policeStation::policeStation(const int idToUse,imagine::sim::playe
 	player=mainPlayer;
 	policeSprite.optionalImage = new sf::Image();
 	id=idToUse;
-	if(id==14){
+	//if(id==14){
 		cost = 6500;
 		maintainceCost=400;
 		maintainceCostSet=true;
 		crimeFightingAbility=20;
 		//std::cout << "cost set\n";
 		policeSprite.optionalImage->create(policeStationImageFile.width,policeStationImageFile.height,policeStationImageFile.pixel_data);
-	}
+	//}
 	policeSprite.sprite.setPosition(position);
 }
 
 imagine::sim::policeStation::~policeStation() {
 	// TODO Auto-generated destructor stub
-	delete policeSprite.optionalImage;
-	delete policeSprite.optionalTexture;
+	if(spawned){
+		delete policeSprite.optionalImage;
+		delete policeSprite.optionalTexture;
+	}
+
 }
 
 void imagine::sim::policeStation::spawn(){

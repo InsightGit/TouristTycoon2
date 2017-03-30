@@ -21,15 +21,18 @@
 
 namespace imagine{
 	namespace sim{
+
 		class player;
 		class tourist;
 		class attraction : public tile
 		{
 		    public:
 			std::string name;
+			bool alive = false;
 			sf::Image attractionImage;
 			sf::Texture attractionTexture;
 			sf::Sprite attractionSprite;
+			//imagine::sim::types::boolOverride createdVarOverride; //used when loading object
 
 			attraction(int idToUse, imagine::sim::player *mainPlayer,sf::Vector2f positionToUse);
 			attraction();
@@ -52,7 +55,6 @@ namespace imagine{
 			void draw(sf::RenderWindow *window)override;
 
 		    protected:
-			bool alive = false;
 			bool created = false;
 			imagine::sim::player *player;
 
