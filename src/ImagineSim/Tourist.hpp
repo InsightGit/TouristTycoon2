@@ -110,6 +110,7 @@ namespace imagine{
 			bool touringTimeSet = false;
 			bool drivingTimeSet = false;
 			bool sleepingTimeSet = false;
+			bool leavingSaid = false;
 
 
 			//used for A*

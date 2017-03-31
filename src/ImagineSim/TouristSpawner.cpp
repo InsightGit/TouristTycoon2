@@ -109,7 +109,7 @@ void imagine::sim::TouristSpawner::spawnTourists(const signed int numberOfAttrac
 					player->touristsSpawned[i].added=false;
 				}
 			}
-			std::cout << spawnNumber << "\n";
+			std::cout << "SPAWN:" << spawnNumber << "\n";
 			for(int i = 0; spawnNumber > i;++i){
 				imagine::sim::tourist newTourist = imagine::sim::tourist(player);
 				player->touristsSpawned.push_back(newTourist);

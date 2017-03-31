@@ -12,6 +12,7 @@ imagine::sim::attraction::attraction(int idToUse, imagine::sim::player *mainPlay
 	id=idToUse;
 	player=mainPlayer;
 	position=positionToUse;
+	exists=true;
 	//createdVarOverride=imagine::sim::types::UseInternalValue;
 }
 
@@ -34,7 +35,6 @@ void imagine::sim::attraction::spawn(){
 		maxOccupancy = 50;
 		activityLevel = 7;
 		attractionImage.create(washMonu.width,washMonu.height,washMonu.pixel_data);
-		std::cout << "id==0\n";
 	}else if(id == 3){ //We skip 2 because it is a hotel
 		name="Tokyo Tower";
 		cost=2500;
@@ -148,11 +148,11 @@ bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, 
 			player->numberOfAttractionsSpawned++;
 			std::cout << "Attraction created\n";
 			player->money-=cost;
+			created=true;
 		}else{
 			notEnoughMoneyPopUp = new imagine::sim::popUp("You don't have enough money.",fontToUse);
 			return false;
 		}
-		created=true;
 		return true;
 	}
 	return false;
@@ -160,8 +160,9 @@ bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, 
 
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 	//if(maxOccupancy>currentTouristNum+1){
-		if(tourist->money-costForTourists > 0){
+		if(tourist->money-costForTourists > 0 && alive){
 			 if(tourist->energy-activityLevel > 0){
+				 	tourist->currentAttraction = this;
 					currentTouristNum++;
 					allTouristNum++;
 					tourist->money-=costForTourists;
@@ -186,7 +187,7 @@ void imagine::sim::attraction::demit(){
 }
 
 void imagine::sim::attraction::update(){
-	if(int(allTouristNum/100)!=0 && pastTouristNum!=int(allTouristNum/100)){
+	/*if(int(allTouristNum/100)!=0 && pastTouristNum!=int(allTouristNum/100)){
 		maintainceCost=baseMaintainceCost*(int(allTouristNum/100));
 	}
 	pastTouristNum=int(allTouristNum/100);
@@ -197,10 +198,10 @@ void imagine::sim::attraction::update(){
 }
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
-	std::cout << currentTouristNum << "\n";
+	//std::cout << currentTouristNum << "\n";
 	update();
 	if(alive){
-		std::cout << "ALIVE\n";
+		//std::cout << "ALIVE\n";
 		attractionTexture.loadFromImage(attractionImage);
 
 		attractionSprite.setTexture(attractionTexture);

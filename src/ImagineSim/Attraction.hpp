@@ -27,8 +27,9 @@ namespace imagine{
 		class attraction : public tile
 		{
 		    public:
-			std::string name;
+			std::string name = "Unknown";
 			bool alive = false;
+			bool exists = false;
 			sf::Image attractionImage;
 			sf::Texture attractionTexture;
 			sf::Sprite attractionSprite;
@@ -47,6 +48,8 @@ namespace imagine{
 			signed int getCurrentOccupancy() { return currentTouristNum; }
 			signed int getActivityLevel() { return activityLevel; }
 			signed int getCrimeAttention() { return crimeAttention; }
+			bool getCreated() { return created; }
+			bool getAlive() { return alive; }
 
 			void spawn();
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
