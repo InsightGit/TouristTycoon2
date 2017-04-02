@@ -21,7 +21,8 @@ src/SceneController.o: ../src/SceneController.cpp \
  ../src/ImagineSim/Resources/centralpark.h \
  ../src/ImagineSim/Resources/movieSet.h \
  ../src/ImagineSim/Resources/spaceNeedle.h \
- ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/Restaurant.hpp \
+ ../src/ImagineSim/Resources/personNew.h ../src/ImagineSim/NewTourist.hpp \
+ ../src/ImagineSim/Restaurant.hpp \
  ../src/ImagineSim/Resources/ItalianRestaurant.h \
  ../src/ImagineSim/Resources/MexicanRestaurant.h \
  ../src/ImagineSim/Resources/diner.h \
@@ -145,6 +146,8 @@ src/SceneController.o: ../src/SceneController.cpp \
 ../src/ImagineSim/Resources/spaceNeedle.h:
 
 ../src/ImagineSim/Resources/personNew.h:
+
+../src/ImagineSim/NewTourist.hpp:
 
 ../src/ImagineSim/Restaurant.hpp:
 

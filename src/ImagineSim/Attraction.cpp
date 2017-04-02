@@ -1,7 +1,27 @@
+/*Copyright (C) 2017 Bobby Youstra
+
+This file is part of TouristTycoon2.
+
+TouristTycoon2 is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+TouristTycoon2 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 #include "Attraction.hpp"
 
 #include <iostream>
 
+#include "NewTourist.hpp"
 #include "Tourist.hpp"
 #include "SimPlayer.hpp"
 
@@ -13,6 +33,7 @@ imagine::sim::attraction::attraction(int idToUse, imagine::sim::player *mainPlay
 	player=mainPlayer;
 	position=positionToUse;
 	exists=true;
+	playerAssign=true;
 	//createdVarOverride=imagine::sim::types::UseInternalValue;
 }
 
@@ -112,6 +133,7 @@ void imagine::sim::attraction::spawn(){
 		name = "Movie Set";
 		cost = 8000;
 		baseMaintainceCost=700;
+		costForTourists=130;
 		popularity = 25;
 		maxOccupancy = 50;
 		activityLevel = 15;
@@ -120,12 +142,14 @@ void imagine::sim::attraction::spawn(){
 		name = "Space Needle";
 		cost = 4000;
 		baseMaintainceCost=750;
+		costForTourists=300;
 		popularity = 20;
 		maxOccupancy = 100;
 		activityLevel = 9;
 		attractionImage.create(spaceNeedleImageFile.width,spaceNeedleImageFile.height,spaceNeedleImageFile.pixel_data);
 	}else{
 		name = "Unknown";
+		costForTourists=0;
 	}
 	maintainceCost=baseMaintainceCost;
 	maintainceCostSet=true;
@@ -158,6 +182,30 @@ bool imagine::sim::attraction::create(imagine::sim::popUp *notEnoughMoneyPopUp, 
 	return false;
 }
 
+bool imagine::sim::attraction::admit(imagine::sim::NewTourist *tourist){
+	//if(maxOccupancy>currentTouristNum+1){
+		if(tourist->GetMoney()-costForTourists > 0 && alive ){
+			 if(tourist->GetEnergy()-activityLevel > 0){
+				 	//tourist->currentAttraction = this;
+					currentTouristNum++;
+					allTouristNum++;
+					tourist->SetMoney(tourist->GetMoney()-costForTourists);
+					player->money+=costForTourists;
+					tourist->SetEnergy(tourist->GetMoney()-activityLevel);
+			 }else{
+				std::cout << "No activity\n";
+				return false;
+			 }
+		}else{
+			std::cout << "No money\n";
+			return false;
+		}
+		return true;
+	//}else{
+		//return false;
+	//}
+}
+
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 	//if(maxOccupancy>currentTouristNum+1){
 		if(tourist->money-costForTourists > 0 && alive){
@@ -182,6 +230,7 @@ bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 	//}
 }
 
+
 void imagine::sim::attraction::demit(){
 	currentTouristNum--;
 }
@@ -198,7 +247,6 @@ void imagine::sim::attraction::update(){
 }
 
 void imagine::sim::attraction::draw(sf::RenderWindow *window){
-	//std::cout << currentTouristNum << "\n";
 	update();
 	if(alive){
 		//std::cout << "ALIVE\n";
