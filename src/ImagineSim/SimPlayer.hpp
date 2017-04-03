@@ -85,7 +85,7 @@ namespace imagine{
 	    }
 		class player : sf::NonCopyable{
 		    public:
-			int money;
+			int money = 15000;
 			imagine::sim::types::date *playerDate;
 			imagine::sim::GameTime *time;
 			std::vector<imagine::sim::attraction> attractionsCreated;

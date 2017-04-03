@@ -109,7 +109,28 @@ bool imagine::sim::Restaurant::checkin(imagine::sim::tourist *tourist){
 	}
 }
 
+bool imagine::sim::Restaurant::checkin(imagine::sim::NewTourist *tourist){
+	if(tourist->GetMoney()-cost > 0 && vacancy){
+		tourist->SetMoney(tourist->GetMoney()-cost);
+		player->money+=cost;
+		currentOccupancy++;
+		if(currentOccupancy>=maxOccupancy){
+			vacancy=false;
+		}
+		return true;
+	}else{
+		return false;
+	}
+}
+
 void imagine::sim::Restaurant::checkout(imagine::sim::tourist *tourist){
+	currentOccupancy--;
+	if(currentOccupancy < maxOccupancy){
+		vacancy=true;
+	}
+}
+
+void imagine::sim::Restaurant::checkout(){
 	currentOccupancy--;
 	if(currentOccupancy < maxOccupancy){
 		vacancy=true;

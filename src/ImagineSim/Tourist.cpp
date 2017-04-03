@@ -169,7 +169,6 @@ imagine::sim::tourist::tourist(imagine::sim::player *mainPlayer){
 			preferredCuisine=imagine::sim::types::JapaneseTeppanyaki;
 			break;
 	}
-
 }
 
 std::vector<int> imagine::sim::tourist::findNextRoadPlace(const imagine::sim::road *road){

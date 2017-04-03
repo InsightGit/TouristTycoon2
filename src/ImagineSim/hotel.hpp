@@ -43,6 +43,7 @@ namespace imagine {
 	namespace sim {
 		class player;
 		class tourist;
+		class NewTourist;
 		class hotel : public service {
 		public:
 			sf::Vector2f tilePosition;
@@ -56,9 +57,15 @@ namespace imagine {
 			signed int getCost(){ return cost; }
 			signed int getId() { return id; }
 			signed int getCurrentOccupancy() { return size; }
+			signed int getPopularity() const {
+				return popularity;
+			}
 
 			bool checkin(imagine::sim::tourist *tourist);
 			void checkout(imagine::sim::tourist *tourist);
+
+			bool checkin(imagine::sim::NewTourist *tourist);
+			void checkout();
 
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
 
@@ -74,6 +81,12 @@ namespace imagine {
 			signed int cost;
 			signed int buildingCost;
 			signed int id;
+
+			void setPopularity(signed int popularity) {
+				this->popularity = popularity;
+			}
+		private:
+			signed int popularity = 0;
 		};
 
 	} /* namespace sim */

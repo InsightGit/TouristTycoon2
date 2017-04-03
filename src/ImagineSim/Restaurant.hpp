@@ -71,7 +71,9 @@ namespace imagine {
 
 			bool create(imagine::sim::popUp *notEnoughMoneyPopUp, const sf::Font *fontToUse);
 			bool checkin(imagine::sim::tourist *tourist);
+			bool checkin(imagine::sim::NewTourist *tourist);
 			void checkout(imagine::sim::tourist *tourist);
+			void checkout();
 
 			void draw(sf::RenderWindow *window)override;
 		protected:

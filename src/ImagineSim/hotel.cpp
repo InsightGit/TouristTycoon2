@@ -26,6 +26,7 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "hotel.hpp"
 #include "Tourist.hpp"
+#include "NewTourist.hpp"
 #include "SimPlayer.hpp"
 
 imagine::sim::hotel::hotel(const signed int idToUse, const sf::Vector2f position, imagine::sim::player *mainPlayer) {
@@ -36,6 +37,7 @@ imagine::sim::hotel::hotel(const signed int idToUse, const sf::Vector2f position
 		maintainceCost=750;
 		maintainceCostSet=true;
 		buildingCost=3000;
+		setPopularity(1);
 		std::cout << "Hotel created\n";
 	}
 	tilePosition=position;
@@ -92,6 +94,28 @@ bool imagine::sim::hotel::checkin(imagine::sim::tourist *tourist){
 }
 
 void imagine::sim::hotel::checkout(imagine::sim::tourist *tourist){
+	size--;
+	if(size < maxSize){
+		vacancy=true;
+	}
+}
+
+bool imagine::sim::hotel::checkin(imagine::sim::NewTourist *tourist){
+	if(tourist->GetMoney()-cost > 0 && vacancy){
+		tourist->SetMoney(tourist->GetMoney()-cost);
+		player->money+=cost;
+		size++;
+		if(size>=maxSize){
+			vacancy=false;
+		}
+		tourist->SetEnergy(tourist->GetBaseEnergy());
+		return true;
+	}else{
+		return false;
+	}
+}
+
+void imagine::sim::hotel::checkout(){
 	size--;
 	if(size < maxSize){
 		vacancy=true;
