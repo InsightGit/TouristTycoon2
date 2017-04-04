@@ -24,7 +24,6 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "SceneMusicPlayer.hpp"
 #include "ImagineSim/SimHUD.hpp"
-#include "ImagineSim/SimSidebar.hpp"
 #include "ImagineSim/SimPlayer.hpp"
 #include "ImagineSim/HelpBar.hpp"
 #include "ImagineSim/SimPlayer.hpp"
@@ -34,6 +33,9 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace imagine{
     class mainMenu;
+    namespace sim{
+    	class sidebar;
+    }
 	class scene : sf::NonCopyable{
 	public:
 		int sceneNum = 0;

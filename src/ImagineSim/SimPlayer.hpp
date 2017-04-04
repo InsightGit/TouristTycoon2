@@ -47,6 +47,7 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 #include "PublicTransportManager.hpp"
 
 namespace imagine{
+	class scene;
 	namespace sim{
 	    namespace exceptions{
             class invalidDateException : public std::runtime_error {
@@ -102,14 +103,15 @@ namespace imagine{
 			bool townHallSpawned = false;
 			signed int activeTourists = 0;
 			signed int tourists = 0;
-			unsigned int numberOfRoadsSpawned = 0;
-			unsigned int numberOfAttractionsSpawned = 0;
-			unsigned int numberOfAdvertisementsSpawned = 0;
-			unsigned int numberOfHotelsSpawned = 0;
-			unsigned int numberOfRestaurantsSpawned = 0;
-			unsigned int numberOfPoliceStationsSpawned = 0;
+			signed int numberOfRoadsSpawned = 0;
+			signed int numberOfAttractionsSpawned = 0;
+			signed int numberOfAdvertisementsSpawned = 0;
+			signed int numberOfHotelsSpawned = 0;
+			signed int numberOfRestaurantsSpawned = 0;
+			signed int numberOfPoliceStationsSpawned = 0;
 			signed int touristExtraHappiness = 0;
 			sf::Font defaultFont;
+			imagine::scene *currentScene;
 
 			imagine::sim::levelCompletePopUp *levelCompletePopUp;
 
@@ -118,8 +120,8 @@ namespace imagine{
 
 			Json::Value getReadySaveData();
 			bool loadData();
+			void setScene(imagine::scene *scene) { currentScene=scene; }
 			void display(sf::RenderWindow *window);
-
 		    protected:
 				std::vector<bool> progressAdded;
 				signed int progressAddedSize = 0;

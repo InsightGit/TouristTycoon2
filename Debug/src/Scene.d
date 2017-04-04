@@ -39,42 +39,12 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
  ../src/ImagineSim/PublicTransportManager.hpp \
  ../src/ImagineSim/CruiseTerminal.hpp \
  ../src/ImagineSim/PublicTransport.hpp ../src/ImagineSim/Resources/port.h \
- ../src/ImagineSim/SimSidebar.hpp ../src/ImagineSim/BuildMenu.hpp \
- ../src/ImagineSim/../ImagineCore.hpp ../src/ImagineSim/BuildPrompter.hpp \
- ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/ConfirmationPopUp.hpp \
- ../src/ImagineSim/../Resources/yes.h ../src/ImagineSim/../Resources/no.h \
- ../src/ImagineSim/HelpBar.hpp \
- ../src/ImagineSim/Resources/roadRemastered.h \
- ../src/ImagineSim/Resources/WashMonuIcon.h \
- ../src/ImagineSim/Resources/hotelIcon.h \
- ../src/ImagineSim/Resources/TokyotowerIcon.h \
- ../src/ImagineSim/Resources/ZiplineIcon.h \
- ../src/ImagineSim/Resources/HikingTrailIcon.h \
- ../src/ImagineSim/Resources/ItalianRestaurantIcon.h \
- ../src/ImagineSim/Resources/MexicanRestaurantIcon.h \
- ../src/ImagineSim/Resources/dinerIcon.h \
- ../src/ImagineSim/Resources/TownHallIcon.h \
- ../src/ImagineSim/Resources/empireStateIcon.h \
- ../src/ImagineSim/Resources/teppanyakiIcon.h \
- ../src/ImagineSim/Resources/bigBenIcon.h \
- ../src/ImagineSim/Resources/amusementparkIcon.h \
- ../src/ImagineSim/Resources/policeStationIcon.h \
- ../src/ImagineSim/Resources/casinoIcon.h \
- ../src/ImagineSim/Resources/portIcon.h \
- ../src/ImagineSim/Resources/centralparkIcon.h \
- ../src/ImagineSim/Resources/movieSetIcon.h \
- ../src/ImagineSim/Resources/spaceNeedleIcon.h \
- ../src/ImagineSim/SimSaveGame.hpp \
- ../src/ImagineSim/../ImagineSaveGame.hpp \
- ../src/ImagineSim/Resources/advertIcon.h \
- ../src/ImagineSim/AdvertMenu.hpp ../src/ImagineSim/Advertisement.hpp \
- ../src/ImagineSim/Resources/laptop.h \
- ../src/ImagineSim/DeleteBuilding.hpp \
- ../src/ImagineSim/Resources/deleteBuilding.h \
  ../src/ImagineSim/SimPlayer.hpp ../src/ImagineSim/HelpBar.hpp \
  ../src/ImagineSim/ActionArea.hpp ../src/ImagineSim/GameTime.hpp \
- ../src/ImagineSim/TouristSpawner.hpp ../src/ImagineSim/GameTime.hpp \
- ../src/MainMenu.hpp ../src/Menu.hpp
+ ../src/ImagineSim/Advertisement.hpp ../src/ImagineSim/TouristSpawner.hpp \
+ ../src/ImagineSim/GameTime.hpp ../src/ImagineSim/SimSidebar.hpp \
+ ../src/ImagineSim/Resources/advertIcon.h ../src/MainMenu.hpp \
+ ../src/Menu.hpp
 
 ../src/Scene.hpp:
 
@@ -190,80 +160,6 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 
 ../src/ImagineSim/Resources/port.h:
 
-../src/ImagineSim/SimSidebar.hpp:
-
-../src/ImagineSim/BuildMenu.hpp:
-
-../src/ImagineSim/../ImagineCore.hpp:
-
-../src/ImagineSim/BuildPrompter.hpp:
-
-../src/ImagineSim/ActionArea.hpp:
-
-../src/ImagineSim/ConfirmationPopUp.hpp:
-
-../src/ImagineSim/../Resources/yes.h:
-
-../src/ImagineSim/../Resources/no.h:
-
-../src/ImagineSim/HelpBar.hpp:
-
-../src/ImagineSim/Resources/roadRemastered.h:
-
-../src/ImagineSim/Resources/WashMonuIcon.h:
-
-../src/ImagineSim/Resources/hotelIcon.h:
-
-../src/ImagineSim/Resources/TokyotowerIcon.h:
-
-../src/ImagineSim/Resources/ZiplineIcon.h:
-
-../src/ImagineSim/Resources/HikingTrailIcon.h:
-
-../src/ImagineSim/Resources/ItalianRestaurantIcon.h:
-
-../src/ImagineSim/Resources/MexicanRestaurantIcon.h:
-
-../src/ImagineSim/Resources/dinerIcon.h:
-
-../src/ImagineSim/Resources/TownHallIcon.h:
-
-../src/ImagineSim/Resources/empireStateIcon.h:
-
-../src/ImagineSim/Resources/teppanyakiIcon.h:
-
-../src/ImagineSim/Resources/bigBenIcon.h:
-
-../src/ImagineSim/Resources/amusementparkIcon.h:
-
-../src/ImagineSim/Resources/policeStationIcon.h:
-
-../src/ImagineSim/Resources/casinoIcon.h:
-
-../src/ImagineSim/Resources/portIcon.h:
-
-../src/ImagineSim/Resources/centralparkIcon.h:
-
-../src/ImagineSim/Resources/movieSetIcon.h:
-
-../src/ImagineSim/Resources/spaceNeedleIcon.h:
-
-../src/ImagineSim/SimSaveGame.hpp:
-
-../src/ImagineSim/../ImagineSaveGame.hpp:
-
-../src/ImagineSim/Resources/advertIcon.h:
-
-../src/ImagineSim/AdvertMenu.hpp:
-
-../src/ImagineSim/Advertisement.hpp:
-
-../src/ImagineSim/Resources/laptop.h:
-
-../src/ImagineSim/DeleteBuilding.hpp:
-
-../src/ImagineSim/Resources/deleteBuilding.h:
-
 ../src/ImagineSim/SimPlayer.hpp:
 
 ../src/ImagineSim/HelpBar.hpp:
@@ -272,9 +168,15 @@ src/Scene.o: ../src/Scene.cpp ../src/Scene.hpp \
 
 ../src/ImagineSim/GameTime.hpp:
 
+../src/ImagineSim/Advertisement.hpp:
+
 ../src/ImagineSim/TouristSpawner.hpp:
 
 ../src/ImagineSim/GameTime.hpp:
+
+../src/ImagineSim/SimSidebar.hpp:
+
+../src/ImagineSim/Resources/advertIcon.h:
 
 ../src/MainMenu.hpp:
 

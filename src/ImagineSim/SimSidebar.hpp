@@ -20,12 +20,8 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 #define SIMSIDEBAR_HPP
 #include <SFML/Graphics.hpp>
 #include "../ClickableSprite.hpp"
-#include "BuildMenu.hpp"
 #include "SimPlayer.hpp"
-#include "SimSaveGame.hpp"
 #include "Resources/advertIcon.h"
-#include "AdvertMenu.hpp"
-#include "DeleteBuilding.hpp"
 
 namespace imagine{
     namespace sim{
@@ -38,6 +34,12 @@ namespace imagine{
 				destroyButton
             };
         }
+        class advertMenu;
+        class buildMenu;
+        class helpBar;
+        class actionArea;
+        class DeleteBuilding;
+        class simSaveGame;
         class sidebar
         {
         public:

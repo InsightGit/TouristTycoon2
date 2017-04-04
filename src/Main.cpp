@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : Main.cpp
-// Author      : InfernoStudios
-// Version     :
-// Copyright   : Licensed under  the Apache License 2.0
-// Description :
-//============================================================================
-
 /*Copyright (C) 2017 Bobby Youstra
 
 This file is part of TouristTycoon2.
@@ -31,6 +23,7 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 #include "ImagineCore.hpp"
 #include "MainMenu.hpp"
 
+#include "ImagineSim/Resources/ProgramIcon.h"
 
 int main() {
 	if(imagine::core::isDebugBuild()){
@@ -42,6 +35,7 @@ int main() {
 	imagine::sim::player *player;
 	//Json::Reader *JSONReader;
 	//Json::Value *JSONDataValue;
+	sceneController.displayWindow.setIcon(ProgramIcon.width,ProgramIcon.height,ProgramIcon.pixel_data);
 	while(sceneController.displayWindow.isOpen()){
 		sf::Event event;
 		imagine::types::event imagineEvent;
@@ -82,6 +76,7 @@ int main() {
                         return 1;
 					}
 					sceneController.switchScene(currentScene);
+					player->setScene(currentScene);
 				}else if(imagineEvent == imagine::types::loadGame){
 					sf::Font fontToUse;
 					//JSONReader = new Json::Reader();
@@ -97,6 +92,7 @@ int main() {
                         return 1;
 					}
 					sceneController.switchScene(currentScene);
+					player->setScene(currentScene);
 				}
 			}
 		}

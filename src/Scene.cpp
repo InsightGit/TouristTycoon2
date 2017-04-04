@@ -17,8 +17,12 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "Scene.hpp"
-#include "MainMenu.hpp"
+
 #include <iostream>
+
+#include "ImagineSim/SimSidebar.hpp"
+#include "MainMenu.hpp"
+
 
 
 

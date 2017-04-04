@@ -25,8 +25,10 @@ along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "BuildPrompter.hpp"
+
 #include <iostream>
 
+#include "../Scene.hpp"
 
 imagine::sim::buildPrompter::buildPrompter(imagine::sim::player *mainPlayer,sf::Image tileImageToUse,const signed int tileCost,const sf::Vector2i tileSize,imagine::sim::actionArea *actionAreaToUse,const signed int tileIdToUse, sf::Font *fontToUse) {
 	// TODO Auto-generated constructor stub
@@ -125,28 +127,61 @@ void imagine::sim::buildPrompter::update(sf::RenderWindow *window, std::vector<i
 	}
 	buildArea = sf::RectangleShape(sf::Vector2f(64*tilePlacingSize.x,64*tilePlacingSize.y));
 	sf::Vector2i mouse = sf::Mouse::getPosition(*window);
-	mousePosition = (sf::Vector2f)(mouse);
-	//std::cout << mousePosition.x << " Y:" << mousePosition.y << "\n";
+	mousePosition = window->mapPixelToCoords(mouse,player->currentScene->sceneActionArea->actionAreaView);
+	buildArea.setPosition((sf::Vector2f)(mouse));
 
 	bool collides = false;
-	for(int i = 0; i < attractions->size();i++){
-		if(attractions->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
+	for(int i = 0; i < player->numberOfAttractionsSpawned;i++){
+		if(attractions->at(i).attractionSprite.getGlobalBounds().contains(mousePosition)){
 			collides=true;
 		}
 	}
-	for(int i = 0; i < roads->size();i++){
+	/*for(int i = 0; i < roads->size();i++){
 		if(roads->at(i).tileSprite.getGlobalBounds().contains(mousePosition)){
 			collides=true;
 		}
+	}*/
+	for(int i = 0; i < player->numberOfRestaurantsSpawned; ++i){
+		if(player->restaurantsCreated[i].tileSprite.getGlobalBounds().contains(mousePosition)){
+			collides=true;
+		}
 	}
-	if(collides || !actionArea->actionAreaView.getViewport().intersects(buildArea.getGlobalBounds())){
+
+	for(int i = 0; i < player->numberOfHotelsSpawned; ++i){
+		if(player->hotelsCreated[i].hotelSprite.sprite.getGlobalBounds().contains(mousePosition)){
+			collides=true;
+		}
+	}
+
+	for(int i = 0; i < player->numberOfPoliceStationsSpawned; ++i){
+		if(player->policeStationsCreated[i].policeSprite.sprite.getGlobalBounds().contains(mousePosition)){
+			collides=true;
+		}
+	}
+
+	if(player->townHallSpawned){
+		if(player->townHall->cityServiceSprite.sprite.getGlobalBounds().contains(mousePosition)){
+			collides=true;
+		}
+	}
+
+	if(player->publicTransport.cruiseTerminalSpawned){
+		if(player->publicTransport.currentCruiseTerminal.transportSprite.sprite.getGlobalBounds().contains(mousePosition)){
+			collides=true;
+		}
+	}
+
+	if(!buildArea.getGlobalBounds().intersects(sf::FloatRect(player->currentScene->sceneActionArea->actionAreaView.getCenter() - player->currentScene->sceneActionArea->actionAreaView.getSize() / 2.f , player->currentScene->sceneActionArea->actionAreaView.getSize()))){
+		collides=true;
+	}
+
+	if(collides){
 		buildArea.setOutlineColor(sf::Color::Red);
 	}else{
 		buildArea.setOutlineColor(sf::Color(285,100,80,255));
 	}
 	buildArea.setFillColor(sf::Color::Transparent);
 	buildArea.setOutlineThickness(4);
-	buildArea.setPosition(mousePosition);
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
 		done=true;

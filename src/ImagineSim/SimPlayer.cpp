@@ -16,10 +16,11 @@ You should have received a copy of the GNU Affero General Public License
 along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "SimPlayer.hpp"
 
 #include <iostream>
 
-#include "SimPlayer.hpp"
+#include "../Scene.hpp"
 
 #include "Advertisement.hpp"
 #include "GameTime.hpp"

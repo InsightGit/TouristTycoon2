@@ -15,12 +15,20 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with TouristTycoon2.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #include "SimSidebar.hpp"
+
+#include <iostream>
+
+#include "../ImagineCore.hpp"
+
+#include "AdvertMenu.hpp"
+#include "BuildMenu.hpp"
+#include "DeleteBuilding.hpp"
+#include "SimSaveGame.hpp"
+
 #include "Resources/saveicon.h"
 #include "Resources/buildIcon.h"
-#include "../ImagineCore.hpp"
-#include <iostream>
+
 
 imagine::sim::sidebar::sidebar(sf::Font *fontToUse, imagine::sim::player *mainPlayer, imagine::sim::helpBar *helpBarToUse,imagine::sim::actionArea *actionAreaToUse)
 {

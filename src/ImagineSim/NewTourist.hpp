@@ -70,8 +70,10 @@ namespace imagine {
 			sf::Clock visitingtimer;
 			sf::Clock sleepingtimer;
 			sf::Clock eatingtimer;
+			sf::Clock drivingtohoteltimer;
 
 			void DriveToDestination();
+			void DriveToHotel();
 
 			void ChooseAttraction();
 			void TourAttraction();
@@ -234,6 +236,22 @@ namespace imagine {
 				visitedattractionnumber_ = visitedattractionnumber;
 			}
 
+			bool GetArrivedAtHotel() const {
+				return arrivedathotel_;
+			}
+
+			void SetArrivedAtHotel(bool arrivedathotel = false) {
+				arrivedathotel_ = arrivedathotel;
+			}
+
+			bool GetDrivingToHotel() const {
+				return drivingtohotel_;
+			}
+
+			void SetDrivingToHotel(bool drivingtohotel = false) {
+				drivingtohotel_ = drivingtohotel;
+			}
+
 			imagine::sim::attraction* GetCurrentAttraction() { return currentattraction_; }
 			void SetCurrentAttraction(const imagine::sim::attraction *attractiontouse) { currentattraction_=attractiontouse; }
 		private:
@@ -258,6 +276,8 @@ namespace imagine {
 			bool chosenrestaurant_ = false;
 			bool cuisinematched_ = false;
 			bool eating_ = false;
+			bool arrivedathotel_ = false;
+			bool drivingtohotel_ = false;
 			imagine::sim::Restaurant *currentrestaurant_;
 			imagine::sim::hotel *currenthotel_;
 			imagine::sim::attraction *currentattraction_;
