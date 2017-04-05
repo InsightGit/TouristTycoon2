@@ -55,7 +55,7 @@ static std::string imagine::sim::player::getApplicationDataDir(){
 		std::string USERSTRING = USER;
 		return "/home/"+USERSTRING+"/.";
 	}else if(getPlatform()==imagine::sim::types::win32 || getPlatform()==imagine::sim::types::win64){
-		return "%APPDATA%/"; //use forward slashes because they cause no difference in Windows and cause less internal errors
+		return "%APPDATA%/"; //use forward slashes because they cause no difference in Windows and cause less internal errors with C++
 	}else if(getPlatform()==imagine::sim::types::macos){
 		char *USER = getenv("USER");
 		std::string USERSTRING = USER;
@@ -66,7 +66,7 @@ static std::string imagine::sim::player::getApplicationDataDir(){
 imagine::sim::types::levelProgress::levelProgress(){
     finishPoint = 0;
     currentProgress = 0;
-    currentLevel = 5;
+    currentLevel = 1;
 }
 
 imagine::sim::types::levelProgress::levelProgress(const int finishValue, const int currentValue, const int currentLevelNum){
@@ -77,7 +77,7 @@ imagine::sim::types::levelProgress::levelProgress(const int finishValue, const i
 
 imagine::sim::player::player(sf::Font *fontToUse){
     //For now
-    money=15000;
+    money=10000;
     defaultFont=*fontToUse;
 	playerDate = new imagine::sim::types::date();
 	time = new imagine::sim::GameTime(this);
@@ -99,7 +99,7 @@ void imagine::sim::player::updatePlayerLevel(){
 				 if(i==0 && progressAddedSize-1 >= 0){
 					 if(!progressAdded[i]){
 						 if(money >= 13000){
-							 progressAdded.push_back(true);
+							 progressAdded[i] = true;
 							 progressAddedSize++;
 							 levelProgress.currentProgress++;
 						 }
@@ -184,22 +184,31 @@ void imagine::sim::player::updatePlayerLevel(){
 }
 
 void imagine::sim::player::update(){
-	updatePlayerLevel();
+	//updatePlayerLevel();
 	//check level-up conditions
+	/*for(int i = 0;levelProgress.currentProgress > i;++i){
+		if(!progressAdded[i]){
+			passed=false;
+		}
+	}*/
 	if(!levelUp){
+		//if(passed){
 		if(numberOfAttractionsSpawned>=1 && levelProgress.currentLevel==0){
 			levelProgress.currentLevel = 1;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 1;
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,1,1),"Level Up! 1",&defaultFont);
 			levelUp=true;
-		}else if(levelProgress.currentLevel==1 && levelProgress.currentProgress >= levelProgress.finishPoint){
+		}else if(levelProgress.currentLevel==1 && money >= 15000){
 			levelProgress.currentLevel = 2;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 2;
+			std::cout << "Level 2!\n";
 			levelCompletePopUp = new imagine::sim::levelCompletePopUp(sf::Vector3i(0,2,3),"Level Up! 2",&defaultFont);
 			levelUp=true;
-		}else if(levelProgress.currentLevel==2 && levelProgress.currentProgress >= levelProgress.finishPoint){
+			progressAdded.clear();
+			progressAddedSize = 0;
+		}else if(levelProgress.currentLevel==2 && money >= 20000 && activeTourists >= 500){
 			levelProgress.currentLevel = 3;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 2;
@@ -207,7 +216,7 @@ void imagine::sim::player::update(){
 			levelUp=true;
 			progressAdded.clear();
 			progressAddedSize = 0;
-		}else if(levelProgress.currentLevel==3 && levelProgress.currentProgress >= levelProgress.finishPoint){
+		}else if(levelProgress.currentLevel==3 && money >= 40000 && activeTourists >= 1500){
 			levelProgress.currentLevel = 4;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 3;
@@ -215,7 +224,7 @@ void imagine::sim::player::update(){
 			levelUp=true;
 			progressAdded.clear();
 			progressAddedSize = 0;
-		}else if(levelProgress.currentLevel==4 && levelProgress.currentProgress >= levelProgress.finishPoint){
+		}else if(levelProgress.currentLevel==4 && money >= 50000 && activeTourists >= 10000 && touristExtraHappiness >= 35){
 			levelProgress.currentLevel = 5;
 			levelProgress.currentProgress = 0;
 			levelProgress.finishPoint = 99;
@@ -225,12 +234,16 @@ void imagine::sim::player::update(){
 			progressAddedSize = 0;
 		}
 	}else{
-		progressAdded.clear();
-		progressAddedSize = 0;
 		if(!levelCompletePopUp->getDrawingStatus()){
 			levelUp=false;
 		}
 	}
+	/*}else{
+		progressAdded.clear();
+		progressAddedSize = 0;
+		*/
+
+	//}
 	publicTransport.update();
 }
 

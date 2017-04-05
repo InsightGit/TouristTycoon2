@@ -41,7 +41,7 @@ imagine::sim::helpBar::helpBar(sf::Font *fontToUse, const std::string customMess
     helpBarRect.setPosition(sf::Vector2f(0,718));
 
     helpText.setFont(defaultFont);
-    helpText.setCharacterSize(30);
+    helpText.setCharacterSize(25);
     helpText.setPosition(sf::Vector2f(20,728));
     helpText.setString(message);
 }
@@ -51,10 +51,12 @@ imagine::sim::helpBar::~helpBar()
     //dtor
 }
 
-void imagine::sim::helpBar::switchMessage(std::string helpMessage){
-	previousMessage=message;
-    message=helpMessage;
-    helpText.setString(message);
+void imagine::sim::helpBar::switchMessage(std::string helpMessage, bool doIt){
+	if(doIt){
+		previousMessage=message;
+	    message=helpMessage;
+	    helpText.setString(message);
+	}
 }
 
 void imagine::sim::helpBar::switchToPreviousMessage(){

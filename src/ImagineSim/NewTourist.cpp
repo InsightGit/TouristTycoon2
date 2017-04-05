@@ -160,9 +160,11 @@ void imagine::sim::NewTourist::DriveToHotel(){
 	if(!GetDrivingToHotel()){
 		drivingtohoteltimer.restart();
 		SetDrivingToHotel(true);
-	}else if(drivingtohoteltimer.getElapsedTime().asSeconds() >= 5){
+		std::cout << "Reset\n";
+	}else if(drivingtohoteltimer.getElapsedTime().asSeconds() >= 5 && GetDrivingToHotel()){
 		SetDrivingToHotel(false);
 		SetArrivedAtHotel(true);
+		std::cout << "Reached\n";
 	}
 }
 
@@ -179,9 +181,9 @@ void imagine::sim::NewTourist::TourAttraction(){
 		}
 		SetVisitedAttractionNumber(GetVisitedAttractionNumber()+1);
 		int happiness = GetHappiness();
-		happiness-=int(1.5*GetVisitedAttractionNumber());
+		happiness-=int(5*GetVisitedAttractionNumber());
 		if(player->townHallSpawned){
-			happiness+=int(1*player->townHall->getCityPolicySize());
+			happiness+=int(4*player->townHall->getCityPolicySize());
 		}
 	}
 }
@@ -268,11 +270,17 @@ void imagine::sim::NewTourist::ChooseRestaurant(){
 
 void imagine::sim::NewTourist::Sleep(){
 	if(GetSleeping() && sleepingtimer.getElapsedTime().asSeconds() >= 6){
+		std::cout << "Checking Out\n";
 		GetCurrentHotel()->checkout();
 		SetSleeping(false);
 		SetArrivedAtHotel(false);
 		SetChosenHotel(false);
+		SetInHotel(false);
+	}else if(!GetSleeping()){
+		SetSleeping(true);
+		sleepingtimer.restart();
 	}
+	//std::cout << "Sleeping for:" << std::to_string(int(sleepingtimer.getElapsedTime().asSeconds())) << "\n";
 }
 
 void imagine::sim::NewTourist::Eat(){
@@ -286,7 +294,19 @@ void imagine::sim::NewTourist::Eat(){
 	}
 }
 
+void imagine::sim::NewTourist::CalculateExtraHappiness(){
+	player->touristExtraHappiness = 0;
+	if(player->townHallSpawned){
+		for(int i = 0;player->townHall->getCityPolicySize() > i;++i){
+			if(player->townHall->cityPolicies[i].active){
+				player->touristExtraHappiness+=player->townHall->cityPolicies[i].getHappinessGained();
+			}
+		}
+	}
+}
+
 void imagine::sim::NewTourist::Update(){
+	CalculateExtraHappiness();
 	if(!GetLeaving()){
 		if(GetHappiness() <= 0){
 			SetLeaving(true);
@@ -300,12 +320,12 @@ void imagine::sim::NewTourist::Update(){
 			//std::cout << std::to_string(player->numberOfAttractionsSpawned-(GetCheckedAttractionsSize())-1) << "=#ofATTSPAW\n";
 			if(!GetChosenAttraction() && player->numberOfAttractionsSpawned-GetCheckedAttractionsSize() > 0 && !GetJustSpawned()){
 				ChooseHotel();
-				std::cout << "Choosing Hotel\n";
+				//std::cout << "Choosing Hotel\n";
 				if(!GetChosenHotel()){
 					SetLeaving(true);
 					std::cout << "Leaving2\n";
 				}else{
-					std::cout << "Chose Hotel\n";
+					std::cout << "Chose Hotel1\n";
 					SetArrivedAtDestination(false);
 				}
 			}else if(!GetChosenAttraction()){
@@ -313,6 +333,13 @@ void imagine::sim::NewTourist::Update(){
 				std::cout << "Leaving1\n";
 			}else if(GetJustSpawned()){
 				SetJustSpawned(false);
+			}
+			if(GetChosenAttraction() && !GetChosenHotel()){
+				std::cout << "Chosen Attraction but not hotel\n";
+			}else if(GetChosenAttraction() && GetChosenHotel()){
+				std::cout << "Chosen Both\n";
+			}else if(GetChosenHotel()){
+				std::cout << "Chose Hotel2\n";
 			}
 		}
 		if(!GetArrivedAtDestination() && !GetChosenHotel()){
@@ -332,20 +359,19 @@ void imagine::sim::NewTourist::Update(){
 			}else{
 				SetLeaving(true);
 			}
-		}else if(GetArrivedAtDestination() && GetChosenHotel() && !GetSleeping()){
+		}else if(GetArrivedAtHotel() && GetChosenHotel() && !GetInHotel()){
 			if(GetCurrentHotel()->checkin(this)){
 				std::cout << "Sleeping\n";
-				SetSleeping(true);
-				sleepingtimer.restart();
+				SetArrivedAtHotel(true);
+				SetInHotel(true);
+				//sleepingtimer.restart();
 			}else if(player->numberOfHotelsSpawned-(GetCheckedHotelsSize()+1) > 0){
-				std::cout << "Rejected\n";
 				checkedhotels.push_back(GetCurrentHotel());
 				SetCheckedHotelsSize(GetCheckedHotelsSize()+1);
 				SetChosenHotel(false);
-				SetArrivedAtHotel(false);
 			}else{
 				SetLeaving(true);
-				std::cout << "Leaving3\n";
+				//std::cout << "Leaving3\n";
 			}
 		}else if(GetArrivedAtDestination() && GetChosenRestaurant() && !GetEating()){
 			if(GetCurrentRestaurant()->checkin(this)){
@@ -362,7 +388,7 @@ void imagine::sim::NewTourist::Update(){
 			}
 		}else if(GetVisitingAttraction()){
 			TourAttraction();
-		}else if(GetSleeping()){
+		}else if(GetInHotel()){
 			Sleep();
 		}else if(GetEating()){
 			Eat();

@@ -30,7 +30,7 @@ namespace imagine{
             helpBar(sf::Font *fontToUse, const std::string customMessage);
             virtual ~helpBar();
 
-            void switchMessage(std::string helpMessage);
+            void switchMessage(std::string helpMessage,bool doIt = false);
             void switchToPreviousMessage();
             std::string getMessage();
             std::string getPreviousMessage();
@@ -42,7 +42,7 @@ namespace imagine{
             sf::Clock previousMessageCallLimit;
             bool previousMessageLimitSet = false;
             std::string previousMessage;
-            std::string message = "You do not have any roads connecting your city! Go to the City Items in the build menu to build some."; //default for new game
+            std::string message = "Thanks for playing TouristTycoon! Need Help? Look at the itch.io page!"; //default for new game
         };
     }
 

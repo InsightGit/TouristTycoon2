@@ -87,8 +87,10 @@ bool imagine::sim::hotel::checkin(imagine::sim::tourist *tourist){
 		if(size>=maxSize){
 			vacancy=false;
 		}
+		std::cout << "Accepted\n";
 		return true;
 	}else{
+		std::cout << "Rejected\n";
 		return false;
 	}
 }

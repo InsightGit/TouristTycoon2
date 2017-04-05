@@ -74,10 +74,10 @@ namespace imagine {
 			void draw(sf::RenderWindow *window)override;
 		protected:
 			imagine::sim::player *player;
-			bool vacancy = false;
+			bool vacancy = true;
 			bool alive = false;
 			int size = 0;
-			int maxSize = 20;
+			int maxSize = 300;
 			signed int cost;
 			signed int buildingCost;
 			signed int id;

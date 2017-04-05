@@ -50,7 +50,7 @@ void imagine::sim::attraction::spawn(){
 		name="Washington Monument";
 		cost=1500;
 		baseMaintainceCost=600;
-		costForTourists=50;
+		costForTourists=70;
 		attractionLevel=0;
 		popularity = 10;
 		maxOccupancy = 50;
@@ -60,7 +60,7 @@ void imagine::sim::attraction::spawn(){
 		name="Tokyo Tower";
 		cost=2500;
 		baseMaintainceCost=950;
-		costForTourists=100;
+		costForTourists=80;
 		popularity = 20;
 		maxOccupancy = 100;
 		activityLevel = 9;
@@ -69,7 +69,7 @@ void imagine::sim::attraction::spawn(){
 		name="Zipline";
 		cost=7000;
 		baseMaintainceCost=400;
-		costForTourists=150;
+		costForTourists=110;
 		popularity = 40;
 		maxOccupancy = 80;
 		activityLevel = 15;
@@ -78,7 +78,7 @@ void imagine::sim::attraction::spawn(){
 		name="Hiking Trail";
 		cost=7500;
 		baseMaintainceCost=375;
-		costForTourists=175;
+		costForTourists=160;
 		popularity = 40;
 		maxOccupancy = 100;
 		activityLevel = 25;
@@ -87,8 +87,8 @@ void imagine::sim::attraction::spawn(){
 		name="Empire State Building";
 		cost=8500;
 		baseMaintainceCost=2000;
-		costForTourists=200;
-		popularity = 65;
+		costForTourists=180;
+		popularity = 50;
 		maxOccupancy = 150;
 		activityLevel = 10;
 		attractionImage.create(empireStateImageFile.width,empireStateImageFile.height,empireStateImageFile.pixel_data);
@@ -96,8 +96,8 @@ void imagine::sim::attraction::spawn(){
 		name = "Big Ben";
 		cost = 6000;
 		baseMaintainceCost=2500;
-		costForTourists=175;
-		popularity = 50;
+		costForTourists=170;
+		popularity = 45;
 		maxOccupancy = 100;
 		activityLevel = 10;
 		attractionImage.create(bigBenImageFile.width,bigBenImageFile.height,bigBenImageFile.pixel_data);
@@ -105,8 +105,8 @@ void imagine::sim::attraction::spawn(){
 		name = "Amusement Park";
 		cost = 9000;
 		baseMaintainceCost=4000;
-		costForTourists=300;
-		popularity = 80;
+		costForTourists=230;
+		popularity = 65;
 		maxOccupancy = 300;
 		activityLevel = 20;
 		attractionImage.create(amusementParkImageFile.width,amusementParkImageFile.height,amusementParkImageFile.pixel_data);
@@ -114,8 +114,8 @@ void imagine::sim::attraction::spawn(){
 		name = "Casino";
 		cost = 10000;
 		baseMaintainceCost=5000;
-		costForTourists=500;
-		popularity = 90;
+		costForTourists=350;
+		popularity = 75;
 		maxOccupancy = 350;
 		activityLevel = 9;
 		crimeAttention = 10;
@@ -124,7 +124,7 @@ void imagine::sim::attraction::spawn(){
 		name = "Central Park";
 		cost = 7500;
 		baseMaintainceCost=1500;
-		costForTourists=375;
+		costForTourists=250;
 		popularity = 75;
 		maxOccupancy = 600;
 		activityLevel = 27;
@@ -142,8 +142,8 @@ void imagine::sim::attraction::spawn(){
 		name = "Space Needle";
 		cost = 4000;
 		baseMaintainceCost=750;
-		costForTourists=300;
-		popularity = 20;
+		costForTourists=95;
+		popularity = 30;
 		maxOccupancy = 100;
 		activityLevel = 9;
 		attractionImage.create(spaceNeedleImageFile.width,spaceNeedleImageFile.height,spaceNeedleImageFile.pixel_data);
@@ -208,7 +208,7 @@ bool imagine::sim::attraction::admit(imagine::sim::NewTourist *tourist){
 
 bool imagine::sim::attraction::admit(imagine::sim::tourist *tourist){
 	//if(maxOccupancy>currentTouristNum+1){
-		if(tourist->money-costForTourists > 0 && alive){
+		if(tourist->money-costForTourists > 0 && exists){
 			 if(tourist->energy-activityLevel > 0){
 				 	tourist->currentAttraction = this;
 					currentTouristNum++;

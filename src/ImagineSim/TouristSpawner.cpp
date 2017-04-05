@@ -64,6 +64,13 @@ void imagine::sim::TouristSpawner::update(const signed int numberOfAttractionsSp
 		if(player->publicTransport.cruiseTerminalSpawned){
 			basePopularity=basePopularity*player->publicTransport.currentCruiseTerminal.getPopularityBoost();
 		}
+		int buildingNumber = 0;
+		buildingNumber = player->numberOfAttractionsSpawned+player->numberOfHotelsSpawned+player->numberOfPoliceStationsSpawned+player->numberOfRestaurantsSpawned;
+		if(player->townHallSpawned){
+			//if() TODO:(Bobby)Add City Policy removing limits
+		}else if(int(buildingNumber / 3) > 0){
+			activeTourists = activeTourists / int(buildingNumber / 3);
+		}
 	}
 
 	if(player->time->getSimTime().getHour() >= 5 && player->time->getSimTime().getHour() <= 17){

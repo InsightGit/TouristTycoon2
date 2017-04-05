@@ -84,6 +84,8 @@ namespace imagine {
 			void ChooseRestaurant();
 			void Eat();
 
+			void CalculateExtraHappiness();
+
 			void Update();
 
 			bool GetJustSpawned() { return justspawned_; }
@@ -252,6 +254,14 @@ namespace imagine {
 				drivingtohotel_ = drivingtohotel;
 			}
 
+			bool GetInHotel() const {
+				return inhotel_;
+			}
+
+			void SetInHotel(bool inhotel = false) {
+				inhotel_ = inhotel;
+			}
+
 			imagine::sim::attraction* GetCurrentAttraction() { return currentattraction_; }
 			void SetCurrentAttraction(const imagine::sim::attraction *attractiontouse) { currentattraction_=attractiontouse; }
 		private:
@@ -278,6 +288,7 @@ namespace imagine {
 			bool eating_ = false;
 			bool arrivedathotel_ = false;
 			bool drivingtohotel_ = false;
+			bool inhotel_ = false;
 			imagine::sim::Restaurant *currentrestaurant_;
 			imagine::sim::hotel *currenthotel_;
 			imagine::sim::attraction *currentattraction_;
