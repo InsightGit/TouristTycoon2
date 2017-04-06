@@ -655,7 +655,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 				}else if(attractionButtons[i].itemName.getString() == "Central Park"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*attractionButtons[i].optionalImage,7500,sf::Vector2i(2,2),actionArea,17,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
@@ -666,7 +666,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -683,7 +683,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 
 				}else if(restaurantButtons[i].itemName.getString() == "Mexican Restaurant"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,5000,sf::Vector2i(1,1),actionArea,7,&defaultFont);
@@ -695,7 +695,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 				}else if(restaurantButtons[i].itemName.getString() == "Diner"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,5000,sf::Vector2i(1,1),actionArea,8,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
@@ -706,7 +706,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 				}else if("Japanese Teppanyaki Restaurant"){
 					buildingPrompter = new imagine::sim::buildPrompter(player,*restaurantButtons[i].optionalImage,6500,sf::Vector2i(1,1),actionArea,11,&defaultFont);
 					buildingPrompter->spawn(window,&player->attractionsCreated,&player->roadsCreated,&player->hotelsCreated,&player->restaurantsCreated);
@@ -717,7 +717,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 					if(prompterTimerNotYetSet){
 						limitPrompterClicks.restart();
 					}
-					helpBar->switchMessage("Press Escape to Cancel");
+					//helpBar->switchMessage("Press Escape to Cancel");
 				}
 			}
 		}
@@ -729,7 +729,7 @@ void imagine::sim::buildMenu::update(sf::RenderWindow *window){
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
 			drawPrompter=false;
 			drawMenu=true;
-			helpBar->switchMessage(helpBar->getPreviousMessage());
+			//helpBar->switchMessage(helpBar->getPreviousMessage());
 		}
 	}
 	/*if(prompterCreated){
