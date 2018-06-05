@@ -1,5 +1,8 @@
 # TouristTycoon
 
+## Archived due to Microsoft's acquisition of GitHub 
+New project link: https://gitlab.com/insightgit/TouristTycoon2
+
 TouristTycoon is similar to SimCity, but instead of trying to build the best City, In TouristTycoon, you build the best Tourist Trap. 
 Build attractions, enact city policies, and use ads to promote your tourist trap!
 
